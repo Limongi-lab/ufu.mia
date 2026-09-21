@@ -1,2 +1,22 @@
-# ufu.mia
-Sistema de adoção e doação de animais para o Projeto Mia (UFU) — cadastro de animais, gestão de doações e acompanhamento do processo de adoção.
+# Mia - Sistema de Adoção e Doação de Animais
+
+Sistema desenvolvido em parceria com o Projeto Mia (UFU) para gerenciar o processo de adoção de animais e o registro de doações recebidas.
+
+## Sobre o projeto
+
+- Cadastro dos animais disponíveis para adoção (foto, idade, espécie, status)
+- Registro de doações (dinheiro e itens)
+- Fluxo de acompanhamento de adoção
+- Painel administrativo para a equipe cadastrar e atualizar informações
+
+## Status
+
+🚧 Em desenvolvimento
+
+## Stack
+
+_(a definir)_
+
+## Deploy
+
+🔗 _(link em breve)_
