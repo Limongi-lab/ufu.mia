@@ -1,55 +1,51 @@
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function FaixaDestaqueInsta() {
-  const [copied, setCopied] = useState(false);
-  const pix = 'ufumiaufu@gmail.com';
-
-  const copyPix = () => {
-    navigator.clipboard.writeText(pix);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
-  };
-
   return (
-    <section className="bg-[#7B1FA2] text-white py-8 sm:py-10">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+    <section className="bg-gradient-to-r from-[#5B107D] via-[#7B1FA2] to-[#8C1BA8] text-white py-10 sm:py-12 relative overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left"
+        >
           
-          <div className="space-y-1">
-            <div className="inline-block bg-[#F2C744] text-[#1F1A24] font-black text-[11px] uppercase tracking-wider px-2.5 py-0.5 rounded-sm mb-1">
-              Campanha Ativa • UFU MIA
+          <div className="space-y-1.5 max-w-xl">
+            <div className="inline-block bg-[#F2C744] text-[#1F1A24] font-black text-[11px] uppercase tracking-wider px-3 py-0.5 rounded-full mb-1">
+              Participe da Causa • UFU MIA
             </div>
-            <h3 className="text-xl sm:text-2xl font-black tracking-tight">
-              Vi um gato na UFU, o que eu faço?
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-white">
+              Quer fazer parte da nossa história?
             </h3>
-            <p className="text-sm text-purple-100 max-w-xl">
-              Nossa equipe atua no manejo ético e acolhimento nos campi de Uberlândia. Você pode ajudar sendo Lar Temporário (LT) ou contribuindo com qualquer valor!
+            <p className="text-xs sm:text-sm text-purple-100 leading-relaxed">
+              Acompanhe nossos resgates diários na UFU, novos gatinhos disponíveis para adoção e novidades do Processo Seletivo!
             </p>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
-            <button
-              onClick={copyPix}
-              className={`px-5 py-2.5 rounded-lg text-xs sm:text-sm font-bold transition-all shadow-xs ${
-                copied
-                  ? 'bg-emerald-500 text-white'
-                  : 'bg-[#F2C744] hover:bg-[#E0B634] text-[#1F1A24]'
-              }`}
+            <Link
+              to="/processo-seletivo"
+              className="bg-[#F2C744] hover:bg-[#E0B634] text-[#1F1A24] font-bold px-5 py-3 rounded-xl text-xs sm:text-sm transition-all shadow-xs hover:shadow-md transform hover:-translate-y-0.5 flex items-center gap-1.5"
             >
-              {copied ? 'Chave PIX copiada!' : 'Copiar PIX: ufumiaufu@gmail.com'}
-            </button>
+              <span>Processo Seletivo</span>
+              <span>✨</span>
+            </Link>
 
             <a
               href="https://instagram.com/ufu.mia"
               target="_blank"
               rel="noreferrer"
-              className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-colors"
+              className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center gap-2"
             >
-              Ver Instagram @ufu.mia
+              <span>Instagram @ufu.mia</span>
+              <span>📸</span>
             </a>
           </div>
 
-        </div>
+        </motion.div>
       </div>
     </section>
   );

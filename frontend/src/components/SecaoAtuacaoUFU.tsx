@@ -4,7 +4,7 @@ export default function SecaoAtuacaoUFU() {
   const frentes = [
     {
       titulo: 'Resgate nos Campi',
-      subtitulo: 'Santa Mônica & Umuarama',
+      subtitulo: 'UFU - Universidade Federal de Uberlândia',
       descricao: 'Monitoramento diário, resgate ético e triagem de felinos que circulam nos espaços da UFU.',
       linkTexto: 'Como Ajudar',
       linkUrl: '/sobre',

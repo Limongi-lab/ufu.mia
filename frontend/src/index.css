@@ -1,12 +1,15 @@
 @import "tailwindcss";
 
 @theme {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Outfit', 'Plus Jakarta Sans', sans-serif;
   --color-lilas: #C9B8F0;
   --color-lilas-suave: #F3EDFC;
   --color-lilas-card: #EADFFB;
   --color-roxo: #7B1FA2;
   --color-roxo-vibrante: #6A0DAD;
   --color-roxo-escuro: #4A0E72;
+  --color-roxo-profundo: #1F0B2C;
   --color-amarelo: #F2C744;
   --color-amarelo-hover: #E0B634;
   --color-rosa: #EC4899;
@@ -14,14 +17,26 @@
   --color-branco: #FFFFFF;
   --color-preto: #18141D;
   --color-cinza-texto: #4B5563;
+  /* página base: lilás extremamente suave e fosco */
+  --color-pagina: #F8F6FC;
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    background-color: #FFFFFF;
+    /* lilás leve e fosco — nem branco puro, nem lilás forte */
+    background-color: #F8F6FC;
     color: #18141D;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
   }
 
   ::selection {
@@ -29,3 +44,17 @@
     color: #4A0E72;
   }
 }
+
+/* Glassmorphism header helper */
+.glass-header {
+  background: rgba(248, 246, 252, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Seções "brancas" ficam com o mesmo lilás ultra-leve */
+.bg-section-light {
+  background-color: #F8F6FC;
+}
+
+

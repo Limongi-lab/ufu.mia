@@ -2,21 +2,23 @@ import Header from '../components/Header';
 import Hero from '../components/Hero';
 import SecaoAnimais from '../components/SecaoAnimais';
 import SecaoSobre from '../components/SecaoSobre';
+import SecaoProcessoSeletivo from '../components/SecaoProcessoSeletivo';
 import SecaoComoAjudar from '../components/SecaoComoAjudar';
-import SecaoDoacao from '../components/SecaoDoacao';
+import SecaoContadores from '../components/SecaoContadores';
 import SecaoFAQ from '../components/SecaoFAQ';
 import Footer from '../components/Footer';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white font-sans text-gray-900">
+    <div className="min-h-screen bg-white font-sans text-gray-900 flex flex-col justify-between">
       <Header />
       <main>
         <Hero />
         <SecaoAnimais />
         <SecaoSobre />
+        <SecaoProcessoSeletivo />
         <SecaoComoAjudar />
-        <SecaoDoacao />
+        <SecaoContadores />
         <SecaoFAQ />
       </main>
       <Footer />

@@ -30,7 +30,7 @@ export default function AnimatedCounter({
       const progress = frame / totalFrames;
       // Easing out quadratic
       const current = Math.round(end * (1 - Math.pow(1 - progress, 3)));
-      
+
       setCount(current);
 
       if (frame >= totalFrames) {

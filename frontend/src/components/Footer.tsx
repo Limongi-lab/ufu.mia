@@ -27,7 +27,7 @@ export default function Footer() {
             </div>
             
             <p className="text-sm text-purple-200/80 leading-relaxed max-w-sm">
-              Projeto de extensão da Universidade Federal de Uberlândia dedicado ao resgate, acolhimento, cuidados veterinários, castração e adoção responsável de felinos.
+              Projeto de extensão da Universidade Federal de Uberlândia dedicado ao acolhimento, triagem, cuidados veterinários e adoção responsável de felinos.
             </p>
           </div>
 
@@ -44,27 +44,30 @@ export default function Footer() {
                 <Link to="/animais" className="hover:text-white transition-colors">Gatinhos para Adoção</Link>
               </li>
               <li>
+                <Link to="/processo-seletivo" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <span>Processo Seletivo</span>
+                  <span className="text-xs text-[#F2C744]">✨</span>
+                </Link>
+              </li>
+              <li>
                 <Link to="/sobre" className="hover:text-white transition-colors">Sobre o Projeto</Link>
               </li>
               <li>
                 <Link to="/faq" className="hover:text-white transition-colors">Perguntas Frequentes</Link>
               </li>
-              <li>
-                <Link to="/doacoes" className="hover:text-white transition-colors">Doações & PIX</Link>
-              </li>
             </ul>
           </div>
 
-          {/* Coluna 3: Contato & Redes */}
+          {/* Coluna 3: Contato & Institucional */}
           <div className="md:col-span-4 space-y-3">
             <h4 className="text-xs font-black text-[#F2C744] uppercase tracking-wider">
-              Contato & Doações
+              Contato & Localização
             </h4>
             <p className="text-sm text-purple-200/80">
-              Chave PIX: <strong className="text-[#F2C744] font-mono text-sm select-all">ufumiaufu@gmail.com</strong>
+              E-mail: <strong className="text-white font-mono text-sm select-all">ufumiaufu@gmail.com</strong>
             </p>
             <p className="text-sm text-purple-200/70">
-              Campus Santa Mônica • Uberlândia - MG
+              UFU - Universidade Federal de Uberlândia • Uberlândia - MG
             </p>
             <div className="pt-2">
               <a

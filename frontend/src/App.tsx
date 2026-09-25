@@ -5,6 +5,7 @@ import Sobre from './pages/Sobre';
 import Animais from './pages/Animais';
 import Doacoes from './pages/Doacoes';
 import FAQ from './pages/FAQ';
+import ProcessoSeletivo from './pages/ProcessoSeletivo';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/animais" element={<Animais />} />
         <Route path="/doacoes" element={<Doacoes />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/processo-seletivo" element={<ProcessoSeletivo />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
