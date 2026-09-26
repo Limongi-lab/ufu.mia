@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 
 export default function ProcessoSeletivo() {
   return (
-    <div className="min-h-screen bg-white font-sans text-gray-900 flex flex-col justify-between">
+    <div className="relative z-10 min-h-screen font-sans text-gray-900 flex flex-col justify-between">
       <Header />
       <main>
         {/* Banner Superior da Página */}

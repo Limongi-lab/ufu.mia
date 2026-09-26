@@ -44,10 +44,15 @@ export default function Footer() {
                 <Link to="/animais" className="hover:text-white transition-colors">Gatinhos para Adoção</Link>
               </li>
               <li>
-                <Link to="/processo-seletivo" className="hover:text-white transition-colors flex items-center gap-1.5">
-                  <span>Processo Seletivo</span>
-                  <span className="text-xs text-[#F2C744]">✨</span>
+                <Link to="/processo-seletivo" className="hover:text-white transition-colors">
+                  Processo Seletivo
                 </Link>
+              </li>
+              <li>
+                <Link to="/como-ajudar" className="hover:text-white transition-colors">Como Ajudar</Link>
+              </li>
+              <li>
+                <Link to="/fale-conosco" className="hover:text-white transition-colors">Fale Conosco</Link>
               </li>
               <li>
                 <Link to="/sobre" className="hover:text-white transition-colors">Sobre o Projeto</Link>
@@ -77,7 +82,6 @@ export default function Footer() {
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-purple-900/60 hover:bg-purple-800 border border-purple-700/50 text-xs sm:text-sm font-bold text-white transition-all hover:scale-105"
               >
                 <span>Instagram @ufu.mia</span>
-                <span>📸</span>
               </a>
             </div>
           </div>
@@ -86,10 +90,7 @@ export default function Footer() {
 
         {/* Rodapé inferior */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-purple-300/60 font-medium">
-          <p>© {new Date().getFullYear()} UFU MIA — Universidade Federal de Uberlândia. Todos os direitos reservados.</p>
-          <p className="flex items-center gap-1 text-purple-200/80">
-            Feito com <span className="text-pink-400">❤️</span> pela causa animal na UFU
-          </p>
+          <p>© {new Date().getFullYear()} UFU MIA, Universidade Federal de Uberlândia. Todos os direitos reservados.</p>
         </div>
 
       </div>

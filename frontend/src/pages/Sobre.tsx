@@ -1,15 +1,14 @@
 import Header from '../components/Header';
 import SecaoSobre from '../components/SecaoSobre';
-import SecaoComoAjudar from '../components/SecaoComoAjudar';
 import SecaoContadores from '../components/SecaoContadores';
 import Footer from '../components/Footer';
 
 export default function Sobre() {
   return (
-    <div className="min-h-screen bg-white font-sans text-gray-900 flex flex-col justify-between">
+    <div className="relative z-10 min-h-screen font-sans text-gray-900 flex flex-col justify-between">
       <Header />
       <main>
-        <div className="bg-lilas-suave py-10 sm:py-14 border-b border-purple-100 text-center">
+        <div className="bg-white/45 py-10 sm:py-14 border-b border-purple-100/70 text-center">
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-roxo tracking-tight">
               Sobre o UFU MIA
@@ -21,7 +20,6 @@ export default function Sobre() {
         </div>
 
         <SecaoSobre />
-        <SecaoComoAjudar />
         <SecaoContadores />
       </main>
       <Footer />

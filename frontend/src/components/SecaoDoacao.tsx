@@ -12,7 +12,7 @@ export default function SecaoDoacao() {
   };
 
   return (
-    <section id="doacoes" className="py-16 sm:py-24 bg-white">
+    <section id="doacoes" className="py-16 sm:py-24">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         
         {/* Banner de Doação no estilo vibrante do Instagram do UFU MIA */}
@@ -47,7 +47,7 @@ export default function SecaoDoacao() {
                   : 'bg-[#F2C744] hover:bg-[#E0B634] text-[#18141D]'
               }`}
             >
-              {copied ? 'Chave copiada! ✓' : 'Copiar Chave PIX'}
+              {copied ? 'Chave copiada!' : 'Copiar Chave PIX'}
             </button>
           </div>
 

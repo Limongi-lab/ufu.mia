@@ -31,7 +31,6 @@ export default function FaixaDestaqueInsta() {
               className="bg-[#F2C744] hover:bg-[#E0B634] text-[#1F1A24] font-bold px-5 py-3 rounded-xl text-xs sm:text-sm transition-all shadow-xs hover:shadow-md transform hover:-translate-y-0.5 flex items-center gap-1.5"
             >
               <span>Processo Seletivo</span>
-              <span>✨</span>
             </Link>
 
             <a
@@ -41,7 +40,6 @@ export default function FaixaDestaqueInsta() {
               className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center gap-2"
             >
               <span>Instagram @ufu.mia</span>
-              <span>📸</span>
             </a>
           </div>
 

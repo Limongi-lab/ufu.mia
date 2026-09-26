@@ -57,84 +57,33 @@ export default function Header() {
         </Link>
 
         {/* Menu Desktop */}
-        <nav className="hidden lg:flex items-center gap-7 text-sm font-semibold">
-          <Link
-            to="/"
-            className={`transition-colors py-1 relative ${
-              isActive('/') ? 'text-[#7B1FA2] font-bold' : 'text-gray-700 hover:text-[#7B1FA2]'
-            }`}
-          >
-            Início
-            {isActive('/') && (
-              <motion.div
-                layoutId="navIndicator"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#7B1FA2] rounded-full"
-              />
-            )}
-          </Link>
-          <Link
-            to="/animais"
-            className={`transition-colors py-1 relative ${
-              isActive('/animais') ? 'text-[#7B1FA2] font-bold' : 'text-gray-700 hover:text-[#7B1FA2]'
-            }`}
-          >
-            Animais
-            {isActive('/animais') && (
-              <motion.div
-                layoutId="navIndicator"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#7B1FA2] rounded-full"
-              />
-            )}
-          </Link>
-          <Link
-            to="/sobre"
-            className={`transition-colors py-1 relative ${
-              isActive('/sobre') ? 'text-[#7B1FA2] font-bold' : 'text-gray-700 hover:text-[#7B1FA2]'
-            }`}
-          >
-            Sobre Nós
-            {isActive('/sobre') && (
-              <motion.div
-                layoutId="navIndicator"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#7B1FA2] rounded-full"
-              />
-            )}
-          </Link>
-          <Link
-            to="/sobre#como-ajudar"
-            className="text-gray-700 hover:text-[#7B1FA2] transition-colors py-1"
-          >
-            Como Ajudar
-          </Link>
-          <Link
-            to="/processo-seletivo"
-            className={`transition-colors py-1 relative flex items-center gap-1.5 ${
-              isActive('/processo-seletivo') ? 'text-[#7B1FA2] font-bold' : 'text-gray-700 hover:text-[#7B1FA2]'
-            }`}
-          >
-            Processo Seletivo
-            <span className="w-2 h-2 rounded-full bg-[#F2C744] animate-pulse" />
-            {isActive('/processo-seletivo') && (
-              <motion.div
-                layoutId="navIndicator"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#7B1FA2] rounded-full"
-              />
-            )}
-          </Link>
-          <Link
-            to="/faq"
-            className={`transition-colors py-1 relative ${
-              isActive('/faq') ? 'text-[#7B1FA2] font-bold' : 'text-gray-700 hover:text-[#7B1FA2]'
-            }`}
-          >
-            Dúvidas
-            {isActive('/faq') && (
-              <motion.div
-                layoutId="navIndicator"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#7B1FA2] rounded-full"
-              />
-            )}
-          </Link>
+        <nav className="hidden lg:flex items-center gap-5 text-[13px] font-semibold">
+          {[
+            { to: '/', label: 'Início' },
+            { to: '/animais', label: 'Animais' },
+            { to: '/sobre', label: 'Sobre Nós' },
+            { to: '/como-ajudar', label: 'Como Ajudar' },
+            { to: '/fale-conosco', label: 'Fale Conosco' },
+            { to: '/processo-seletivo', label: 'Processo Seletivo', pulse: true },
+            { to: '/faq', label: 'Dúvidas' },
+          ].map((item: { to: string; label: string; pulse?: boolean }) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className={`transition-colors py-1 relative flex items-center gap-1.5 ${
+                isActive(item.to) ? 'text-[#7B1FA2] font-bold' : 'text-gray-700 hover:text-[#7B1FA2]'
+              }`}
+            >
+              {item.label}
+              {item.pulse && <span className="w-2 h-2 rounded-full bg-[#F2C744] animate-pulse" />}
+              {isActive(item.to) && (
+                <motion.div
+                  layoutId="navIndicator"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#7B1FA2] rounded-full"
+                />
+              )}
+            </Link>
+          ))}
         </nav>
 
         {/* Lado Direito: Instagram + Botão Doações */}
@@ -210,6 +159,20 @@ export default function Header() {
               className="block py-2 text-sm font-bold text-gray-800 hover:text-[#7B1FA2]"
             >
               Sobre Nós
+            </Link>
+            <Link
+              to="/como-ajudar"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-sm font-bold text-gray-800 hover:text-[#7B1FA2]"
+            >
+              Como Ajudar
+            </Link>
+            <Link
+              to="/fale-conosco"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-sm font-bold text-gray-800 hover:text-[#7B1FA2]"
+            >
+              Fale Conosco
             </Link>
             <Link
               to="/processo-seletivo"

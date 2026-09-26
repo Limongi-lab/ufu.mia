@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 
 export default function Animais() {
   return (
-    <div className="min-h-screen bg-white font-sans text-gray-900 flex flex-col justify-between">
+    <div className="relative z-10 min-h-screen font-sans text-gray-900 flex flex-col justify-between">
       <Header />
       <main>
         <div className="bg-gradient-to-r from-[#5B107D] via-[#7B1FA2] to-[#8C1BA8] py-12 sm:py-16 text-white text-center relative overflow-hidden">

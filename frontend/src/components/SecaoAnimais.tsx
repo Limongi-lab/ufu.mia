@@ -58,7 +58,7 @@ export default function SecaoAnimais() {
   const bgCores = ['bg-[#F3EDFC]', 'bg-[#FEF8ED]', 'bg-[#FDF2F8]', 'bg-[#EBF8F2]'];
 
   return (
-    <section id="animais" className="py-16 sm:py-24 bg-[#F8F6FC] relative overflow-hidden">
+    <section id="animais" className="py-16 sm:py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Cabeçalho */}
@@ -69,14 +69,14 @@ export default function SecaoAnimais() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-10 sm:mb-14"
         >
-          <div className="inline-block text-[#F2C744] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">
-            — ADOTE AGORA —
+          <div className="inline-block text-[#7B1FA2] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">
+            ADOTE AGORA
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight">
-            Todo gatinho merece um lar cheio de amor<span className="text-[#7B1FA2]">.</span>
+            Todo gatinho merece um lar cheio de amor
           </h2>
           <p className="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed font-normal">
-            Adoção é uma promessa de carinho e proteção para toda a vida — abra seu coração e dê um lar para um gatinho resgatado na UFU.
+            Adoção é uma promessa de carinho e proteção para toda a vida. Abra seu coração e dê um lar para um gatinho resgatado na UFU.
           </p>
 
           {/* Filtros em abas estilo modelo */}
@@ -85,7 +85,7 @@ export default function SecaoAnimais() {
               { key: 'todos', label: 'Todos os Gatinhos' },
               { key: 'disponivel', label: 'Disponíveis para Adoção' },
               { key: 'em_avaliacao', label: 'Em Avaliação' },
-              { key: 'adotado', label: 'Histórias Felizes (Adotados)' },
+              { key: 'adotado', label: 'Adotados' },
             ].map((tab) => (
               <button
                 key={tab.key}
@@ -197,7 +197,7 @@ export default function SecaoAnimais() {
                             onClick={() => setAdoptionModalAnimal(animal)}
                             className="bg-[#7B1FA2] hover:bg-[#6A0DAD] text-white font-bold py-2.5 px-5 rounded-xl text-xs transition-all shadow-2xs hover:shadow-sm"
                           >
-                            Quero Adotar 💕
+                            Quero Adotar
                           </button>
                         )}
                       </div>
@@ -211,8 +211,7 @@ export default function SecaoAnimais() {
 
         {/* Empty state */}
         {!loading && filteredAnimais.length === 0 && (
-          <div className="bg-purple-50/50 rounded-3xl p-12 text-center max-w-md mx-auto border border-purple-100">
-            <div className="text-4xl mb-3">🐱</div>
+            <div className="bg-white/70 rounded-3xl p-12 text-center max-w-md mx-auto border border-purple-100">
             <h3 className="text-lg font-bold text-gray-900 mb-1">Nenhum gatinho encontrado nesta categoria</h3>
             <p className="text-xs text-gray-500 mb-5">
               Tente selecionar outro filtro ou confira todos os animais cadastrados.
@@ -263,9 +262,8 @@ export default function SecaoAnimais() {
                   </div>
 
                   <div>
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#7B1FA2] mb-1.5 flex items-center gap-1">
-                      <span>✨</span>
-                      <span>Personalidade & História</span>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#7B1FA2] mb-1.5">
+                      Personalidade & História
                     </h4>
                     <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-line font-medium bg-purple-50/50 p-4 rounded-2xl border border-purple-100">
                       {selectedAnimal.descricao || 'Gatinho dócil e amoroso resgatado pela equipe do UFU MIA.'}
@@ -281,7 +279,7 @@ export default function SecaoAnimais() {
                       }}
                       className="flex-1 text-center bg-[#7B1FA2] hover:bg-[#6A0DAD] text-white py-3.5 rounded-xl font-bold transition-colors shadow-md"
                     >
-                      Manifestar Interesse em Adoção 💕
+                      Manifestar Interesse em Adoção
                     </button>
                   </div>
                 </div>
@@ -338,7 +336,7 @@ export default function SecaoAnimais() {
                 </div>
 
                 <div className="bg-amber-50 rounded-xl p-3 text-[11px] text-amber-800 leading-tight text-left">
-                  🔒 <strong>Lembrete:</strong> Nossas adoções exigem residência segura com telas de proteção para garantir a segurança dos gatinhos.
+                  <strong>Lembrete:</strong> Nossas adoções exigem residência segura com telas de proteção para garantir a segurança dos gatinhos.
                 </div>
               </motion.div>
             </div>

@@ -39,7 +39,7 @@ export default function SecaoContadores() {
   ];
 
   return (
-    <section className="py-14 sm:py-20 bg-[#F8F6FC] border-y border-purple-100/60">
+    <section className="py-14 sm:py-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">

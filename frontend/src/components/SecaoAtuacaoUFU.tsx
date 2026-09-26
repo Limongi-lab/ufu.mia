@@ -7,10 +7,9 @@ export default function SecaoAtuacaoUFU() {
       subtitulo: 'UFU - Universidade Federal de Uberlândia',
       descricao: 'Monitoramento diário, resgate ético e triagem de felinos que circulam nos espaços da UFU.',
       linkTexto: 'Como Ajudar',
-      linkUrl: '/sobre',
+      linkUrl: '/como-ajudar',
       bgCard: 'bg-lilas-suave border-purple-200',
       corTitulo: 'text-roxo',
-      icone: '🐱',
     },
     {
       titulo: 'Castração & Saúde',
@@ -20,17 +19,15 @@ export default function SecaoAtuacaoUFU() {
       linkUrl: '/doacoes',
       bgCard: 'bg-[#FDF2F8] border-pink-200',
       corTitulo: 'text-pink-700',
-      icone: '🩺',
     },
     {
       titulo: 'Lar Temporário (LT)',
       subtitulo: 'Acolhimento Voluntário',
       descricao: 'Espaço temporário para gatinhos em recuperação ou filhotes aguardando vacinação.',
       linkTexto: 'Oferecer Lar (LT)',
-      linkUrl: '/faq',
+      linkUrl: '/fale-conosco',
       bgCard: 'bg-amarelo-suave border-amber-200',
       corTitulo: 'text-amber-800',
-      icone: '🏠',
     },
     {
       titulo: 'Feiras & Adoção',
@@ -40,12 +37,11 @@ export default function SecaoAtuacaoUFU() {
       linkUrl: '/animais',
       bgCard: 'bg-purple-50 border-purple-200',
       corTitulo: 'text-roxo',
-      icone: '🐾',
     },
   ];
 
   return (
-    <section className="py-14 sm:py-20 bg-white">
+    <section className="py-14 sm:py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
@@ -67,10 +63,6 @@ export default function SecaoAtuacaoUFU() {
               className={`${item.bgCard} rounded-2xl p-6 border shadow-2xs hover:shadow-md transition-all flex flex-col justify-between`}
             >
               <div>
-                <div className="text-3xl mb-3 bg-white w-12 h-12 rounded-xl flex items-center justify-center shadow-2xs">
-                  {item.icone}
-                </div>
-
                 <h3 className={`text-lg font-bold ${item.corTitulo} mb-1`}>
                   {item.titulo}
                 </h3>

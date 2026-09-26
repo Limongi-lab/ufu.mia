@@ -11,29 +11,25 @@ export default function SecaoProcessoSeletivo() {
 
   const areasAtuacao = [
     {
-      icone: '🐱',
       titulo: 'Manejo & Bem-Estar',
       desc: 'Alimentação ética, acolhimento nos campi e suporte veterinário aos felinos.',
     },
     {
-      icone: '📢',
       titulo: 'Comunicação & Mídias',
       desc: 'Criação de conteúdo, fotografia, redes sociais e campanhas de adoção.',
     },
     {
-      icone: '🤝',
       titulo: 'Eventos & Adoção',
       desc: 'Organização de feiras, triagem de adotantes e entrevistas de adoção responsável.',
     },
     {
-      icone: '📋',
       titulo: 'Gestão & Extensão',
       desc: 'Planejamento de atividades, controle de registros e horas complementares UFU.',
     },
   ];
 
   return (
-    <section id="processo-seletivo" className="py-16 sm:py-24 bg-[#FAF7FD] relative overflow-hidden">
+    <section id="processo-seletivo" className="py-16 sm:py-24 relative overflow-hidden">
       {/* Elementos visuais decorativos suaves */}
       <div className="absolute -top-24 right-0 w-96 h-96 bg-[#7B1FA2]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-24 left-0 w-96 h-96 bg-[#F2C744]/10 rounded-full blur-3xl pointer-events-none" />
@@ -48,8 +44,8 @@ export default function SecaoProcessoSeletivo() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
         >
-          <div className="inline-block text-[#F2C744] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">
-            — PROCESSO SELETIVO —
+          <div className="inline-block text-[#7B1FA2] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">
+            PROCESSO SELETIVO
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight">
             Faça parte da equipe do <span className="text-[#7B1FA2]">UFU MIA</span>
@@ -213,8 +209,8 @@ export default function SecaoProcessoSeletivo() {
               <div>
                 <div className="flex items-center justify-between gap-3 mb-5">
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-2xl bg-[#FEF8ED] text-[#B45309] flex items-center justify-center text-2xl font-bold shadow-2xs">
-                      ✍️
+                    <div className="w-12 h-12 rounded-2xl bg-[#FEF8ED] text-[#B45309] flex items-center justify-center text-sm font-black shadow-2xs">
+                      PS
                     </div>
                     <div>
                       <span className="text-[11px] font-black text-[#B45309] uppercase tracking-wider block">
@@ -320,7 +316,6 @@ export default function SecaoProcessoSeletivo() {
                 key={area.titulo}
                 className="bg-[#FAF7FD] rounded-2xl p-5 border border-purple-100/60 hover:border-purple-300 transition-colors"
               >
-                <div className="text-3xl mb-3">{area.icone}</div>
                 <h4 className="text-base font-bold text-gray-900 mb-1.5">{area.titulo}</h4>
                 <p className="text-xs text-gray-600 leading-relaxed">{area.desc}</p>
               </div>
@@ -346,7 +341,7 @@ export default function SecaoProcessoSeletivo() {
                   <span className="text-xl">📄</span>
                   <div>
                     <h3 className="font-bold text-gray-900 text-sm sm:text-base">
-                      Edital de Processo Seletivo — UFU MIA
+                      Edital de Processo Seletivo UFU MIA
                     </h3>
                     <p className="text-[11px] text-gray-500">Visualização direta do Google Drive</p>
                   </div>

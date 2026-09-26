@@ -59,7 +59,7 @@ export default function SecaoFAQ() {
   ];
 
   return (
-    <section id="faq" className="py-16 sm:py-24 bg-[#F8F6FC] relative overflow-hidden">
+    <section id="faq" className="py-16 sm:py-24 relative overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         
         <motion.div
@@ -69,11 +69,11 @@ export default function SecaoFAQ() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <div className="inline-block text-[#F2C744] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">
-            — TIRE SUAS DÚVIDAS —
+          <div className="inline-block text-[#7B1FA2] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">
+            TIRE SUAS DÚVIDAS
           </div>
           <h2 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight">
-            Perguntas Frequentes<span className="text-[#7B1FA2]">.</span>
+            Perguntas Frequentes
           </h2>
           <p className="mt-2 text-sm text-gray-600">
             Respostas sobre adoção responsável, processo seletivo e atuação do projeto UFU MIA.
