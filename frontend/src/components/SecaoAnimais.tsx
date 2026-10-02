@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Animal } from '../services/api';
 import { getAnimais } from '../services/api';
@@ -11,15 +11,41 @@ export default function SecaoAnimais() {
   const [adoptionModalAnimal, setAdoptionModalAnimal] = useState<Animal | null>(null);
   const [filterStatus, setFilterStatus] = useState<string>('todos');
 
-  useEffect(() => {
+  const buscar = useCallback(() => {
     getAnimais()
-      .then((data) => {
-        setAnimais(data);
-        setError(null);
-      })
-      .catch((err) => setError(err.message))
+      .then((data) => setAnimais(data))
+      .catch(() => setError('Não foi possível carregar os gatinhos agora.'))
       .finally(() => setLoading(false));
   }, []);
+
+  const carregar = () => {
+    setLoading(true);
+    setError(null);
+    buscar();
+  };
+
+  useEffect(() => {
+    buscar();
+  }, [buscar]);
+
+  // Esc fecha os modais e a página não rola por trás deles
+  const algumModalAberto = selectedAnimal !== null || adoptionModalAnimal !== null;
+  useEffect(() => {
+    if (!algumModalAberto) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedAnimal(null);
+        setAdoptionModalAnimal(null);
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    const overflowAnterior = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = overflowAnterior;
+    };
+  }, [algumModalAberto]);
 
   const filteredAnimais = animais.filter((animal) => {
     if (filterStatus === 'todos') return true;
@@ -75,12 +101,12 @@ export default function SecaoAnimais() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight">
             Todo gatinho merece um lar cheio de amor
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed font-normal">
+          <p className="mt-3 text-sm sm:text-base text-gray-700 leading-relaxed font-medium">
             Adoção é uma promessa de carinho e proteção para toda a vida. Abra seu coração e dê um lar para um gatinho resgatado na UFU.
           </p>
 
           {/* Filtros em abas estilo modelo */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-6 mt-8 pt-4 border-t border-gray-100 font-semibold text-sm">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-8 font-semibold text-sm">
             {[
               { key: 'todos', label: 'Todos os Gatinhos' },
               { key: 'disponivel', label: 'Disponíveis para Adoção' },
@@ -90,10 +116,10 @@ export default function SecaoAnimais() {
               <button
                 key={tab.key}
                 onClick={() => setFilterStatus(tab.key)}
-                className={`pb-2 border-b-2 transition-all text-xs sm:text-sm relative ${
+                className={`px-4 py-2 rounded-full transition-all text-xs sm:text-sm ${
                   filterStatus === tab.key
-                    ? 'border-[#7B1FA2] text-[#7B1FA2] font-bold'
-                    : 'border-transparent text-gray-500 hover:text-gray-900'
+                    ? 'bg-[#7B1FA2] text-white font-bold shadow-md'
+                    : 'bg-white/60 text-[#4A0E72] hover:bg-white/90'
                 }`}
               >
                 {tab.label}
@@ -117,15 +143,21 @@ export default function SecaoAnimais() {
         )}
 
         {/* Erro */}
-        {error && (
-          <div className="bg-purple-50 border border-purple-200 text-[#7B1FA2] p-8 rounded-3xl text-center max-w-md mx-auto">
-            <p className="font-bold mb-1">Carregando catálogo de felinos...</p>
-            <p className="text-xs text-gray-600">Apresentando gatinhos disponíveis no projeto.</p>
+        {!loading && error && (
+          <div className="bg-white/80 border border-purple-200 text-[#4A0E72] p-8 rounded-3xl text-center max-w-md mx-auto">
+            <p className="font-bold mb-1">{error}</p>
+            <p className="text-xs text-gray-600 mb-5">Verifique sua conexão e tente de novo em instantes.</p>
+            <button
+              onClick={carregar}
+              className="bg-[#7B1FA2] text-white px-6 py-2.5 rounded-full text-xs font-bold shadow-xs hover:bg-[#6A0DAD] transition-colors"
+            >
+              Tentar de novo
+            </button>
           </div>
         )}
 
         {/* Grid de Animais com animações */}
-        {!loading && filteredAnimais.length > 0 && (
+        {!loading && !error && filteredAnimais.length > 0 && (
           <motion.div
             layout
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -142,7 +174,7 @@ export default function SecaoAnimais() {
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.35, delay: idx * 0.05 }}
                     key={animal.id}
-                    className="flex flex-col group transition-all duration-300"
+                    className="flex flex-col group bg-white/65 backdrop-blur-sm border border-white/70 rounded-[2rem] p-3 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                   >
                     {/* Foto com fundo suave e cantos arredondados */}
                     <div className={`relative aspect-square ${bgFundo} rounded-3xl overflow-hidden p-2 mb-4 border border-purple-100 shadow-2xs group-hover:shadow-md transition-shadow`}>
@@ -151,7 +183,8 @@ export default function SecaoAnimais() {
                         alt={animal.nome}
                         className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"
                         onError={(e) => {
-                          (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=600&auto=format&fit=crop';
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=600&auto=format&fit=crop';
                         }}
                       />
                       <div className="absolute top-4 right-4">
@@ -160,18 +193,18 @@ export default function SecaoAnimais() {
                     </div>
 
                     {/* Informações abaixo da foto */}
-                    <div className="space-y-2">
+                    <div className="space-y-2 px-2 pb-2">
                       <div className="flex justify-between items-baseline">
                         <h3 className="text-2xl font-black text-gray-900 group-hover:text-[#7B1FA2] transition-colors">
                           {animal.nome}
                         </h3>
-                        <span className="text-xs font-bold text-gray-500">
+                        <span className="text-xs font-bold text-gray-600">
                           {animal.especie}
                         </span>
                       </div>
 
                       {/* Linha de atributos */}
-                      <div className="flex items-center gap-4 text-xs font-semibold text-gray-500">
+                      <div className="flex items-center gap-4 text-xs font-semibold text-gray-600">
                         <span className="flex items-center gap-1">
                           <span>🎂</span> {animal.idade}
                         </span>
@@ -180,14 +213,14 @@ export default function SecaoAnimais() {
                         </span>
                       </div>
 
-                      <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed pt-1 font-medium">
+                      <p className="text-sm text-gray-700 line-clamp-2 leading-relaxed pt-1 font-medium">
                         {animal.descricao || 'Gatinho muito carinhoso e dócil procurando por um lar amoroso em Uberlândia.'}
                       </p>
 
                       <div className="pt-3 flex items-center gap-3">
                         <button
                           onClick={() => setSelectedAnimal(animal)}
-                          className="flex-1 bg-gray-100 hover:bg-purple-100 text-[#7B1FA2] font-bold py-2.5 px-4 rounded-xl text-xs transition-colors"
+                          className="flex-1 bg-purple-100 hover:bg-purple-200 text-[#7B1FA2] font-bold py-2.5 px-4 rounded-xl text-xs transition-colors"
                         >
                           Ver Detalhes
                         </button>
@@ -210,7 +243,7 @@ export default function SecaoAnimais() {
         )}
 
         {/* Empty state */}
-        {!loading && filteredAnimais.length === 0 && (
+        {!loading && !error && filteredAnimais.length === 0 && (
             <div className="bg-white/70 rounded-3xl p-12 text-center max-w-md mx-auto border border-purple-100">
             <h3 className="text-lg font-bold text-gray-900 mb-1">Nenhum gatinho encontrado nesta categoria</h3>
             <p className="text-xs text-gray-500 mb-5">
@@ -228,8 +261,15 @@ export default function SecaoAnimais() {
         {/* Modal de Detalhes do Animal */}
         <AnimatePresence>
           {selectedAnimal && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs">
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs"
+              onClick={() => setSelectedAnimal(null)}
+            >
               <motion.div
+                onClick={(e) => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true"
+                aria-label={`Detalhes de ${selectedAnimal.nome}`}
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -237,6 +277,7 @@ export default function SecaoAnimais() {
               >
                 <button
                   onClick={() => setSelectedAnimal(null)}
+                  aria-label="Fechar"
                   className="absolute top-4 right-4 z-10 w-9 h-9 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center text-sm font-bold transition-transform hover:scale-110"
                 >
                   ✕
@@ -291,8 +332,15 @@ export default function SecaoAnimais() {
         {/* Modal de Instruções de Adoção Direta */}
         <AnimatePresence>
           {adoptionModalAnimal && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs">
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs"
+              onClick={() => setAdoptionModalAnimal(null)}
+            >
               <motion.div
+                onClick={(e) => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true"
+                aria-label={`Adotar ${adoptionModalAnimal.nome}`}
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -300,6 +348,7 @@ export default function SecaoAnimais() {
               >
                 <button
                   onClick={() => setAdoptionModalAnimal(null)}
+                  aria-label="Fechar"
                   className="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center text-xs font-bold"
                 >
                   ✕
@@ -319,7 +368,7 @@ export default function SecaoAnimais() {
 
                 <div className="space-y-3 mb-6">
                   <a
-                    href={`https://ig.me/m/ufu.mia?text=Olá! Gostaria de saber mais sobre a adoção do(a) ${adoptionModalAnimal.nome}.`}
+                    href={`https://ig.me/m/ufu.mia?text=${encodeURIComponent(`Olá! Gostaria de saber mais sobre a adoção do(a) ${adoptionModalAnimal.nome}.`)}`}
                     target="_blank"
                     rel="noreferrer"
                     className="w-full bg-[#7B1FA2] hover:bg-[#6A0DAD] text-white font-bold py-3.5 px-4 rounded-xl text-xs sm:text-sm transition-all shadow-xs hover:shadow-md flex items-center justify-center gap-2"
@@ -328,7 +377,7 @@ export default function SecaoAnimais() {
                   </a>
 
                   <a
-                    href={`mailto:ufumiaufu@gmail.com?subject=Interesse em Adoção: ${adoptionModalAnimal.nome}&body=Olá equipe UFU MIA, gostaria de me candidatar para adotar o(a) ${adoptionModalAnimal.nome}!`}
+                    href={`mailto:ufumiaufu@gmail.com?subject=${encodeURIComponent(`Interesse em Adoção: ${adoptionModalAnimal.nome}`)}&body=${encodeURIComponent(`Olá equipe UFU MIA, gostaria de me candidatar para adotar o(a) ${adoptionModalAnimal.nome}!`)}`}
                     className="w-full bg-[#F5F0FC] hover:bg-purple-100 text-[#7B1FA2] font-bold py-3 px-4 rounded-xl text-xs sm:text-sm transition-colors flex items-center justify-center gap-2 border border-purple-200"
                   >
                     <span>Enviar E-mail (ufumiaufu@gmail.com)</span>

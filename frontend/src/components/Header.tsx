@@ -36,7 +36,7 @@ export default function Header() {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-purple-100/60 shadow-sm transition-all">
+    <header className="sticky top-0 z-50 bg-[#D5ADEB]/95 backdrop-blur-md border-b border-[#B98AD6]/60 shadow-sm transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
         
         {/* Logo UFU MIA */}
@@ -71,7 +71,7 @@ export default function Header() {
               key={item.to}
               to={item.to}
               className={`transition-colors py-1 relative flex items-center gap-1.5 ${
-                isActive(item.to) ? 'text-[#7B1FA2] font-bold' : 'text-gray-700 hover:text-[#7B1FA2]'
+                isActive(item.to) ? 'text-[#7B1FA2] font-bold' : 'text-gray-900 hover:text-[#7B1FA2]'
               }`}
             >
               {item.label}
@@ -92,7 +92,7 @@ export default function Header() {
             href="https://instagram.com/ufu.mia"
             target="_blank"
             rel="noreferrer"
-            className="w-10 h-10 rounded-xl bg-[#F5F0FC] hover:bg-gray-50 flex items-center justify-center transition-colors shadow-2xs"
+            className="w-10 h-10 rounded-xl bg-white/70 hover:bg-white flex items-center justify-center transition-colors shadow-2xs"
             title="Instagram @ufu.mia"
           >
             <InstagramIcon className="w-5 h-5" />
@@ -137,7 +137,7 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-t border-purple-100/60 px-5 py-4 space-y-2 shadow-lg overflow-hidden"
+            className="lg:hidden bg-[#D5ADEB] border-t border-[#B98AD6]/60 px-5 py-4 space-y-2 shadow-lg overflow-hidden"
           >
             <Link
               to="/"
@@ -195,6 +195,14 @@ export default function Header() {
             >
               Doações e PIX
             </Link>
+            <a
+              href="https://instagram.com/ufu.mia"
+              target="_blank"
+              rel="noreferrer"
+              className="block py-2 text-sm font-bold text-gray-800 hover:text-[#7B1FA2]"
+            >
+              Instagram @ufu.mia
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
