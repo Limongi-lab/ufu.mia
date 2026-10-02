@@ -1,3 +1,4 @@
+import Reveal from './Reveal';
 export default function SecaoOndeEncontrar() {
   const locais = [
     {
@@ -54,6 +55,7 @@ export default function SecaoOndeEncontrar() {
   ];
 
   return (
+    <Reveal>
     <section className="py-14 sm:py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
@@ -105,5 +107,6 @@ export default function SecaoOndeEncontrar() {
 
       </div>
     </section>
+    </Reveal>
   );
 }

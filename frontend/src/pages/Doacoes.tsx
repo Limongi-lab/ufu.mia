@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -43,23 +44,31 @@ export default function Doacoes() {
       <main className="py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-block text-[#F2C744] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">
-              DOAR AGORA
-            </div>
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="text-center max-w-2xl mx-auto mb-12"
+          >
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 tracking-tight">
               Doações
             </h1>
             <p className="mt-2 text-sm sm:text-base text-gray-600 font-medium">
               Doe uma quantia livre ou selecione uma de nossas campanhas de apadrinhamento!
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
-            {planos.map((plano) => (
-              <div
+            {planos.map((plano, idx) => (
+              <motion.div
                 key={plano.id}
-                className={`${plano.bgCard} rounded-3xl p-6 sm:p-8 border shadow-2xs hover:shadow-md transition-all flex flex-col justify-between text-center`}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.55, delay: idx * 0.12, ease: 'easeOut' }}
+              >
+              <div
+                className={`${plano.bgCard} h-full rounded-3xl p-6 sm:p-8 border shadow-2xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between text-center`}
               >
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-1">
@@ -76,7 +85,7 @@ export default function Doacoes() {
                 </div>
 
                 <div className="bg-white/90 rounded-2xl p-4 border border-purple-100">
-                  <span className="block text-[10px] font-bold uppercase tracking-wider text-gray-500 mb-1">
+                  <span className="block text-[10px] lg:text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1">
                     Chave PIX
                   </span>
                   <p className="font-mono text-sm sm:text-base font-bold text-[#7B1FA2] select-all break-all">
@@ -84,6 +93,7 @@ export default function Doacoes() {
                   </p>
                 </div>
               </div>
+              </motion.div>
             ))}
           </div>
 

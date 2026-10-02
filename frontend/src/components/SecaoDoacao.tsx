@@ -1,3 +1,4 @@
+import Reveal from './Reveal';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -12,6 +13,7 @@ export default function SecaoDoacao() {
   };
 
   return (
+    <Reveal>
     <section id="doacoes" className="py-16 sm:py-24">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         
@@ -33,7 +35,7 @@ export default function SecaoDoacao() {
           {/* Campo de Chave PIX */}
           <div className="bg-white text-gray-900 p-4 sm:p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 max-w-xl mx-auto shadow-md">
             <div className="text-center sm:text-left">
-              <span className="text-[10px] text-gray-500 font-bold block uppercase tracking-wider">Chave PIX Oficial (E-mail)</span>
+              <span className="text-[10px] lg:text-[11px] text-gray-500 font-bold block uppercase tracking-wider">Chave PIX Oficial (E-mail)</span>
               <span className="text-[#7B1FA2] font-mono text-base sm:text-xl font-black select-all">
                 {chavePix}
               </span>
@@ -65,5 +67,6 @@ export default function SecaoDoacao() {
 
       </div>
     </section>
+    </Reveal>
   );
 }

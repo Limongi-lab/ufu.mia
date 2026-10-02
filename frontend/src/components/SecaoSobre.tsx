@@ -6,16 +6,16 @@ export default function SecaoSobre() {
 
   const compromissos = [
     {
-      titulo: 'Compromisso com o Resgate Ético',
-      descricao: 'Monitoramento e acolhimento contínuo na Universidade Federal de Uberlândia (UFU), acolhendo animais em vulnerabilidade com respeito, responsabilidade e dedicação.',
+      titulo: 'A situação que nos fez começar',
+      descricao: 'Mais de 50 gatos foram encontrados abandonados no Campus Santa Mônica, muitos deles doentes, presos em telhados e sem os cuidados adequados.',
     },
     {
-      titulo: 'Foco em Saúde, Vacinação e Castração',
-      descricao: 'Todos os felinos resgatados passam por triagem veterinária, exames, vermifugação, vacinação e cirurgia de castração antes de serem encaminhados para adoção responsável.',
+      titulo: 'Nossos objetivos',
+      descricao: 'Cuidar da saúde e alimentar os gatos, realizar castrações para controle populacional, promover a adoção responsável dos animais e contribuir para o desenvolvimento acadêmico dos estudantes.',
     },
     {
-      titulo: 'Construindo Lares Amorosos e Conexões',
-      descricao: 'Entrevistas de adoção criteriosas para garantir que cada gatinho vá para um ambiente seguro, com telas de proteção e acolhedor por toda a vida.',
+      titulo: 'Como agimos: o método CCD',
+      descricao: 'Captura, Castração e Devolução ou Adoção. Gatos mansos e filhotes são divulgados para encontrar lares responsáveis; os ariscos voltam ao campus, mas seguem monitorados e disponíveis para adoção.',
     },
   ];
 
@@ -75,7 +75,7 @@ export default function SecaoSobre() {
             </p>
 
             <p className="text-sm sm:text-base text-gray-600 leading-relaxed font-normal">
-              O <strong>UFU MIA</strong> é um projeto de extensão da <strong>Universidade Federal de Uberlândia (UFU)</strong> que acolhe, trata e prepara gatinhos para adoção responsável, transformando a universidade em um espaço de cuidado, saúde pública e conscientização.
+              O <strong>UFU MIA</strong> é um projeto de extensão da <strong>Universidade Federal de Uberlândia (UFU)</strong> que integra ensino, pesquisa e extensão para cuidar dos gatos abandonados no <strong>Campus Santa Mônica</strong>: oferecemos saúde, alimentação, castração e adoção responsável, e ainda contribuímos para a formação dos estudantes.
             </p>
 
             {/* Lista de Compromissos com (+) */}

@@ -273,7 +273,7 @@ export default function SecaoAnimais() {
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl relative"
+                className="bg-white rounded-3xl max-w-lg w-full max-h-[92dvh] overflow-y-auto shadow-2xl relative"
               >
                 <button
                   onClick={() => setSelectedAnimal(null)}
@@ -344,7 +344,7 @@ export default function SecaoAnimais() {
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative text-center"
+                className="bg-white rounded-3xl max-w-md w-full max-h-[92dvh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative text-center"
               >
                 <button
                   onClick={() => setAdoptionModalAnimal(null)}
@@ -384,7 +384,7 @@ export default function SecaoAnimais() {
                   </a>
                 </div>
 
-                <div className="bg-amber-50 rounded-xl p-3 text-[11px] text-amber-800 leading-tight text-left">
+                <div className="bg-amber-50 rounded-xl p-3 text-[11px] lg:text-[12px] text-amber-800 leading-tight text-left">
                   <strong>Lembrete:</strong> Nossas adoções exigem residência segura com telas de proteção para garantir a segurança dos gatinhos.
                 </div>
               </motion.div>

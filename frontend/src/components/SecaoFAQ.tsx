@@ -44,15 +44,38 @@ export default function SecaoFAQ() {
       pergunta: 'Com qual idade o gatinho já pode ser castrado?',
       resposta: (
         <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-          A partir dos <strong>4 a 6 meses de idade</strong>, após criteriosa avaliação clínica veterinária de peso, desenvolvimento e condições gerais de saúde.
+          As fêmeas são castradas a partir de <strong>6 meses</strong> e os machos adultos também passam pela cirurgia. Os benefícios são o controle populacional e a redução do risco de câncer.
         </p>
       ),
     },
     {
       pergunta: 'Como posso oferecer Lar Temporário (LT) ou ser voluntário?',
       resposta: (
+        <div className="space-y-2 text-xs sm:text-sm text-gray-700 leading-relaxed">
+          <p>
+            Após o resgate, os gatinhos precisam de um local seguro para se recuperar e esperar pelo lar definitivo. O espaço precisa ser <strong>sem rotas de fuga</strong>, separado de outros bichinhos e com disponibilidade para oferecer carinho e atenção.
+          </p>
+          <p>
+            Nós damos suporte completo: medicamentos, caixinha de areia e areia, e ração. Fale com a equipe pela aba <strong>Fale Conosco</strong>, pelo Instagram <strong>@ufu.mia</strong> ou pelo e-mail <strong>ufumiaufu@gmail.com</strong>.
+          </p>
+        </div>
+      ),
+    },
+    {
+      pergunta: 'O que significa a sigla CCD?',
+      resposta: (
+        <div className="space-y-2 text-xs sm:text-sm text-gray-700 leading-relaxed">
+          <p><strong>Captura:</strong> resgatamos gatos mansos, ariscos e ferais, e todos são levados ao veterinário para avaliação e cuidados.</p>
+          <p><strong>Castração:</strong> fêmeas (a partir de 6 meses) e machos adultos são castrados.</p>
+          <p><strong>Devolução ou Adoção:</strong> gatos ariscos retornam ao campus, mas continuam monitorados e disponíveis para adoção. Gatos mansos e filhotes são divulgados para encontrar lares responsáveis.</p>
+        </div>
+      ),
+    },
+    {
+      pergunta: 'Gatos com FeLV podem passar a doença para pessoas?',
+      resposta: (
         <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-          O Lar Temporário (LT) é fundamental para abrigar filhotinhos ou animais pós-cirúrgicos até que encontrem lares definitivos. Entre em contato diretamente pelo Instagram <strong>@ufu.mia</strong> ou envie uma mensagem para <strong>ufumiaufu@gmail.com</strong>.
+          Não. Gatos FeLV+ não transmitem a doença para humanos nem para outros animais, como cães. A transmissão ocorre apenas entre gatos, principalmente por contato direto prolongado. Com os cuidados certos, eles podem viver felizes e saudáveis por muitos anos.
         </p>
       ),
     },

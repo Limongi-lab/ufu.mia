@@ -36,28 +36,42 @@ export default function Header() {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 bg-[#D5ADEB]/95 backdrop-blur-md border-b border-[#B98AD6]/60 shadow-sm transition-all">
+    <motion.header
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className="sticky top-0 z-50 bg-[#D5ADEB]/95 backdrop-blur-md border-b border-[#B98AD6]/60 shadow-sm transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
         
         {/* Logo UFU MIA */}
-        <Link to="/" className="flex items-center gap-3.5 group">
+        <Link
+          to="/"
+          onClick={(e) => {
+            // já está no início: sobe a página inteira suavemente na mesma aba
+            if (location.pathname === '/') {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }}
+          className="flex items-center gap-3.5 group"
+        >
           <img
             src={logoImg}
             alt="UFU MIA"
-            className="w-12 h-12 rounded-full object-cover shadow-xs group-hover:scale-105 transition-transform"
+            className="w-12 h-12 rounded-full object-cover shadow-xs group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300"
           />
           <div className="flex flex-col">
             <span className="text-xl font-black text-gray-900 tracking-tight leading-none">
               Ufu Mia
             </span>
-            <span className="text-[10px] font-bold text-[#7B1FA2] tracking-wider uppercase mt-1">
+            <span className="hidden min-[360px]:block text-[10px] lg:text-[11px] font-bold text-[#7B1FA2] tracking-wider uppercase mt-1">
               Projeto de Extensão UFU
             </span>
           </div>
         </Link>
 
         {/* Menu Desktop */}
-        <nav className="hidden lg:flex items-center gap-5 text-[13px] font-semibold">
+        <nav className="hidden lg:flex items-center gap-5 text-[13px] lg:text-[15px] font-semibold">
           {[
             { to: '/', label: 'Início' },
             { to: '/animais', label: 'Animais' },
@@ -100,7 +114,7 @@ export default function Header() {
 
           <Link
             to="/doacoes"
-            className="bg-[#7B1FA2] hover:bg-[#6A0DAD] text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-xs hover:shadow-md transition-all transform hover:-translate-y-0.5"
+            className="bg-[#7B1FA2] hover:bg-[#6A0DAD] text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-xs hover:shadow-md btn-pulse"
           >
             Doe agora
           </Link>
@@ -206,6 +220,6 @@ export default function Header() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

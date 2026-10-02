@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import Reveal from './Reveal';
 import logoImg from '../assets/logo.png';
 
 export default function Footer() {
   return (
     <footer className="bg-[#1F0B2C] text-white pt-16 pb-12 border-t border-purple-900/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Reveal className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-purple-900/40">
           
@@ -91,9 +92,10 @@ export default function Footer() {
         {/* Rodapé inferior */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-purple-300/60 font-medium">
           <p>© {new Date().getFullYear()} UFU MIA, Universidade Federal de Uberlândia. Todos os direitos reservados.</p>
+          <p className="font-semibold text-purple-200/80">Feito por Rafael Limongi</p>
         </div>
 
-      </div>
+      </Reveal>
     </footer>
   );
 }

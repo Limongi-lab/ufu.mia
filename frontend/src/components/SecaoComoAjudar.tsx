@@ -37,8 +37,8 @@ export default function SecaoComoAjudar() {
   const formasAjudar = [
     {
       icone: <IconeCasa />,
-      titulo: 'Adoção Responsável',
-      descricao: 'Dê um lar permanente cheio de amor, segurança e cuidados para um dos nossos gatinhos resgatados.',
+      titulo: 'Adotar um Gatinho',
+      descricao: 'Ofereça um lar amoroso e responsável para um dos gatinhos resgatados.',
       linkTexto: 'Ver Animais',
       linkUrl: '/animais',
       isExternal: false,
@@ -48,7 +48,7 @@ export default function SecaoComoAjudar() {
     {
       icone: <IconeCama />,
       titulo: 'Lar Temporário (LT)',
-      descricao: 'Acolha temporariamente gatinhos em recuperação ou filhotes até que encontrem uma família definitiva.',
+      descricao: 'Receba um gatinho em um local seguro, sem rotas de fuga, enquanto ele se recupera. Você dá carinho e atenção; nós damos medicamentos, caixinha de areia e ração.',
       linkTexto: 'Falar com a equipe',
       linkUrl: '/fale-conosco',
       isExternal: false,
@@ -57,9 +57,9 @@ export default function SecaoComoAjudar() {
     },
     {
       icone: <IconePessoas />,
-      titulo: 'Processo Seletivo',
-      descricao: 'Inscreva-se como voluntário no projeto de extensão UFU e contribua nas ações de acolhimento e conscientização.',
-      linkTexto: 'Ver Edital & Vagas',
+      titulo: 'Ser Extensionista ou Voluntário',
+      descricao: 'Faça parte da equipe e contribua com ações no projeto: ajude nas atividades, nos eventos e no cuidado dos gatos.',
+      linkTexto: 'Ver Processo Seletivo',
       linkUrl: '/processo-seletivo',
       isExternal: false,
       bg: 'bg-white/70',
@@ -67,11 +67,11 @@ export default function SecaoComoAjudar() {
     },
     {
       icone: <IconeMegafone />,
-      titulo: 'Divulgação nas Redes',
-      descricao: 'Compartilhe nossos posts no Instagram para ajudar os gatinhos a encontrarem famílias amorosas mais rápido.',
-      linkTexto: 'Seguir @ufu.mia',
-      linkUrl: 'https://instagram.com/ufu.mia',
-      isExternal: true,
+      titulo: 'Ajudar Financeiramente',
+      descricao: 'Participe dos nossos eventos, como bazares e rifas, ou contribua com doações.',
+      linkTexto: 'Fazer uma doação',
+      linkUrl: '/doacoes',
+      isExternal: false,
       bg: 'bg-white/70',
       borda: 'border-emerald-200',
     },
@@ -95,7 +95,7 @@ export default function SecaoComoAjudar() {
             Como você pode nos ajudar
           </h2>
           <p className="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed font-normal">
-            Você pode transformar a vida dos gatinhos da UFU de diversas formas. Seja acolhendo, participando do processo seletivo ou compartilhando nossas histórias:
+            Você pode transformar a vida dos gatinhos da UFU de diversas formas. Seja adotando, acolhendo, entrando para a equipe ou ajudando financeiramente:
           </p>
         </motion.div>
 

@@ -71,3 +71,55 @@
 }
 
 
+
+
+/* Botões e links arredondados: sobem com mola ao passar o mouse e "afundam" ao clicar */
+a[class*="rounded-full"],
+button[class*="rounded-full"],
+a[class*="rounded-xl"],
+button[class*="rounded-xl"] {
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    filter 0.2s ease;
+}
+
+a[class*="rounded-full"]:hover,
+button[class*="rounded-full"]:not(:disabled):hover,
+a[class*="rounded-xl"]:hover,
+button[class*="rounded-xl"]:not(:disabled):hover {
+  transform: translateY(-3px) scale(1.04);
+  filter: brightness(1.05);
+}
+
+a[class*="rounded-full"]:active,
+button[class*="rounded-full"]:not(:disabled):active,
+a[class*="rounded-xl"]:active,
+button[class*="rounded-xl"]:not(:disabled):active {
+  transform: translateY(0) scale(0.95);
+  transition-duration: 0.1s;
+}
+
+/* Botão "Doe agora" do cabeçalho: anel suave pulsando para chamar atenção */
+@keyframes pulso-anel {
+  0%   { box-shadow: 0 0 0 0 rgba(123, 31, 162, 0.5); }
+  70%  { box-shadow: 0 0 0 12px rgba(123, 31, 162, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(123, 31, 162, 0); }
+}
+.btn-pulse {
+  animation: pulso-anel 2.6s ease-out infinite;
+}
+.btn-pulse:hover {
+  animation: none;
+}
+
+
+/* Só computador (tela larga + mouse): aumenta tudo que usa rem, ou seja, os textos */
+@media (min-width: 1024px) and (pointer: fine) {
+  html { font-size: 112.5%; }
+}
+
+/* Segurança no celular: nenhum elemento decorativo pode criar rolagem horizontal */
+html, body { overflow-x: clip; }

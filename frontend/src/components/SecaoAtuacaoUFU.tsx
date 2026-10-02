@@ -1,46 +1,66 @@
+import Reveal from './Reveal';
 import { Link } from 'react-router-dom';
 
 export default function SecaoAtuacaoUFU() {
   const frentes = [
     {
-      titulo: 'Resgate nos Campi',
-      subtitulo: 'UFU - Universidade Federal de Uberlândia',
-      descricao: 'Monitoramento diário, resgate ético e triagem de felinos que circulam nos espaços da UFU.',
-      linkTexto: 'Como Ajudar',
-      linkUrl: '/como-ajudar',
+      titulo: 'Eventos',
+      subtitulo: 'Arrecadação',
+      descricao: 'Organização de bazares, rifas, feirinhas e outras ações para arrecadar fundos para os gatinhos.',
+      linkTexto: 'Falar com Eventos',
+      linkUrl: '/fale-conosco',
       bgCard: 'bg-lilas-suave border-purple-200',
       corTitulo: 'text-roxo',
     },
     {
-      titulo: 'Castração & Saúde',
-      subtitulo: 'Hospital Veterinário UFU',
-      descricao: 'Controle populacional ético com castrações, vacinação e tratamento de doenças.',
-      linkTexto: 'Apoiar Tratamentos',
-      linkUrl: '/doacoes',
+      titulo: 'Marketing',
+      subtitulo: 'Comunicação',
+      descricao: 'Divulgação nas redes sociais e campanhas para dar visibilidade ao projeto e aos gatinhos.',
+      linkTexto: 'Falar com Marketing',
+      linkUrl: '/fale-conosco',
       bgCard: 'bg-[#FDF2F8] border-pink-200',
       corTitulo: 'text-pink-700',
     },
     {
-      titulo: 'Lar Temporário (LT)',
-      subtitulo: 'Acolhimento Voluntário',
-      descricao: 'Espaço temporário para gatinhos em recuperação ou filhotes aguardando vacinação.',
-      linkTexto: 'Oferecer Lar (LT)',
+      titulo: 'Artes',
+      subtitulo: 'Design',
+      descricao: 'Criação de materiais visuais e design para divulgação.',
+      linkTexto: 'Falar com Artes',
       linkUrl: '/fale-conosco',
       bgCard: 'bg-amarelo-suave border-amber-200',
       corTitulo: 'text-amber-800',
     },
     {
-      titulo: 'Feiras & Adoção',
-      subtitulo: 'Posse Responsável',
-      descricao: 'Eventos presenciais e entrevistas criteriosas para garantir um lar seguro e telado.',
-      linkTexto: 'Ver Animais',
-      linkUrl: '/animais',
+      titulo: 'Resgates',
+      subtitulo: 'Mapeamento e captura',
+      descricao: 'Equipe dedicada ao mapeamento e à captura dos gatos.',
+      linkTexto: 'Falar com Resgates',
+      linkUrl: '/fale-conosco',
       bgCard: 'bg-purple-50 border-purple-200',
+      corTitulo: 'text-roxo',
+    },
+    {
+      titulo: 'Coordenação Interna',
+      subtitulo: 'Organização',
+      descricao: 'Gestão das equipes e organização do trabalho.',
+      linkTexto: 'Falar com a Coordenação',
+      linkUrl: '/fale-conosco',
+      bgCard: 'bg-[#FDF2F8] border-pink-200',
+      corTitulo: 'text-pink-700',
+    },
+    {
+      titulo: 'Gente e Gestão',
+      subtitulo: 'Apoio e logística',
+      descricao: 'Apoio e logística para os voluntários e participantes do projeto.',
+      linkTexto: 'Entrar para a equipe',
+      linkUrl: '/processo-seletivo',
+      bgCard: 'bg-lilas-suave border-purple-200',
       corTitulo: 'text-roxo',
     },
   ];
 
   return (
+    <Reveal>
     <section className="py-14 sm:py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
@@ -49,14 +69,14 @@ export default function SecaoAtuacaoUFU() {
             Nossas Frentes de Trabalho
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-preto tracking-tight">
-            Como atuamos na UFU
+            Frentes de atuação do projeto
           </h2>
           <p className="mt-2 text-xs sm:text-sm text-gray-600">
-            Conheça as ações contínuas do projeto de extensão para garantir o bem-estar felino em Uberlândia.
+            Conheça as equipes que fazem o UFU MIA acontecer todos os dias.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {frentes.map((item) => (
             <div
               key={item.titulo}
@@ -89,5 +109,6 @@ export default function SecaoAtuacaoUFU() {
 
       </div>
     </section>
+    </Reveal>
   );
 }

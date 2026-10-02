@@ -111,7 +111,7 @@ export default function SecaoProcessoSeletivo() {
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                     </div>
                     <div>
-                      <span className="text-[11px] font-black text-[#7B1FA2] uppercase tracking-wider block">
+                      <span className="text-[11px] lg:text-[12px] font-black text-[#7B1FA2] uppercase tracking-wider block">
                         Documento Oficial
                       </span>
                       <h3 className="text-xl sm:text-2xl font-black text-gray-900">
@@ -213,7 +213,7 @@ export default function SecaoProcessoSeletivo() {
                       PS
                     </div>
                     <div>
-                      <span className="text-[11px] font-black text-[#B45309] uppercase tracking-wider block">
+                      <span className="text-[11px] lg:text-[12px] font-black text-[#B45309] uppercase tracking-wider block">
                         Candidatura Online
                       </span>
                       <h3 className="text-xl sm:text-2xl font-black text-gray-900">
@@ -343,7 +343,7 @@ export default function SecaoProcessoSeletivo() {
                     <h3 className="font-bold text-gray-900 text-sm sm:text-base">
                       Edital de Processo Seletivo UFU MIA
                     </h3>
-                    <p className="text-[11px] text-gray-500">Visualização direta do Google Drive</p>
+                    <p className="text-[11px] lg:text-[12px] text-gray-500">Visualização direta do Google Drive</p>
                   </div>
                 </div>
 

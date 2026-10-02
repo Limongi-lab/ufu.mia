@@ -1,4 +1,6 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { MotionConfig, motion } from 'framer-motion';
+import BarraProgresso from './components/BarraProgresso';
 import ScrollToTop from './components/ScrollToTop';
 import FundoGatinhos from './components/FundoGatinhos';
 import Home from './pages/Home';
@@ -10,12 +12,16 @@ import ProcessoSeletivo from './pages/ProcessoSeletivo';
 import ComoAjudar from './pages/ComoAjudar';
 import FaleConosco from './pages/FaleConosco';
 
-function App() {
+function RotasAnimadas() {
+  const location = useLocation();
   return (
-    <BrowserRouter>
-      <FundoGatinhos />
-      <ScrollToTop />
-      <Routes>
+    <motion.div
+      key={location.pathname}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
+    >
+      <Routes location={location}>
         <Route path="/" element={<Home />} />
         <Route path="/sobre" element={<Sobre />} />
         <Route path="/animais" element={<Animais />} />
@@ -26,7 +32,20 @@ function App() {
         <Route path="/processo-seletivo" element={<ProcessoSeletivo />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </BrowserRouter>
+    </motion.div>
+  );
+}
+
+function App() {
+  return (
+    <MotionConfig reducedMotion="user">
+      <BrowserRouter>
+        <FundoGatinhos />
+        <BarraProgresso />
+        <ScrollToTop />
+        <RotasAnimadas />
+      </BrowserRouter>
+    </MotionConfig>
   );
 }
 

@@ -14,7 +14,7 @@ export default function FaixaDestaqueInsta() {
         >
           
           <div className="space-y-1.5 max-w-xl">
-            <div className="inline-block bg-[#F2C744] text-[#1F1A24] font-black text-[11px] uppercase tracking-wider px-3 py-0.5 rounded-full mb-1">
+            <div className="inline-block bg-[#F2C744] text-[#1F1A24] font-black text-[11px] lg:text-[12px] uppercase tracking-wider px-3 py-0.5 rounded-full mb-1">
               Participe da Causa • UFU MIA
             </div>
             <h3 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-white">

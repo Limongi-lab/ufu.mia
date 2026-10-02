@@ -1,5 +1,7 @@
 import Header from '../components/Header';
 import SecaoSobre from '../components/SecaoSobre';
+import SecaoCCD from '../components/SecaoCCD';
+import SecaoAtuacaoUFU from '../components/SecaoAtuacaoUFU';
 import SecaoContadores from '../components/SecaoContadores';
 import Footer from '../components/Footer';
 
@@ -20,6 +22,8 @@ export default function Sobre() {
         </div>
 
         <SecaoSobre />
+        <SecaoCCD />
+        <SecaoAtuacaoUFU />
         <SecaoContadores />
       </main>
       <Footer />
