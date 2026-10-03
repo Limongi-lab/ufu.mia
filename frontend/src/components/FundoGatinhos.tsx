@@ -1,15 +1,11 @@
 export default function FundoGatinhos() {
-  const reduzirMovimento =
-    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
       <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
         <defs>
           <pattern id="gatinhos-fofos" width="220" height="220" patternUnits="userSpaceOnUse">
             {/* fundo derivando bem devagar */}
-            {!reduzirMovimento && (
-              <animateTransform
+            <animateTransform
                 attributeName="patternTransform"
                 type="translate"
                 from="0 0"
@@ -17,7 +13,7 @@ export default function FundoGatinhos() {
                 dur="90s"
                 repeatCount="indefinite"
               />
-            )}
+            
             {/* rosto de gatinho */}
             <g fill="#B57AD4" opacity="0.42">
               <ellipse cx="48" cy="52" rx="22" ry="18" />

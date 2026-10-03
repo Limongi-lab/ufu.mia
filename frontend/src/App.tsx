@@ -38,7 +38,7 @@ function RotasAnimadas() {
 
 function App() {
   return (
-    <MotionConfig reducedMotion="user">
+    <MotionConfig reducedMotion="never">
       <BrowserRouter>
         <FundoGatinhos />
         <BarraProgresso />

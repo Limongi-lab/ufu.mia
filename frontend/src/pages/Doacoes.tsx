@@ -7,30 +7,6 @@ export default function Doacoes() {
   const [copied, setCopied] = useState(false);
   const chavePix = 'ufumiaufu@gmail.com';
 
-  const planos = [
-    {
-      id: 'livre',
-      titulo: 'Quantia livre',
-      valor: 'R$ 00,00',
-      descricao: 'Aqui você nos ajuda com a quantia que cabe no seu bolso ou no seu coração! Qualquer valor será uma grande ajuda.',
-      bgCard: 'bg-[#F5F0FC] border-purple-200',
-    },
-    {
-      id: 'racao',
-      titulo: 'Ração & Alimentação',
-      valor: 'R$ 98,90',
-      descricao: 'Com esse valor você nos ajuda a comprar sacos de ração premium e sachês para os gatinhos acolhidos no campus.',
-      bgCard: 'bg-[#FEF8ED] border-amber-200',
-    },
-    {
-      id: 'castracao',
-      titulo: 'Cirurgia de castração',
-      valor: 'R$ 150,00',
-      descricao: 'Com esse valor você nos ajuda com a cirurgia de castração e medicação pós-operatória que previne o abandono.',
-      bgCard: 'bg-[#FDF2F8] border-pink-200',
-    },
-  ];
-
   const handleCopyPix = () => {
     navigator.clipboard.writeText(chavePix);
     setCopied(true);
@@ -54,48 +30,9 @@ export default function Doacoes() {
               Doações
             </h1>
             <p className="mt-2 text-sm sm:text-base text-gray-600 font-medium">
-              Doe uma quantia livre ou selecione uma de nossas campanhas de apadrinhamento!
+              Participe de nossos eventos, como bazares e rifas, ou contribua com doações pela chave PIX.
             </p>
           </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
-            {planos.map((plano, idx) => (
-              <motion.div
-                key={plano.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.55, delay: idx * 0.12, ease: 'easeOut' }}
-              >
-              <div
-                className={`${plano.bgCard} h-full rounded-3xl p-6 sm:p-8 border shadow-2xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between text-center`}
-              >
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">
-                    {plano.titulo}
-                  </h3>
-
-                  <div className="text-3xl sm:text-4xl font-black text-[#7B1FA2] my-3">
-                    {plano.valor}
-                  </div>
-
-                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6 font-medium">
-                    {plano.descricao}
-                  </p>
-                </div>
-
-                <div className="bg-white/90 rounded-2xl p-4 border border-purple-100">
-                  <span className="block text-[10px] lg:text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1">
-                    Chave PIX
-                  </span>
-                  <p className="font-mono text-sm sm:text-base font-bold text-[#7B1FA2] select-all break-all">
-                    {chavePix}
-                  </p>
-                </div>
-              </div>
-              </motion.div>
-            ))}
-          </div>
 
           <div className="bg-gradient-to-r from-[#5B107D] via-[#7B1FA2] to-[#8C1BA8] text-white rounded-3xl p-8 sm:p-12 text-center max-w-3xl mx-auto shadow-xl mb-12">
             <div className="inline-block bg-[#F2C744] text-[#18141D] font-black text-xs uppercase tracking-wider px-3.5 py-1 rounded-full mb-3">

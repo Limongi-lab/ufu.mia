@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import tigre from '../assets/slide/tigre.jpg';
 
 const passos = [
   {
@@ -25,7 +26,7 @@ export default function SecaoCCD() {
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto mb-10 sm:mb-14"
         >
@@ -36,7 +37,7 @@ export default function SecaoCCD() {
             A sigla CCD
           </h2>
           <p className="mt-2 text-sm sm:text-base text-gray-700">
-            O caminho de cada gatinho dos campi, da captura até a adoção.
+            Captura, Castração, Devolução ou Adoção.
           </p>
         </motion.div>
 
@@ -46,7 +47,7 @@ export default function SecaoCCD() {
               key={p.titulo}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.55, delay: idx * 0.15, ease: 'easeOut' }}
             >
               <div className="h-full bg-white/80 border border-purple-200 rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
@@ -63,10 +64,16 @@ export default function SecaoCCD() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6 }}
-          className="mt-8 sm:mt-10 bg-gradient-to-r from-[#5B107D] via-[#7B1FA2] to-[#8C1BA8] text-white rounded-3xl p-6 sm:p-10 shadow-lg"
+          className="mt-8 sm:mt-10 bg-gradient-to-r from-[#5B107D] via-[#7B1FA2] to-[#8C1BA8] text-white rounded-3xl p-6 sm:p-10 shadow-lg flex flex-col md:flex-row md:items-center gap-6 md:gap-10"
         >
+          <img
+            src={tigre}
+            alt="Tigre, um dos gatinhos do projeto"
+            className="w-full max-w-xs mx-auto md:mx-0 md:w-64 rounded-2xl shadow-lg shrink-0"
+          />
+          <div>
           <p className="text-[#F2C744] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">
             Curiosidade · FIV e FeLV
           </p>
@@ -74,6 +81,7 @@ export default function SecaoCCD() {
           <p className="text-sm sm:text-base text-purple-100 leading-relaxed">
             A Leucemia Viral Felina (FeLV) afeta o sistema imunológico dos gatinhos, mas com os cuidados certos eles podem viver felizes e saudáveis por muitos anos. Gatos FeLV+ não transmitem a doença para humanos ou outros animais, como cães: a transmissão ocorre apenas entre gatos, principalmente por contato direto prolongado.
           </p>
+          </div>
         </motion.div>
       </div>
     </section>

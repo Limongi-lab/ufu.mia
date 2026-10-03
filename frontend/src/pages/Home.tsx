@@ -2,6 +2,7 @@ import Header from '../components/Header';
 import Hero from '../components/Hero';
 import SecaoAnimais from '../components/SecaoAnimais';
 import SecaoSobre from '../components/SecaoSobre';
+import SecaoAdotados from '../components/SecaoAdotados';
 import SecaoProcessoSeletivo from '../components/SecaoProcessoSeletivo';
 import SecaoComoAjudar from '../components/SecaoComoAjudar';
 import SecaoContadores from '../components/SecaoContadores';
@@ -16,6 +17,7 @@ export default function Home() {
         <Hero />
         <SecaoAnimais />
         <SecaoSobre />
+        <SecaoAdotados />
         <SecaoProcessoSeletivo />
         <SecaoComoAjudar />
         <SecaoContadores />

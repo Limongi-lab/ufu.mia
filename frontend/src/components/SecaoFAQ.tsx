@@ -6,59 +6,19 @@ export default function SecaoFAQ() {
 
   const faqs = [
     {
-      pergunta: 'Como funciona o processo de adoção responsável?',
+      pergunta: 'Como posso adotar um gatinho?',
       resposta: (
-        <div className="space-y-2 text-xs sm:text-sm text-gray-700 leading-relaxed">
-          <p>O processo de adoção inclui:</p>
-          <ol className="list-decimal list-inside space-y-1.5 bg-[#FAF7FD] p-3.5 rounded-xl border border-purple-100">
-            <li>Manifestação de interesse pelo perfil do gatinho ou pelo Instagram @ufu.mia;</li>
-            <li>Entrevista sobre segurança da residência (obrigatoriedade de telas de proteção);</li>
-            <li>Assinatura do Termo Oficial de Adoção Responsável;</li>
-            <li>Acompanhamento carinhoso e suporte na adaptação do gatinho.</li>
-          </ol>
-        </div>
+        <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
+          Gatos mansos e filhotes são divulgados para encontrar lares responsáveis. Veja os gatinhos disponíveis na aba <strong>Animais</strong> e fale com a equipe pelo Instagram <strong>@ufu.mia</strong>, pelo e-mail <strong>ufumiaufu@gmail.com</strong> ou pela aba <strong>Fale Conosco</strong>.
+        </p>
       ),
     },
     {
       pergunta: 'Como funciona o Processo Seletivo do UFU MIA?',
       resposta: (
-        <div className="space-y-2 text-xs sm:text-sm text-gray-700 leading-relaxed">
-          <p>
-            O Processo Seletivo é voltado para estudantes e voluntários interessados em integrar as frentes de manejo felino, resgate ético, mídias sociais e eventos de adoção.
-          </p>
-          <p>
-            Basta acessar a aba <strong>Processo Seletivo</strong>, ler o edital oficial no Google Drive e preencher o formulário de inscrição online dentro do prazo estabelecido.
-          </p>
-        </div>
-      ),
-    },
-    {
-      pergunta: 'Vocês fazem resgate fora da UFU?',
-      resposta: (
         <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-          Nossa atuação prioritária ocorre nos espaços da <strong>Universidade Federal de Uberlândia (UFU)</strong>. Para ocorrências fora da universidade, orientamos os cidadãos e articulamos apoio com a rede de protetores independentes de Uberlândia conforme disponibilidade.
+          É o caminho para ser Extensionista ou Voluntário e fazer parte da equipe. Acesse a aba <strong>Processo Seletivo</strong>, leia o edital oficial e preencha o formulário de inscrição.
         </p>
-      ),
-    },
-    {
-      pergunta: 'Com qual idade o gatinho já pode ser castrado?',
-      resposta: (
-        <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-          As fêmeas são castradas a partir de <strong>6 meses</strong> e os machos adultos também passam pela cirurgia. Os benefícios são o controle populacional e a redução do risco de câncer.
-        </p>
-      ),
-    },
-    {
-      pergunta: 'Como posso oferecer Lar Temporário (LT) ou ser voluntário?',
-      resposta: (
-        <div className="space-y-2 text-xs sm:text-sm text-gray-700 leading-relaxed">
-          <p>
-            Após o resgate, os gatinhos precisam de um local seguro para se recuperar e esperar pelo lar definitivo. O espaço precisa ser <strong>sem rotas de fuga</strong>, separado de outros bichinhos e com disponibilidade para oferecer carinho e atenção.
-          </p>
-          <p>
-            Nós damos suporte completo: medicamentos, caixinha de areia e areia, e ração. Fale com a equipe pela aba <strong>Fale Conosco</strong>, pelo Instagram <strong>@ufu.mia</strong> ou pelo e-mail <strong>ufumiaufu@gmail.com</strong>.
-          </p>
-        </div>
       ),
     },
     {
@@ -72,10 +32,39 @@ export default function SecaoFAQ() {
       ),
     },
     {
+      pergunta: 'Com qual idade o gatinho já pode ser castrado?',
+      resposta: (
+        <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
+          As fêmeas são castradas a partir de <strong>6 meses</strong> e os machos adultos também passam pela cirurgia. Os benefícios são o controle populacional e a redução do risco de câncer.
+        </p>
+      ),
+    },
+    {
+      pergunta: 'Como posso oferecer Lar Temporário (LT)?',
+      resposta: (
+        <div className="space-y-2 text-xs sm:text-sm text-gray-700 leading-relaxed">
+          <p>
+            Após o resgate, os gatinhos precisam de um local seguro para se recuperar e esperar pelo lar definitivo. O espaço precisa ser <strong>sem rotas de fuga</strong>, separado de outros bichinhos e com disponibilidade para oferecer carinho e atenção.
+          </p>
+          <p>
+            Oferecemos suporte completo e acompanhamento constante: medicamentos, caixinha de areia e areia, e ração. Fale com a equipe pela aba <strong>Fale Conosco</strong>.
+          </p>
+        </div>
+      ),
+    },
+    {
       pergunta: 'Gatos com FeLV podem passar a doença para pessoas?',
       resposta: (
         <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
           Não. Gatos FeLV+ não transmitem a doença para humanos nem para outros animais, como cães. A transmissão ocorre apenas entre gatos, principalmente por contato direto prolongado. Com os cuidados certos, eles podem viver felizes e saudáveis por muitos anos.
+        </p>
+      ),
+    },
+    {
+      pergunta: 'Por que o projeto existe?',
+      resposta: (
+        <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
+          Mais de 50 gatos foram encontrados abandonados no Campus Santa Mônica, muitos doentes, presos em telhados e sem cuidados adequados. O projeto cuida da saúde e alimenta os gatos, faz castrações para o controle populacional e promove a adoção responsável.
         </p>
       ),
     },
@@ -88,7 +77,7 @@ export default function SecaoFAQ() {
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >

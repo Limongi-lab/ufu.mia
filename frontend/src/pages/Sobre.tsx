@@ -16,7 +16,7 @@ export default function Sobre() {
               Sobre o UFU MIA
             </h1>
             <p className="mt-3 text-sm sm:text-base text-gray-700 max-w-2xl mx-auto">
-              Conheça a história e o propósito do projeto de extensão universitária voltado ao bem-estar e acolhimento dos felinos na UFU.
+              Projeto de extensão da UFU que integra ensino, pesquisa e extensão para cuidar dos gatos do Campus Santa Mônica.
             </p>
           </div>
         </div>

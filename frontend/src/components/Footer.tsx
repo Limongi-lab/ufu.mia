@@ -28,7 +28,7 @@ export default function Footer() {
             </div>
             
             <p className="text-sm text-purple-200/80 leading-relaxed max-w-sm">
-              Projeto de extensão da Universidade Federal de Uberlândia dedicado ao acolhimento, triagem, cuidados veterinários e adoção responsável de felinos.
+              Projeto de extensão da UFU que cuida da saúde e da alimentação dos gatos do Campus Santa Mônica, realiza castrações e promove a adoção responsável.
             </p>
           </div>
 

@@ -25,11 +25,11 @@ export default function SecaoDoacao() {
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-3 tracking-tight text-white">
-            Faça parte dessa corrente de amor!
+            Ajudar Financeiramente
           </h2>
 
           <p className="text-sm sm:text-base text-purple-100 max-w-xl mx-auto mb-8 leading-relaxed font-normal">
-            O UFU MIA depende de doações voluntárias para ração, vacinas, exames e cirurgias de castração dos gatinhos.
+            Participe de nossos eventos, como bazares e rifas, ou com doações. Elas ajudam a cuidar da saúde e alimentar os gatos e a realizar castrações para o controle populacional.
           </p>
 
           {/* Campo de Chave PIX */}
@@ -58,7 +58,7 @@ export default function SecaoDoacao() {
               to="/doacoes"
               className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-white hover:text-[#F2C744] transition-colors underline decoration-2 underline-offset-4"
             >
-              <span>Ver todas as opções de doação e apadrinhamento</span>
+              <span>Ver mais sobre doações</span>
               <span>→</span>
             </Link>
           </div>

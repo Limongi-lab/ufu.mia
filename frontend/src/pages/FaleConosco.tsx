@@ -119,7 +119,7 @@ export default function FaleConosco() {
                 key={grupo.funcao}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.25 }}
+                viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.55, ease: 'easeOut' }}
               >
                 <h2 className="text-center font-bold text-gray-900 mb-3">{grupo.pergunta}</h2>

@@ -1,3 +1,4 @@
+import logoReserva from '../assets/logo.png';
 import { useCallback, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Animal } from '../services/api';
@@ -91,7 +92,7 @@ export default function SecaoAnimais() {
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-10 sm:mb-14"
         >
@@ -99,10 +100,10 @@ export default function SecaoAnimais() {
             ADOTE AGORA
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight">
-            Todo gatinho merece um lar cheio de amor
+            Adotar um Gatinho
           </h2>
           <p className="mt-3 text-sm sm:text-base text-gray-700 leading-relaxed font-medium">
-            Adoção é uma promessa de carinho e proteção para toda a vida. Abra seu coração e dê um lar para um gatinho resgatado na UFU.
+            Ofereça um lar amoroso e responsável para um dos resgatados. Gatos mansos e filhotes são divulgados para encontrar lares responsáveis.
           </p>
 
           {/* Filtros em abas estilo modelo */}
@@ -184,7 +185,7 @@ export default function SecaoAnimais() {
                         className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"
                         onError={(e) => {
                           e.currentTarget.onerror = null;
-                          e.currentTarget.src = 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=600&auto=format&fit=crop';
+                          e.currentTarget.src = logoReserva;
                         }}
                       />
                       <div className="absolute top-4 right-4">
@@ -208,13 +209,10 @@ export default function SecaoAnimais() {
                         <span className="flex items-center gap-1">
                           <span>🎂</span> {animal.idade}
                         </span>
-                        <span className="flex items-center gap-1">
-                          Castrado & Vacinado
-                        </span>
                       </div>
 
                       <p className="text-sm text-gray-700 line-clamp-2 leading-relaxed pt-1 font-medium">
-                        {animal.descricao || 'Gatinho muito carinhoso e dócil procurando por um lar amoroso em Uberlândia.'}
+                        {animal.descricao || 'Gatinho resgatado pelo UFU MIA, esperando por um lar responsável.'}
                       </p>
 
                       <div className="pt-3 flex items-center gap-3">
@@ -278,7 +276,7 @@ export default function SecaoAnimais() {
                 <button
                   onClick={() => setSelectedAnimal(null)}
                   aria-label="Fechar"
-                  className="absolute top-4 right-4 z-10 w-9 h-9 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center text-sm font-bold transition-transform hover:scale-110"
+                  className="absolute top-4 right-4 z-10 w-11 h-11 md:w-9 md:h-9 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center text-sm font-bold transition-transform hover:scale-110"
                 >
                   ✕
                 </button>
@@ -307,7 +305,7 @@ export default function SecaoAnimais() {
                       Personalidade & História
                     </h4>
                     <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-line font-medium bg-purple-50/50 p-4 rounded-2xl border border-purple-100">
-                      {selectedAnimal.descricao || 'Gatinho dócil e amoroso resgatado pela equipe do UFU MIA.'}
+                      {selectedAnimal.descricao || 'Gatinho resgatado pelo UFU MIA, esperando por um lar responsável.'}
                     </p>
                   </div>
 
@@ -349,7 +347,7 @@ export default function SecaoAnimais() {
                 <button
                   onClick={() => setAdoptionModalAnimal(null)}
                   aria-label="Fechar"
-                  className="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center text-xs font-bold"
+                  className="absolute top-4 right-4 w-11 h-11 md:w-8 md:h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center text-xs font-bold"
                 >
                   ✕
                 </button>
@@ -382,10 +380,6 @@ export default function SecaoAnimais() {
                   >
                     <span>Enviar E-mail (ufumiaufu@gmail.com)</span>
                   </a>
-                </div>
-
-                <div className="bg-amber-50 rounded-xl p-3 text-[11px] lg:text-[12px] text-amber-800 leading-tight text-left">
-                  <strong>Lembrete:</strong> Nossas adoções exigem residência segura com telas de proteção para garantir a segurança dos gatinhos.
                 </div>
               </motion.div>
             </div>

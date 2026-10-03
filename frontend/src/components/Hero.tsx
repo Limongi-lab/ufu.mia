@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion, type Variants } from 'framer-motion';
+import fotoHero from '../assets/slide/recem-resgate-1.jpg';
 
 const container: Variants = {
   hidden: {},
@@ -63,13 +64,13 @@ export default function Hero() {
             </motion.h1>
 
             <motion.p variants={item} className="text-base sm:text-lg lg:text-xl text-purple-100 font-normal max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Cuidando com carinho, saúde e afeto para garantir um futuro protegido para os gatinhos da Universidade Federal de Uberlândia.
+              Projeto de extensão da UFU que cuida da saúde e da alimentação dos gatos do Campus Santa Mônica, realiza castrações e promove a adoção responsável.
             </motion.p>
 
             <motion.div variants={item} className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
               <Link
                 to="/animais"
-                className="bg-white hover:bg-purple-50 text-[#6A0DAD] font-extrabold text-sm sm:text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
+                className="bg-white hover:bg-purple-50 text-[#6A0DAD] font-extrabold text-sm sm:text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 btn-shine"
               >
                 Adote Agora
               </Link>
@@ -101,16 +102,16 @@ export default function Hero() {
 
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 bg-purple-900/30">
                 <img
-                  src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?q=80&w=900&auto=format&fit=crop"
-                  alt="Gatinho fofo resgatado UFU MIA"
-                  className="w-full h-80 sm:h-96 lg:h-[440px] object-cover object-center transform hover:scale-105 transition-transform duration-700"
+                  src={fotoHero}
+                  alt="Gatinho recém resgatado pelo UFU MIA"
+                  className="w-full h-80 sm:h-96 lg:h-[440px] object-cover object-[50%_30%] transform hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-5 sm:p-6 text-white">
                   <span className="text-xs uppercase tracking-wider text-[#F2C744] font-bold block mb-0.5">
                     UFU MIA · Universidade Federal de Uberlândia
                   </span>
                   <span className="text-sm sm:text-base font-semibold">
-                    Transformando abandono em novas histórias de amor
+                    Gatinho recém resgatado pelo projeto
                   </span>
                 </div>
               </div>

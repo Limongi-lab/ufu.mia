@@ -15,13 +15,13 @@ export default function FaixaDestaqueInsta() {
           
           <div className="space-y-1.5 max-w-xl">
             <div className="inline-block bg-[#F2C744] text-[#1F1A24] font-black text-[11px] lg:text-[12px] uppercase tracking-wider px-3 py-0.5 rounded-full mb-1">
-              Participe da Causa • UFU MIA
+              @ufu.mia
             </div>
             <h3 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-white">
-              Quer fazer parte da nossa história?
+              Nos siga no Instagram!
             </h3>
             <p className="text-xs sm:text-sm text-purple-100 leading-relaxed">
-              Acompanhe nossos resgates diários na UFU, novos gatinhos disponíveis para adoção e novidades do Processo Seletivo!
+              E fique por dentro de todas as novidades: resgates emocionantes, histórias de adoção, dicas de cuidados com felinos, eventos, rifas e muito mais!
             </p>
           </div>
 

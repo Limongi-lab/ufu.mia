@@ -106,7 +106,7 @@ export default function Header() {
             href="https://instagram.com/ufu.mia"
             target="_blank"
             rel="noreferrer"
-            className="w-10 h-10 rounded-xl bg-white/70 hover:bg-white flex items-center justify-center transition-colors shadow-2xs"
+            className="w-11 h-11 rounded-xl bg-white/70 hover:bg-white flex items-center justify-center transition-colors shadow-2xs"
             title="Instagram @ufu.mia"
           >
             <InstagramIcon className="w-5 h-5" />
@@ -124,13 +124,13 @@ export default function Header() {
         <div className="lg:hidden flex items-center gap-2">
           <Link
             to="/doacoes"
-            className="bg-[#7B1FA2] text-white px-3.5 py-1.5 rounded-full text-xs font-bold shadow-xs sm:hidden"
+            className="bg-[#7B1FA2] text-white px-4 py-2.5 min-h-11 inline-flex items-center rounded-full text-xs font-bold shadow-xs btn-pulse sm:hidden"
           >
             Doe agora
           </Link>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-gray-700 hover:text-[#7B1FA2] focus:outline-none"
+            className="p-3 -mr-1 text-gray-700 hover:text-[#7B1FA2] focus:outline-none"
             aria-label="Menu"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -5,8 +5,7 @@ export default function SecaoAtuacaoUFU() {
   const frentes = [
     {
       titulo: 'Eventos',
-      subtitulo: 'Arrecadação',
-      descricao: 'Organização de bazares, rifas, feirinhas e outras ações para arrecadar fundos para os gatinhos.',
+      descricao: 'Organização de bazares, rifas, feirinhas, etc.',
       linkTexto: 'Falar com Eventos',
       linkUrl: '/fale-conosco',
       bgCard: 'bg-lilas-suave border-purple-200',
@@ -14,8 +13,7 @@ export default function SecaoAtuacaoUFU() {
     },
     {
       titulo: 'Marketing',
-      subtitulo: 'Comunicação',
-      descricao: 'Divulgação nas redes sociais e campanhas para dar visibilidade ao projeto e aos gatinhos.',
+      descricao: 'Divulgação nas redes sociais e campanhas.',
       linkTexto: 'Falar com Marketing',
       linkUrl: '/fale-conosco',
       bgCard: 'bg-[#FDF2F8] border-pink-200',
@@ -23,7 +21,6 @@ export default function SecaoAtuacaoUFU() {
     },
     {
       titulo: 'Artes',
-      subtitulo: 'Design',
       descricao: 'Criação de materiais visuais e design para divulgação.',
       linkTexto: 'Falar com Artes',
       linkUrl: '/fale-conosco',
@@ -32,7 +29,6 @@ export default function SecaoAtuacaoUFU() {
     },
     {
       titulo: 'Resgates',
-      subtitulo: 'Mapeamento e captura',
       descricao: 'Equipe dedicada ao mapeamento e à captura dos gatos.',
       linkTexto: 'Falar com Resgates',
       linkUrl: '/fale-conosco',
@@ -41,7 +37,6 @@ export default function SecaoAtuacaoUFU() {
     },
     {
       titulo: 'Coordenação Interna',
-      subtitulo: 'Organização',
       descricao: 'Gestão das equipes e organização do trabalho.',
       linkTexto: 'Falar com a Coordenação',
       linkUrl: '/fale-conosco',
@@ -50,8 +45,7 @@ export default function SecaoAtuacaoUFU() {
     },
     {
       titulo: 'Gente e Gestão',
-      subtitulo: 'Apoio e logística',
-      descricao: 'Apoio e logística para os voluntários e participantes do projeto.',
+      descricao: 'Apoio e logística para os voluntários e participantes.',
       linkTexto: 'Entrar para a equipe',
       linkUrl: '/processo-seletivo',
       bgCard: 'bg-lilas-suave border-purple-200',
@@ -83,13 +77,9 @@ export default function SecaoAtuacaoUFU() {
               className={`${item.bgCard} rounded-2xl p-6 border shadow-2xs hover:shadow-md transition-all flex flex-col justify-between`}
             >
               <div>
-                <h3 className={`text-lg font-bold ${item.corTitulo} mb-1`}>
+                <h3 className={`text-lg font-bold ${item.corTitulo} mb-2.5`}>
                   {item.titulo}
                 </h3>
-
-                <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2.5">
-                  {item.subtitulo}
-                </p>
 
                 <p className="text-xs sm:text-sm text-gray-700 leading-relaxed mb-6 font-normal">
                   {item.descricao}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import fotoSobre from '../assets/slide/recem-resgate-2.jpg';
 
 export default function SecaoSobre() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -28,7 +29,7 @@ export default function SecaoSobre() {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.6 }}
             className="lg:col-span-6 flex justify-center"
           >
@@ -39,9 +40,9 @@ export default function SecaoSobre() {
 
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
                 <img
-                  src="https://images.unsplash.com/photo-1548802673-380ab8ebc7b7?q=80&w=800&auto=format&fit=crop"
-                  alt="Acolhimento com carinho UFU MIA"
-                  className="w-full h-80 sm:h-96 lg:h-[460px] object-cover"
+                  src={fotoSobre}
+                  alt="Gatinho recém resgatado pelo UFU MIA"
+                  className="w-full h-80 sm:h-96 lg:h-[460px] object-cover object-[50%_25%]"
                 />
               </div>
 
@@ -52,7 +53,7 @@ export default function SecaoSobre() {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="lg:col-span-6 space-y-6"
           >
@@ -69,10 +70,6 @@ export default function SecaoSobre() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight leading-tight">
               O que nos move a cuidar dos gatinhos da UFU
             </h2>
-
-            <p className="text-base sm:text-lg text-gray-800 font-semibold leading-relaxed">
-              Nosso amor pelos animais é o que move cada voluntário, cada resgate e cada nova chance de vida.
-            </p>
 
             <p className="text-sm sm:text-base text-gray-600 leading-relaxed font-normal">
               O <strong>UFU MIA</strong> é um projeto de extensão da <strong>Universidade Federal de Uberlândia (UFU)</strong> que integra ensino, pesquisa e extensão para cuidar dos gatos abandonados no <strong>Campus Santa Mônica</strong>: oferecemos saúde, alimentação, castração e adoção responsável, e ainda contribuímos para a formação dos estudantes.

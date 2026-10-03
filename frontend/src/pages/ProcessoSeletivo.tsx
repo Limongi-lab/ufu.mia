@@ -18,7 +18,7 @@ export default function ProcessoSeletivo() {
               Processo Seletivo UFU MIA
             </h1>
             <p className="mt-3 text-sm sm:text-base text-purple-100 max-w-2xl mx-auto leading-relaxed">
-              Venha fazer a diferença na proteção, manejo ético e acolhimento dos felinos da UFU. Confira nosso edital oficial e preencha sua inscrição online!
+              Venha fazer parte da equipe do UFU MIA! Confira nosso edital oficial e preencha sua inscrição online.
             </p>
           </div>
         </div>

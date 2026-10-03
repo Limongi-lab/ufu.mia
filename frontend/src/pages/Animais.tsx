@@ -17,7 +17,7 @@ export default function Animais() {
               Gatinhos para Adoção
             </h1>
             <p className="mt-3 text-sm sm:text-base text-purple-100 max-w-2xl mx-auto leading-relaxed">
-              Cada gatinho acolhido na Universidade Federal de Uberlândia passa por cuidados veterinários, vacinação e castração. Encontre seu novo companheiro!
+              Todos os gatos resgatados são levados ao veterinário para avaliação e cuidados. Conheça os gatinhos que esperam por um lar responsável.
             </p>
           </div>
         </div>

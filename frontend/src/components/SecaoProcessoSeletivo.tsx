@@ -10,22 +10,12 @@ export default function SecaoProcessoSeletivo() {
   const formInscricaoUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfZjbTEZx9EDUuPWmXjEAyJl8vGC9R28SgZQ5UnXJaBHpwNIQ/closedform';
 
   const areasAtuacao = [
-    {
-      titulo: 'Manejo & Bem-Estar',
-      desc: 'Alimentação ética, acolhimento nos campi e suporte veterinário aos felinos.',
-    },
-    {
-      titulo: 'Comunicação & Mídias',
-      desc: 'Criação de conteúdo, fotografia, redes sociais e campanhas de adoção.',
-    },
-    {
-      titulo: 'Eventos & Adoção',
-      desc: 'Organização de feiras, triagem de adotantes e entrevistas de adoção responsável.',
-    },
-    {
-      titulo: 'Gestão & Extensão',
-      desc: 'Planejamento de atividades, controle de registros e horas complementares UFU.',
-    },
+    { titulo: 'Eventos', desc: 'Organização de bazares, rifas, feirinhas, etc.' },
+    { titulo: 'Marketing', desc: 'Divulgação nas redes sociais e campanhas.' },
+    { titulo: 'Artes', desc: 'Criação de materiais visuais e design para divulgação.' },
+    { titulo: 'Resgates', desc: 'Equipe dedicada ao mapeamento e captura dos gatos.' },
+    { titulo: 'Coordenação Interna', desc: 'Gestão das equipes e organização do trabalho.' },
+    { titulo: 'Gente e Gestão', desc: 'Apoio e logística para os voluntários e participantes.' },
   ];
 
   return (
@@ -40,7 +30,7 @@ export default function SecaoProcessoSeletivo() {
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
         >
@@ -51,8 +41,8 @@ export default function SecaoProcessoSeletivo() {
             Faça parte da equipe do <span className="text-[#7B1FA2]">UFU MIA</span>
           </h2>
           <p className="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed">
-            Seja voluntário em nosso projeto de extensão da Universidade Federal de Uberlândia. 
-            Aprenda, transforme vidas e receba certificado oficial de horas de extensão!
+            Seja Extensionista ou Voluntário: faça parte da equipe e contribua com ações no projeto. 
+            Ajude nas atividades, nos eventos e no cuidado dos gatos.
           </p>
 
           {/* Abas de Navegação Rápida */}
@@ -98,7 +88,7 @@ export default function SecaoProcessoSeletivo() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.5 }}
               className={`bg-[#FDFCFF] rounded-3xl p-6 sm:p-8 border border-purple-100 shadow-sm flex flex-col justify-between ${
                 activeTab === 'edital' ? 'lg:col-span-12' : 'lg:col-span-6'
@@ -126,8 +116,7 @@ export default function SecaoProcessoSeletivo() {
                 </div>
 
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6 font-medium">
-                  Confira as diretrizes completas, requisitos para alunos da UFU, cronograma das etapas, 
-                  atribuições dos voluntários e critérios de seleção no edital oficial.
+                  Confira todas as informações no edital oficial.
                 </p>
 
                 {/* Prévia interativa do Edital (Google Drive Embed) */}
@@ -152,25 +141,7 @@ export default function SecaoProcessoSeletivo() {
                 </div>
 
                 {/* Destaques do Edital */}
-                <div className="space-y-2 mb-6">
-                  <h4 className="text-xs font-black uppercase tracking-wider text-gray-500">
-                    Principais informações do edital:
-                  </h4>
-                  <ul className="space-y-1.5 text-xs text-gray-700">
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#7B1FA2] font-bold">✓</span>
-                      <span>Válido para estudantes de graduação e pós da UFU</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#7B1FA2] font-bold">✓</span>
-                      <span>Emissão de certificado de horas de extensão universitária</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#7B1FA2] font-bold">✓</span>
-                      <span>Capacitação sobre bem-estar e acolhimento animal</span>
-                    </li>
-                  </ul>
-                </div>
+                
               </div>
 
               {/* Botões de Ação do Edital */}
@@ -200,7 +171,7 @@ export default function SecaoProcessoSeletivo() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className={`bg-white rounded-3xl p-6 sm:p-8 border border-purple-100 shadow-sm flex flex-col justify-between ${
                 activeTab === 'inscricao' ? 'lg:col-span-12' : 'lg:col-span-6'
@@ -228,8 +199,7 @@ export default function SecaoProcessoSeletivo() {
                 </div>
 
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6 font-medium">
-                  Preencha o formulário oficial com seus dados, curso, horários disponíveis e área de interesse. 
-                  Nossa coordenação avaliará cada inscrição com muito carinho!
+                  Preencha o formulário oficial para se inscrever.
                 </p>
 
                 {/* Passo a Passo da Inscrição */}
@@ -244,7 +214,7 @@ export default function SecaoProcessoSeletivo() {
                         1
                       </span>
                       <p className="leading-snug">
-                        <strong>Leitura do Edital:</strong> Verifique os prazos e compromissos do projeto.
+                        <strong>Leitura do Edital:</strong> Leia o edital oficial e fique atento(a) aos prazos.
                       </p>
                     </div>
 
@@ -254,15 +224,6 @@ export default function SecaoProcessoSeletivo() {
                       </span>
                       <p className="leading-snug">
                         <strong>Envio da Inscrição:</strong> Preencha o formulário oficial do Google Forms com seus dados.
-                      </p>
-                    </div>
-
-                    <div className="flex items-start gap-3">
-                      <span className="w-6 h-6 rounded-full bg-[#7B1FA2] text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
-                        3
-                      </span>
-                      <p className="leading-snug">
-                        <strong>Entrevista & Boas-Vindas:</strong> Os candidatos selecionados serão contatados por e-mail ou WhatsApp.
                       </p>
                     </div>
                   </div>
@@ -358,7 +319,7 @@ export default function SecaoProcessoSeletivo() {
                   </a>
                   <button
                     onClick={() => setShowDriveModal(false)}
-                    className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 flex items-center justify-center text-xs font-bold"
+                    className="w-11 h-11 md:w-8 md:h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 flex items-center justify-center text-xs font-bold"
                   >
                     ✕
                   </button>

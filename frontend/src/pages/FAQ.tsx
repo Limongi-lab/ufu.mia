@@ -14,7 +14,7 @@ export default function FAQ() {
               Perguntas Frequentes
             </h1>
             <p className="mt-3 text-sm sm:text-base text-gray-700 max-w-2xl mx-auto">
-              Reunimos aqui as principais respostas sobre como adotar, como ajudar e como funciona a proteção animal em Uberlândia.
+              Respostas sobre o projeto, a adoção responsável e como participar.
             </p>
           </div>
         </div>
