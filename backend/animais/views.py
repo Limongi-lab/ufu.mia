@@ -7,9 +7,10 @@ from .serializers import AnimalSerializer, HistoriaAdocaoSerializer
 class AnimalViewSet(viewsets.ReadOnlyModelViewSet):
     """
     Endpoint somente leitura para listagem e detalhe de animais disponíveis para adoção.
+    Exibe apenas animais marcados como ativos.
     """
 
-    queryset = Animal.objects.all()
+    queryset = Animal.objects.filter(ativo=True)
     serializer_class = AnimalSerializer
 
 

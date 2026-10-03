@@ -1,0 +1,26 @@
+# Django & DRF
+Django==5.2.17
+djangorestframework==3.18.1
+django-cors-headers==4.9.0
+
+# Configuração via variáveis de ambiente
+django-environ==0.14.0
+
+# Servidor de produção
+gunicorn==26.2.0
+whitenoise==6.12.0
+
+# Banco de dados PostgreSQL
+psycopg[binary]==3.3.6
+
+# Armazenamento de imagens (Cloudinary)
+cloudinary==1.46.2
+django-cloudinary-storage==0.3.0
+
+# Segurança do admin
+django-axes==8.3.1
+django-otp==1.7.3
+qrcode==8.2
+
+# Processamento de imagens
+Pillow==12.2.0
