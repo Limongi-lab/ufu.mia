@@ -9,6 +9,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     path('api/', include('animais.urls')),
+    path('api/', include('conteudo.urls')),
 ]
 
 # Em desenvolvimento, servir arquivos de mídia localmente

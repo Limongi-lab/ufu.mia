@@ -230,3 +230,6 @@ frontend/dist-ssr/
 !.vscode/extensions.json
 .DS_Store
 Thumbs.db
+backend/staticfiles/
+backend/media/
+frontend/.env
