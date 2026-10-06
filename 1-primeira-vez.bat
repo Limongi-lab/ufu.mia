@@ -1,6 +1,6 @@
-@echo off
-chcp 65001 >nul
-cd /d "%~dp0"
+@echo off
+chcp 65001 >nul
+cd /d "%~dp0"
 echo === UFU MIA - configuracao da PRIMEIRA vez ===
 if not exist "backend\venv\Scripts\python.exe" (
   echo Criando o ambiente virtual do Python...

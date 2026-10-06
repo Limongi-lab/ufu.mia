@@ -1,0 +1,61 @@
+{% extends 'admin/base.html' %}
+{% load i18n %}
+
+{% block title %}Início | {{ site_title|default:'UFU MIA' }}{% endblock %}
+
+{% block branding %}
+    {% include "unfold/helpers/site_branding.html" %}
+{% endblock %}
+
+{% block content %}
+<div style="max-width: 860px; margin: 0 auto;">
+  <h1 style="font-size: 1.6rem; font-weight: 800; margin-bottom: .25rem;">
+    Olá{% if request.user.first_name %}, {{ request.user.first_name }}{% endif %}! 💜
+  </h1>
+  <p style="margin-bottom: 1.5rem; opacity: .8;">
+    Aqui você muda o que aparece no site do UFU MIA. É simples: escolha o assunto, mexa e clique em <strong>Salvar</strong>.
+  </p>
+
+  <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+    {% if perms.animais.view_animal %}
+    <a href="{% url 'admin:animais_animal_changelist' %}" style="display:block; padding:1.25rem; border:1px solid rgba(123,31,162,.35); border-radius:1rem;">
+      <div style="font-size:1.8rem;">🐱</div>
+      <strong>Gatinhos para adoção</strong>
+      <div style="opacity:.75; font-size:.9rem;">Cadastrar um gatinho novo, trocar a foto, marcar como adotado ou esconder do site.</div>
+    </a>
+    {% endif %}
+    {% if perms.conteudo.view_textosite %}
+    <a href="{% url 'admin:conteudo_textosite_changelist' %}" style="display:block; padding:1.25rem; border:1px solid rgba(123,31,162,.35); border-radius:1rem;">
+      <div style="font-size:1.8rem;">📝</div>
+      <strong>Textos do site</strong>
+      <div style="opacity:.75; font-size:.9rem;">Títulos, parágrafos, links do edital, chave PIX e rodapé.</div>
+    </a>
+    {% endif %}
+    {% if perms.conteudo.view_perguntafaq %}
+    <a href="{% url 'admin:conteudo_perguntafaq_changelist' %}" style="display:block; padding:1.25rem; border:1px solid rgba(123,31,162,.35); border-radius:1rem;">
+      <div style="font-size:1.8rem;">❓</div>
+      <strong>Perguntas frequentes</strong>
+      <div style="opacity:.75; font-size:.9rem;">Adicionar, editar ou esconder perguntas e respostas.</div>
+    </a>
+    {% endif %}
+    {% if perms.conteudo.view_areacontato %}
+    <a href="{% url 'admin:conteudo_areacontato_changelist' %}" style="display:block; padding:1.25rem; border:1px solid rgba(123,31,162,.35); border-radius:1rem;">
+      <div style="font-size:1.8rem;">📞</div>
+      <strong>Contatos do Fale Conosco</strong>
+      <div style="opacity:.75; font-size:.9rem;">Telefones e fotos da equipe.</div>
+    </a>
+    {% endif %}
+  </div>
+
+  <div style="margin-top: 2rem; padding: 1.25rem; border-radius: 1rem; background: rgba(123,31,162,.08);">
+    <strong>Bom saber</strong>
+    <ul style="margin: .5rem 0 0 1.2rem; list-style: disc; line-height: 1.7;">
+      <li>O que você salva aparece no site em até <strong>1 minuto</strong>.</li>
+      <li>Para <strong>esconder</strong> algo sem apagar, desmarque a caixinha <strong>Ativo</strong>.</li>
+      <li>Deixou um texto em branco? O site volta ao texto original.</li>
+      <li>Sua senha é só sua. Nunca mande por WhatsApp ou e-mail, e nunca empreste a conta.</li>
+      <li>Saiu? Clique no seu nome (canto da tela) e em <strong>Sair</strong>.</li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
