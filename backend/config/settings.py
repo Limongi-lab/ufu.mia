@@ -119,7 +119,7 @@ DATABASES = {
 # --- Autenticação e senhas ------------------------------------------------
 AUTHENTICATION_BACKENDS = [
     'axes.backends.AxesStandaloneBackend',
-    'django.contrib.auth.backends.ModelBackend',
+    'config.auth.EmailOuUsuarioBackend',
 ]
 
 AUTH_PASSWORD_VALIDATORS = [

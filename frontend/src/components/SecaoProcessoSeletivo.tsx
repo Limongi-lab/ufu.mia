@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useConteudo } from '../context/ConteudoContext';
+import { editalSeguro, formularioSeguro } from '../services/conteudo';
 
 export default function SecaoProcessoSeletivo() {
+  const { t } = useConteudo();
   const [activeTab, setActiveTab] = useState<'todos' | 'edital' | 'inscricao'>('todos');
   const [showDriveModal, setShowDriveModal] = useState(false);
 
-  const editalDriveViewUrl = 'https://drive.google.com/file/d/1HYLdRj8LAJd9xM5WFcaj8PN2s-rDX-dA/view';
-  const editalDrivePreviewUrl = 'https://drive.google.com/file/d/1HYLdRj8LAJd9xM5WFcaj8PN2s-rDX-dA/preview';
-  const formInscricaoUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfZjbTEZx9EDUuPWmXjEAyJl8vGC9R28SgZQ5UnXJaBHpwNIQ/closedform';
+  const edital = editalSeguro(t('ps.edital_url'));
+  const editalDriveViewUrl = edital.ver;
+  const editalDrivePreviewUrl = edital.previa;
+  const formInscricaoUrl = formularioSeguro(t('ps.formulario_url'));
 
   const areasAtuacao = [
     { titulo: 'Eventos', desc: 'Organização de bazares, rifas, feirinhas, etc.' },
@@ -34,16 +38,11 @@ export default function SecaoProcessoSeletivo() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
         >
-          <div className="inline-block text-[#7B1FA2] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">
-            PROCESSO SELETIVO
-          </div>
+          <div className="inline-block text-[#7B1FA2] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">{t('ps.selo')}</div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight">
-            Faça parte da equipe do <span className="text-[#7B1FA2]">UFU MIA</span>
+            {t('ps.titulo_inicio')} <span className="text-[#7B1FA2]">{t('ps.titulo_destaque')}</span>
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed">
-            Seja Extensionista ou Voluntário: faça parte da equipe e contribua com ações no projeto. 
-            Ajude nas atividades, nos eventos e no cuidado dos gatos.
-          </p>
+          <p className="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed">{t('ps.texto')}</p>
 
           {/* Abas de Navegação Rápida */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mt-8 pt-4 border-t border-purple-200/60 font-semibold text-sm">
@@ -115,9 +114,7 @@ export default function SecaoProcessoSeletivo() {
                   </span>
                 </div>
 
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6 font-medium">
-                  Confira todas as informações no edital oficial.
-                </p>
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6 font-medium">{t('ps.edital_texto')}</p>
 
                 {/* Prévia interativa do Edital (Google Drive Embed) */}
                 <div className="relative rounded-2xl overflow-hidden border border-purple-200 bg-purple-50/50 mb-6 group">
@@ -198,9 +195,7 @@ export default function SecaoProcessoSeletivo() {
                   </span>
                 </div>
 
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6 font-medium">
-                  Preencha o formulário oficial para se inscrever.
-                </p>
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6 font-medium">{t('ps.formulario_texto')}</p>
 
                 {/* Passo a Passo da Inscrição */}
                 <div className="bg-[#FAF7FD] rounded-2xl p-5 border border-purple-100/80 mb-6 space-y-3.5">
@@ -232,9 +227,7 @@ export default function SecaoProcessoSeletivo() {
                 {/* Aviso informativo */}
                 <div className="bg-purple-50/70 border border-purple-200 rounded-xl p-3.5 text-xs text-[#5B107D] leading-relaxed mb-6 flex items-start gap-2.5">
                   <span className="text-base shrink-0">📌</span>
-                  <span>
-                    Fique atento(a) aos prazos no edital. Durante o período aberto, o link abaixo levará diretamente ao formulário oficial de inscrição.
-                  </span>
+                  <span>{t('ps.aviso')}</span>
                 </div>
               </div>
 

@@ -1,25 +1,15 @@
 import { motion } from 'framer-motion';
 import tigre from '../assets/slide/tigre.jpg';
+import { useConteudo } from '../context/ConteudoContext';
 
-const passos = [
-  {
-    letra: 'C',
-    titulo: 'Captura',
-    texto: 'Com paciência, resgatamos gatos mansos, ariscos e ferais. Todos são levados ao veterinário para avaliação e cuidados.',
-  },
-  {
-    letra: 'C',
-    titulo: 'Castração',
-    texto: 'Fêmeas (a partir de 6 meses) e machos adultos são castrados. Benefícios: controle populacional e redução do risco de câncer.',
-  },
-  {
-    letra: 'D',
-    titulo: 'Devolução ou Adoção',
-    texto: 'Gatos ariscos retornam ao campus, mas continuam monitorados e disponíveis para adoção. Gatos mansos e filhotes são divulgados para encontrar lares responsáveis.',
-  },
-];
 
 export default function SecaoCCD() {
+  const { t } = useConteudo();
+  const passos = [
+    { letra: 'C', titulo: t('ccd.passo1_titulo'), texto: t('ccd.passo1_texto') },
+    { letra: 'C', titulo: t('ccd.passo2_titulo'), texto: t('ccd.passo2_texto') },
+    { letra: 'D', titulo: t('ccd.passo3_titulo'), texto: t('ccd.passo3_texto') },
+  ];
   return (
     <section className="py-14 sm:py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -30,15 +20,9 @@ export default function SecaoCCD() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto mb-10 sm:mb-14"
         >
-          <div className="inline-block text-[#7B1FA2] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">
-            COMO CUIDAMOS
-          </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 tracking-tight">
-            A sigla CCD
-          </h2>
-          <p className="mt-2 text-sm sm:text-base text-gray-700">
-            Captura, Castração, Devolução ou Adoção.
-          </p>
+          <div className="inline-block text-[#7B1FA2] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">{t('ccd.selo')}</div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 tracking-tight">{t('ccd.titulo')}</h2>
+          <p className="mt-2 text-sm sm:text-base text-gray-700">{t('ccd.subtitulo')}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -74,12 +58,10 @@ export default function SecaoCCD() {
             className="w-full max-w-xs mx-auto md:mx-0 md:w-64 rounded-2xl shadow-lg shrink-0"
           />
           <div>
-          <p className="text-[#F2C744] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">
-            Curiosidade · FIV e FeLV
-          </p>
-          <h3 className="text-xl sm:text-2xl font-black mb-3">Gatos FeLV+ também merecem um lar</h3>
+          <p className="text-[#F2C744] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">{t('ccd.curiosidade_selo')}</p>
+          <h3 className="text-xl sm:text-2xl font-black mb-3">{t('ccd.curiosidade_titulo')}</h3>
           <p className="text-sm sm:text-base text-purple-100 leading-relaxed">
-            A Leucemia Viral Felina (FeLV) afeta o sistema imunológico dos gatinhos, mas com os cuidados certos eles podem viver felizes e saudáveis por muitos anos. Gatos FeLV+ não transmitem a doença para humanos ou outros animais, como cães: a transmissão ocorre apenas entre gatos, principalmente por contato direto prolongado.
+            {t('ccd.curiosidade_texto')}
           </p>
           </div>
         </motion.div>

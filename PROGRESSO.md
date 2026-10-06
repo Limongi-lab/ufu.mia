@@ -35,3 +35,4 @@ Checklist para qualquer pessoa/IA retomar o trabalho sem reler tudo.
 - [x] manage.py check, check --deploy (simulando produção), 22 testes OK, tsc + eslint + vite build OK
 - [ ] A FAZER por você: ver DEPLOY.md (nova SECRET_KEY, Cloudinary, PostgreSQL, createsuperuser no servidor, secret scanning no GitHub)
 - [ ] Futuro: 2FA no painel (exige template de login customizado)
+- [x] Login por e-mail + cadeadinho escondido no rodapé (VITE_ADMIN_URL) + atalhos .bat + comandos listar_usuarios/limpar_usuarios

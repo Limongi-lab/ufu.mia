@@ -6,6 +6,10 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from .auth import LoginEquipeForm
+
+admin.site.login_form = LoginEquipeForm
+
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     path('api/', include('animais.urls')),

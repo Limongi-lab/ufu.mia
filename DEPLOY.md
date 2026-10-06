@@ -58,28 +58,74 @@ O backend **se recusa a iniciar** se faltar `CLOUDINARY_URL` ou se `ADMIN_URL` f
 
 ## 3. Criar a conta de administrador (SEM senha no código)
 
-No terminal do serviço (na Render: aba **Shell**), rode:
+> As contas que você criou no seu computador (`createsuperuser` local) **não existem** no site publicado: o banco de lá começa vazio. Por isso você cria a conta de administrador de novo, **uma vez**, no servidor.
+
+### Opção A: terminal da hospedagem (se o seu plano tiver)
+
+Alguns planos têm terminal (o Shell da Render, por exemplo, costuma ser só nos planos pagos; na Railway há o terminal pela linha de comando). Se tiver:
 
 ```
 python manage.py createsuperuser
 ```
 
-Ele pergunta usuário, e-mail e senha **na hora**. A senha é gravada criptografada no banco e **nunca passa pelo GitHub**. Use uma senha longa (de preferência 4 palavras sem relação entre si) e única.
+Ele pergunta usuário, e-mail e senha na hora. A senha é gravada criptografada no banco.
+
+### Opção B: plano grátis, sem terminal (por variáveis de ambiente)
+
+1. No painel da hospedagem, cadastre **temporariamente** estas variáveis (elas ficam só ali, nunca no GitHub):
+
+   | Variável | Valor |
+   |---|---|
+   | `DJANGO_SUPERUSER_USERNAME` | o seu e-mail, ex.: `voce@gmail.com` |
+   | `DJANGO_SUPERUSER_EMAIL` | o mesmo e-mail |
+   | `DJANGO_SUPERUSER_PASSWORD` | uma senha longa e única |
+
+2. No **Build command**, acrescente no final: ` && (python manage.py createsuperuser --noinput || true)`
+3. Faça o deploy. A conta é criada.
+4. **Apague a variável `DJANGO_SUPERUSER_PASSWORD`** do painel e tire o trecho do Build command. A conta já existe e a senha não precisa mais ficar guardada em lugar nenhum.
+
+### Como a equipe entra
 
 O painel fica em `https://SEU-BACKEND/ADMIN_URL/` (ex.: `https://ufumia-api.onrender.com/painel-x7k2q/`).
+
+O login é por **e-mail e senha**. Existe também um **cadeadinho discreto no rodapé do site** (ao lado de "Feito por...") que leva direto para essa tela de login. Para ele aparecer, cadastre no site a variável `VITE_ADMIN_URL` (veja o item 4).
+
+> O cadeadinho revela o endereço do painel para quem inspecionar o código do site. Isso é normal (o WordPress também tem endereço público de login). A proteção de verdade é a **senha forte + o bloqueio depois de 5 erros**, e não o segredo do endereço.
 
 ### Dando acesso para a equipe
 
 Só o superusuário (você) cria contas. Cada pessoa deve ter a **sua própria** conta, nunca uma senha compartilhada.
 
-1. No painel: **Usuários → Adicionar**.
+1. No painel: **Usuários → Adicionar**. Em "Nome de usuário" ponha o **e-mail da pessoa** e depois preencha o campo **Endereço de e-mail** com o mesmo.
 2. Marque **Membro da equipe** (sem isso a pessoa não consegue entrar).
 3. Em **Grupos**, escolha:
    - **Equipe**: gerencia gatinhos, histórias, textos e listas do site.
    - **Coordenação**: o mesmo da Equipe, mais ver o histórico de ações e destravar contas bloqueadas.
 4. **Não** marque "Status de superusuário".
 
+Use um e-mail diferente para cada pessoa (e-mail repetido em duas contas impede o login por e-mail).
+
 Quando alguém sair do projeto, desmarque **Ativo** na conta dela.
+
+### Esqueci a senha / alguém esqueceu
+
+- **Senha de um membro da equipe:** você entra no painel, abre **Usuários**, clica na pessoa e usa o link **"redefinir a senha usando este formulário"**. Passe a senha nova por um canal seguro e peça para ela guardar num gerenciador de senhas.
+- **Conta bloqueada por erros de senha:** espera 30 minutos, ou alguém da **Coordenação** apaga o registro em **Tentativas de acesso**.
+- **Você esqueceu a sua senha de superusuário:** se tiver terminal, `python manage.py changepassword SEU-USUARIO`. Sem terminal, use a Opção B acima com outro e-mail, entre e redefina a senha da conta antiga (ou desative-a).
+
+> Redefinição de senha por e-mail ("esqueci minha senha" automático) exige configurar um serviço de envio de e-mail (SMTP). Não está ativada; por enquanto quem redefine é o superusuário.
+
+### No seu computador (desenvolvimento)
+
+Na pasta do projeto há atalhos para clicar duas vezes:
+
+| Arquivo | Para quê |
+|---|---|
+| `1-primeira-vez.bat` | instala tudo e cria a sua conta (só uma vez) |
+| `ligar-tudo.bat` | liga o backend e o site (todo dia) |
+| `ver-usuarios.bat` | lista as contas que existem (nunca mostra senhas) |
+| `esqueci-a-senha.bat` | redefine a senha de uma conta |
+| `limpar-usuarios.bat` | apaga TODAS as contas do seu PC e cria uma nova (nunca roda em produção) |
 
 ### Proteções que já vêm ligadas
 
@@ -94,7 +140,9 @@ Quando alguém sair do projeto, desmarque **Ativo** na conta dela.
 
 - **Root directory:** `frontend`
 - **Build command:** `npm run build` — **Output:** `dist`
-- **Variável de ambiente:** `VITE_API_URL` = `https://SEU-BACKEND/api`
+- **Variáveis de ambiente:**
+  - `VITE_API_URL` = `https://SEU-BACKEND/api`
+  - `VITE_ADMIN_URL` = `https://SEU-BACKEND/ADMIN_URL/` (faz o cadeadinho do rodapé aparecer; sem ela, ele fica escondido)
 
 > ⚠️ Tudo que começa com `VITE_` fica **público** no navegador. Ali vai só o endereço da API, **nunca** senhas ou chaves.
 
