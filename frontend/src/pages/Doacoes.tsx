@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useConteudo } from '../context/ConteudoContext';
 
 export default function Doacoes() {
+  const { t } = useConteudo();
   const [copied, setCopied] = useState(false);
-  const chavePix = 'ufumiaufu@gmail.com';
+  const chavePix = t('doacoes.chave_pix');
 
   const handleCopyPix = () => {
     navigator.clipboard.writeText(chavePix);
@@ -26,26 +28,16 @@ export default function Doacoes() {
             transition={{ duration: 0.6, ease: 'easeOut' }}
             className="text-center max-w-2xl mx-auto mb-12"
           >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 tracking-tight">
-              Doações
-            </h1>
-            <p className="mt-2 text-sm sm:text-base text-gray-600 font-medium">
-              Participe de nossos eventos, como bazares e rifas, ou contribua com doações pela chave PIX.
-            </p>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 tracking-tight">{t('doacoes.titulo')}</h1>
+            <p className="mt-2 text-sm sm:text-base text-gray-600 font-medium">{t('doacoes.texto')}</p>
           </motion.div>
 
           <div className="bg-gradient-to-r from-[#5B107D] via-[#7B1FA2] to-[#8C1BA8] text-white rounded-3xl p-8 sm:p-12 text-center max-w-3xl mx-auto shadow-xl mb-12">
-            <div className="inline-block bg-[#F2C744] text-[#18141D] font-black text-xs uppercase tracking-wider px-3.5 py-1 rounded-full mb-3">
-              Chave PIX Oficial (E-mail)
-            </div>
+            <div className="inline-block bg-[#F2C744] text-[#18141D] font-black text-xs uppercase tracking-wider px-3.5 py-1 rounded-full mb-3">{t('doacoes.pix_selo')}</div>
 
-            <h2 className="text-2xl sm:text-3xl font-black mb-2">
-              Faça sua transferência via PIX
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-black mb-2">{t('doacoes.pix_titulo')}</h2>
 
-            <p className="text-xs sm:text-sm text-purple-100 max-w-md mx-auto mb-6">
-              Abra o app do seu banco, escolha a opção PIX e cole a chave abaixo:
-            </p>
+            <p className="text-xs sm:text-sm text-purple-100 max-w-md mx-auto mb-6">{t('doacoes.pix_instrucao')}</p>
 
             <div className="bg-white text-gray-900 p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 max-w-lg mx-auto shadow-md">
               <span className="font-mono text-base sm:text-xl font-bold text-[#7B1FA2] select-all">

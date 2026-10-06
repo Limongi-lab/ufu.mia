@@ -1,10 +1,12 @@
 import Reveal from './Reveal';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useConteudo } from '../context/ConteudoContext';
 
 export default function SecaoDoacao() {
+  const { t } = useConteudo();
   const [copied, setCopied] = useState(false);
-  const chavePix = 'ufumiaufu@gmail.com';
+  const chavePix = t('doacoes.chave_pix');
 
   const handleCopy = () => {
     navigator.clipboard.writeText(chavePix);
@@ -20,22 +22,16 @@ export default function SecaoDoacao() {
         {/* Banner de Doação no estilo vibrante do Instagram do UFU MIA */}
         <div className="bg-gradient-to-r from-[#5B107D] via-[#7B1FA2] to-[#8C1BA8] text-white p-8 sm:p-14 rounded-3xl shadow-xl text-center relative overflow-hidden">
           
-          <div className="inline-block bg-[#F2C744] text-[#18141D] font-black text-xs uppercase tracking-wider px-3.5 py-1 rounded-full mb-3">
-            Ajude Nossos Resgates
-          </div>
+          <div className="inline-block bg-[#F2C744] text-[#18141D] font-black text-xs uppercase tracking-wider px-3.5 py-1 rounded-full mb-3">{t('doacao_home.selo')}</div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-3 tracking-tight text-white">
-            Ajudar Financeiramente
-          </h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-3 tracking-tight text-white">{t('doacao_home.titulo')}</h2>
 
-          <p className="text-sm sm:text-base text-purple-100 max-w-xl mx-auto mb-8 leading-relaxed font-normal">
-            Participe de nossos eventos, como bazares e rifas, ou com doações. Elas ajudam a cuidar da saúde e alimentar os gatos e a realizar castrações para o controle populacional.
-          </p>
+          <p className="text-sm sm:text-base text-purple-100 max-w-xl mx-auto mb-8 leading-relaxed font-normal">{t('doacao_home.texto')}</p>
 
           {/* Campo de Chave PIX */}
           <div className="bg-white text-gray-900 p-4 sm:p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 max-w-xl mx-auto shadow-md">
             <div className="text-center sm:text-left">
-              <span className="text-[10px] lg:text-[11px] text-gray-500 font-bold block uppercase tracking-wider">Chave PIX Oficial (E-mail)</span>
+              <span className="text-[10px] lg:text-[11px] text-gray-500 font-bold block uppercase tracking-wider">{t('doacoes.pix_selo')}</span>
               <span className="text-[#7B1FA2] font-mono text-base sm:text-xl font-black select-all">
                 {chavePix}
               </span>

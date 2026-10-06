@@ -1,24 +1,14 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import fotoSobre from '../assets/slide/recem-resgate-2.jpg';
+import { useConteudo } from '../context/ConteudoContext';
+import { Quebras } from './RichText';
 
 export default function SecaoSobre() {
+  const { t, listas } = useConteudo();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const compromissos = [
-    {
-      titulo: 'A situação que nos fez começar',
-      descricao: 'Mais de 50 gatos foram encontrados abandonados no Campus Santa Mônica, muitos deles doentes, presos em telhados e sem os cuidados adequados.',
-    },
-    {
-      titulo: 'Nossos objetivos',
-      descricao: 'Cuidar da saúde e alimentar os gatos, realizar castrações para controle populacional, promover a adoção responsável dos animais e contribuir para o desenvolvimento acadêmico dos estudantes.',
-    },
-    {
-      titulo: 'Como agimos: o método CCD',
-      descricao: 'Captura, Castração e Devolução ou Adoção. Gatos mansos e filhotes são divulgados para encontrar lares responsáveis; os ariscos voltam ao campus, mas seguem monitorados e disponíveis para adoção.',
-    },
-  ];
+  const compromissos = listas.pontos_sobre;
 
   return (
     <section id="sobre" className="py-16 sm:py-24 relative overflow-hidden">
@@ -63,16 +53,12 @@ export default function SecaoSobre() {
               <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
             </div>
 
-            <div className="inline-block text-[#7B1FA2] font-black text-xs sm:text-sm tracking-widest uppercase">
-              SOBRE O PROJETO
-            </div>
+            <div className="inline-block text-[#7B1FA2] font-black text-xs sm:text-sm tracking-widest uppercase">{t('sobre.selo')}</div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight leading-tight">
-              O que nos move a cuidar dos gatinhos da UFU
-            </h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight leading-tight">{t('sobre.titulo')}</h2>
 
             <p className="text-sm sm:text-base text-gray-600 leading-relaxed font-normal">
-              O <strong>UFU MIA</strong> é um projeto de extensão da <strong>Universidade Federal de Uberlândia (UFU)</strong> que integra ensino, pesquisa e extensão para cuidar dos gatos abandonados no <strong>Campus Santa Mônica</strong>: oferecemos saúde, alimentação, castração e adoção responsável, e ainda contribuímos para a formação dos estudantes.
+              <Quebras texto={t('sobre.texto')} />
             </p>
 
             {/* Lista de Compromissos com (+) */}

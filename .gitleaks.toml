@@ -1,0 +1,17 @@
+# Regras do gitleaks para este projeto.
+title = "UFU MIA"
+
+[extend]
+useDefault = true
+
+# Valores de exemplo (falsos) que existem de propósito no repositório.
+[allowlist]
+description = "Exemplos e placeholders"
+paths = [
+  '''backend/\.env\.example''',
+  '''DEPLOY\.md''',
+]
+regexes = [
+  '''cloudinary://0{15}:x+@nome-do-cloud''',
+  '''troque-por-uma-chave-secreta-gerada''',
+]

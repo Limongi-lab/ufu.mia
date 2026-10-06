@@ -5,10 +5,12 @@ import f3 from '../assets/slide/adotado-3.jpg';
 import f4 from '../assets/slide/adotado-4.jpg';
 import f5 from '../assets/slide/adotado-5.jpg';
 import f6 from '../assets/slide/adotado-6.jpg';
+import { useConteudo } from '../context/ConteudoContext';
 
 const fotos = [f1, f2, f3, f4, f5, f6];
 
 export default function SecaoAdotados() {
+  const { t } = useConteudo();
   return (
     <section className="py-14 sm:py-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
@@ -19,12 +21,8 @@ export default function SecaoAdotados() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto mb-10"
         >
-          <div className="inline-block text-[#7B1FA2] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">
-            HISTÓRIAS DE ADOÇÃO
-          </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 tracking-tight">
-            Resgates que foram adotados
-          </h2>
+          <div className="inline-block text-[#7B1FA2] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">{t('adotados.selo')}</div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 tracking-tight">{t('adotados.titulo')}</h2>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-5">

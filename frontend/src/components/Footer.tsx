@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import Reveal from './Reveal';
 import logoImg from '../assets/logo.png';
+import { useConteudo } from '../context/ConteudoContext';
+import { URL_ADMIN } from '../services/conteudo';
 
 export default function Footer() {
+  const { t } = useConteudo();
   return (
     <footer className="bg-[#1F0B2C] text-white pt-16 pb-12 border-t border-purple-900/50">
       <Reveal className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,15 +24,11 @@ export default function Footer() {
                 <span className="text-2xl font-black text-white tracking-tight block">
                   Ufu Mia
                 </span>
-                <span className="text-xs text-[#C9B8F0] font-semibold">
-                  Projeto de Extensão Universitária • UFU
-                </span>
+                <span className="text-xs text-[#C9B8F0] font-semibold">{t('rodape.subtitulo')}</span>
               </div>
             </div>
             
-            <p className="text-sm text-purple-200/80 leading-relaxed max-w-sm">
-              Projeto de extensão da UFU que cuida da saúde e da alimentação dos gatos do Campus Santa Mônica, realiza castrações e promove a adoção responsável.
-            </p>
+            <p className="text-sm text-purple-200/80 leading-relaxed max-w-sm">{t('rodape.descricao')}</p>
           </div>
 
           {/* Coluna 2: Navegação Rápida */}
@@ -70,11 +69,9 @@ export default function Footer() {
               Contato & Localização
             </h4>
             <p className="text-sm text-purple-200/80">
-              E-mail: <strong className="text-white font-mono text-sm select-all">ufumiaufu@gmail.com</strong>
+              E-mail: <strong className="text-white font-mono text-sm select-all">{t('rodape.email')}</strong>
             </p>
-            <p className="text-sm text-purple-200/70">
-              UFU - Universidade Federal de Uberlândia • Uberlândia - MG
-            </p>
+            <p className="text-sm text-purple-200/70">{t('rodape.localizacao')}</p>
             <div className="pt-2">
               <a
                 href="https://instagram.com/ufu.mia"
@@ -92,7 +89,22 @@ export default function Footer() {
         {/* Rodapé inferior */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-purple-300/60 font-medium">
           <p>© {new Date().getFullYear()} UFU MIA, Universidade Federal de Uberlândia. Todos os direitos reservados.</p>
-          <p className="font-semibold text-purple-200/80">Feito por Rafael Limongi</p>
+          <p className="font-semibold text-purple-200/80 flex items-center gap-2">
+            Feito por Rafael Limongi
+            {URL_ADMIN && (
+              <a
+                href={URL_ADMIN}
+                aria-label="Área da equipe"
+                title="Área da equipe"
+                className="inline-flex p-1 opacity-20 hover:opacity-100 focus-visible:opacity-100 transition-opacity"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5" aria-hidden="true">
+                  <rect x="4" y="11" width="16" height="10" rx="2" />
+                  <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                </svg>
+              </a>
+            )}
+          </p>
         </div>
 
       </Reveal>

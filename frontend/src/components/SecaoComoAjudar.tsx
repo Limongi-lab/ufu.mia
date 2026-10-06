@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useConteudo } from '../context/ConteudoContext';
+import { ehLinkInterno, linkSeguro } from '../services/conteudo';
 
 function IconeCasa() {
   return (
@@ -34,48 +36,19 @@ function IconeMegafone() {
 }
 
 export default function SecaoComoAjudar() {
-  const formasAjudar = [
-    {
-      icone: <IconeCasa />,
-      titulo: 'Adotar um Gatinho',
-      descricao: 'Ofereça um lar amoroso e responsável para um dos gatinhos resgatados.',
-      linkTexto: 'Ver Animais',
-      linkUrl: '/animais',
-      isExternal: false,
-      bg: 'bg-white/70',
-      borda: 'border-purple-200',
-    },
-    {
-      icone: <IconeCama />,
-      titulo: 'Lar Temporário (LT)',
-      descricao: 'Receba um gatinho em um local seguro, sem rotas de fuga, enquanto ele se recupera. Você dá carinho e atenção; nós damos medicamentos, caixinha de areia e ração.',
-      linkTexto: 'Falar com a equipe',
-      linkUrl: '/fale-conosco',
-      isExternal: false,
-      bg: 'bg-white/70',
-      borda: 'border-amber-200',
-    },
-    {
-      icone: <IconePessoas />,
-      titulo: 'Ser Extensionista ou Voluntário',
-      descricao: 'Faça parte da equipe e contribua com ações no projeto: ajude nas atividades, nos eventos e no cuidado dos gatos.',
-      linkTexto: 'Ver Processo Seletivo',
-      linkUrl: '/processo-seletivo',
-      isExternal: false,
-      bg: 'bg-white/70',
-      borda: 'border-purple-300/80',
-    },
-    {
-      icone: <IconeMegafone />,
-      titulo: 'Ajudar Financeiramente',
-      descricao: 'Participe dos nossos eventos, como bazares e rifas, ou contribua com doações.',
-      linkTexto: 'Fazer uma doação',
-      linkUrl: '/doacoes',
-      isExternal: false,
-      bg: 'bg-white/70',
-      borda: 'border-emerald-200',
-    },
+  const { t, listas } = useConteudo();
+  const icones = [<IconeCasa />, <IconeCama />, <IconePessoas />, <IconeMegafone />];
+  const estilos = [
+    { bg: 'bg-white/70', borda: 'border-purple-200' },
+    { bg: 'bg-white/70', borda: 'border-amber-200' },
+    { bg: 'bg-white/70', borda: 'border-purple-300/80' },
+    { bg: 'bg-white/70', borda: 'border-emerald-200' },
   ];
+  const formasAjudar = listas.formas_de_ajudar.map((f, i) => ({
+    ...f,
+    ...estilos[i % estilos.length],
+    icone: icones[i % icones.length],
+  }));
 
   return (
     <section id="como-ajudar" className="py-16 sm:py-24 relative overflow-hidden">
@@ -88,14 +61,10 @@ export default function SecaoComoAjudar() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
         >
-          <div className="inline-block text-[#7B1FA2] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">
-            FAÇA A DIFERENÇA
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight">
-            Como você pode nos ajudar
-          </h2>
+          <div className="inline-block text-[#7B1FA2] font-black text-xs sm:text-sm tracking-widest uppercase mb-2">{t('ajudar.selo')}</div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight">{t('ajudar.titulo')}</h2>
           <p className="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed font-normal">
-            Você pode transformar a vida dos gatinhos da UFU de diversas formas. Seja adotando, acolhendo, entrando para a equipe ou ajudando financeiramente:
+            {t('ajudar.subtitulo')}
           </p>
         </motion.div>
 
@@ -123,24 +92,26 @@ export default function SecaoComoAjudar() {
                 </p>
               </div>
 
-              {item.isExternal ? (
-                <a
-                  href={item.linkUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-between text-xs sm:text-sm font-bold text-[#7B1FA2] hover:text-[#5B107D] pt-3 border-t border-purple-200/60"
-                >
-                  <span>{item.linkTexto}</span>
-                  <span>→</span>
-                </a>
-              ) : (
-                <Link
-                  to={item.linkUrl}
-                  className="inline-flex items-center justify-between text-xs sm:text-sm font-bold text-[#7B1FA2] hover:text-[#5B107D] pt-3 border-t border-purple-200/60"
-                >
-                  <span>{item.linkTexto}</span>
-                  <span>→</span>
-                </Link>
+              {item.link_texto && (
+                ehLinkInterno(linkSeguro(item.link_url)) ? (
+                  <Link
+                    to={linkSeguro(item.link_url)}
+                    className="inline-flex items-center justify-between text-xs sm:text-sm font-bold text-[#7B1FA2] hover:text-[#5B107D] pt-3 border-t border-purple-200/60"
+                  >
+                    <span>{item.link_texto}</span>
+                    <span>→</span>
+                  </Link>
+                ) : (
+                  <a
+                    href={linkSeguro(item.link_url)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-between text-xs sm:text-sm font-bold text-[#7B1FA2] hover:text-[#5B107D] pt-3 border-t border-purple-200/60"
+                  >
+                    <span>{item.link_texto}</span>
+                    <span>→</span>
+                  </a>
+                )
               )}
             </motion.div>
           ))}

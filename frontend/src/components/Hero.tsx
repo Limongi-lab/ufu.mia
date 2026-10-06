@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { motion, type Variants } from 'framer-motion';
 import fotoHero from '../assets/slide/recem-resgate-1.jpg';
+import { useConteudo } from '../context/ConteudoContext';
+import { Quebras } from './RichText';
 
 const container: Variants = {
   hidden: {},
@@ -13,6 +15,7 @@ const item: Variants = {
 };
 
 export default function Hero() {
+  const { t } = useConteudo();
   return (
     <section className="bg-gradient-to-br from-[#5B107D] via-[#7B1FA2] to-[#8C1BA8] text-white relative overflow-hidden">
       <motion.div
@@ -54,33 +57,24 @@ export default function Hero() {
             className="lg:col-span-7 space-y-6 text-center lg:text-left"
           >
             
-            <motion.div variants={item} className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-xs border border-white/20 text-[#F2C744] font-black text-xs sm:text-sm tracking-widest uppercase px-4 py-1.5 rounded-full">
-              RESGATE E ADOÇÃO UFU
-            </motion.div>
+            <motion.div variants={item} className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-xs border border-white/20 text-[#F2C744] font-black text-xs sm:text-sm tracking-widest uppercase px-4 py-1.5 rounded-full">{t('hero.selo')}</motion.div>
 
             <motion.h1 variants={item} className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white">
-              Dê uma patinha, <br className="hidden sm:inline" />
-              Salve uma vida!
-            </motion.h1>
+              <Quebras texto={t('hero.titulo')} />
+</motion.h1>
 
-            <motion.p variants={item} className="text-base sm:text-lg lg:text-xl text-purple-100 font-normal max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Projeto de extensão da UFU que cuida da saúde e da alimentação dos gatos do Campus Santa Mônica, realiza castrações e promove a adoção responsável.
-            </motion.p>
+            <motion.p variants={item} className="text-base sm:text-lg lg:text-xl text-purple-100 font-normal max-w-xl mx-auto lg:mx-0 leading-relaxed">{t('hero.texto')}</motion.p>
 
             <motion.div variants={item} className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
               <Link
                 to="/animais"
                 className="bg-white hover:bg-purple-50 text-[#6A0DAD] font-extrabold text-sm sm:text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 btn-shine"
-              >
-                Adote Agora
-              </Link>
+              >{t('hero.botao_adotar')}</Link>
 
               <Link
                 to="/doacoes"
                 className="bg-white/10 hover:bg-white/20 text-white font-bold text-sm sm:text-base px-7 py-3.5 rounded-full border-2 border-white/60 transition-all transform hover:-translate-y-0.5 backdrop-blur-xs"
-              >
-                Doe agora
-              </Link>
+              >{t('hero.botao_doar')}</Link>
             </motion.div>
 
           </motion.div>
@@ -107,12 +101,8 @@ export default function Hero() {
                   className="w-full h-80 sm:h-96 lg:h-[440px] object-cover object-[50%_30%] transform hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-5 sm:p-6 text-white">
-                  <span className="text-xs uppercase tracking-wider text-[#F2C744] font-bold block mb-0.5">
-                    UFU MIA · Universidade Federal de Uberlândia
-                  </span>
-                  <span className="text-sm sm:text-base font-semibold">
-                    Gatinho recém resgatado pelo projeto
-                  </span>
+                  <span className="text-xs uppercase tracking-wider text-[#F2C744] font-bold block mb-0.5">{t('hero.foto_selo')}</span>
+                  <span className="text-sm sm:text-base font-semibold">{t('hero.foto_legenda')}</span>
                 </div>
               </div>
 

@@ -1,42 +1,33 @@
 import { motion } from 'framer-motion';
 import AnimatedCounter from './AnimatedCounter';
+import { useConteudo } from '../context/ConteudoContext';
 
 export default function SecaoContadores() {
-  const estatisticas = [
-    {
-      target: 50,
-      prefix: '+',
-      suffix: '',
-      titulo: 'Gatos abandonados no Campus Santa Mônica',
-      icone: (
+  const { listas } = useConteudo();
+  const icones = [
+    (
         <svg className="w-6 h-6 text-[#7B1FA2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
         </svg>
-      ),
-    },
-    {
-      target: 6,
-      prefix: '',
-      suffix: '',
-      titulo: 'Frentes de atuação: Eventos, Marketing, Artes, Resgates, Coordenação Interna e Gente e Gestão',
-      icone: (
+    ),
+    (
         <svg className="w-6 h-6 text-[#7B1FA2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
         </svg>
-      ),
-    },
-    {
-      target: 3,
-      prefix: '',
-      suffix: '',
-      titulo: 'Etapas do CCD: Captura, Castração e Devolução ou Adoção',
-      icone: (
+    ),
+    (
         <svg className="w-6 h-6 text-[#7B1FA2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
         </svg>
-      ),
-    },
+    ),
   ];
+  const estatisticas = listas.estatisticas.map((e, i) => ({
+    target: e.numero,
+    prefix: e.prefixo,
+    suffix: e.sufixo,
+    titulo: e.titulo,
+    icone: icones[i % icones.length],
+  }));
 
   return (
     <section className="py-14 sm:py-20">
