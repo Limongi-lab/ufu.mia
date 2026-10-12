@@ -91,4 +91,4 @@ python manage.py check --deploy
 
 ## Licença
 
-Projeto de extensão universitária — [MIT](LICENSE) · UFU MIA © 2025
+Projeto de extensão universitária — [MIT](LICENSE) · UFU MIA © 2026
