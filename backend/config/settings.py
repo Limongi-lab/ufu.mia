@@ -293,6 +293,7 @@ UNFOLD = {
     'SITE_TITLE': 'UFU MIA',
     'SITE_HEADER': 'UFU MIA · Painel da equipe',
     'SITE_SYMBOL': 'pets',
+    'SITE_URL': 'https://ufumia.vercel.app',
     'SHOW_HISTORY': True,
     'SIDEBAR': {
         'show_search': False,
