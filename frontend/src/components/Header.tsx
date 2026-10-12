@@ -14,13 +14,13 @@ function InstagramIcon({ className }: { className?: string }) {
     >
       <defs>
         <radialGradient id="ig-gradient" cx="30%" cy="107%" r="150%">
-          <stop offset="0%" stopColor="#ffd879" />
-          <stop offset="10%" stopColor="#fcd774" />
-          <stop offset="20%" stopColor="#f9b04c" />
-          <stop offset="35%" stopColor="#f07137" />
-          <stop offset="50%" stopColor="#e1306c" />
-          <stop offset="70%" stopColor="#c13584" />
-          <stop offset="85%" stopColor="#833ab4" />
+          <stop offset="0%"   stopColor="#ffd879" />
+          <stop offset="10%"  stopColor="#fcd774" />
+          <stop offset="20%"  stopColor="#f9b04c" />
+          <stop offset="35%"  stopColor="#f07137" />
+          <stop offset="50%"  stopColor="#e1306c" />
+          <stop offset="70%"  stopColor="#c13584" />
+          <stop offset="85%"  stopColor="#833ab4" />
           <stop offset="100%" stopColor="#405de6" />
         </radialGradient>
       </defs>
@@ -29,10 +29,19 @@ function InstagramIcon({ className }: { className?: string }) {
   );
 }
 
+const NAV_LINKS = [
+  { to: '/',                   label: 'Início' },
+  { to: '/animais',            label: 'Animais' },
+  { to: '/sobre',              label: 'Sobre Nós' },
+  { to: '/como-ajudar',        label: 'Como Ajudar' },
+  { to: '/fale-conosco',       label: 'Fale Conosco' },
+  { to: '/processo-seletivo',  label: 'Processo Seletivo', pulse: true },
+  { to: '/faq',                label: 'Dúvidas' },
+];
+
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-
   const isActive = (path: string) => location.pathname === path;
 
   return (
@@ -40,73 +49,67 @@ export default function Header() {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="sticky top-0 z-50 bg-[#D5ADEB]/95 backdrop-blur-md border-b border-[#B98AD6]/60 shadow-sm transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
-        
-        {/* Logo UFU MIA */}
+      className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-purple-100 shadow-sm"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-[4.5rem]">
+
+        {/* ── Logo ─────────────────────────────── */}
         <Link
           to="/"
           onClick={(e) => {
-            // já está no início: sobe a página inteira suavemente na mesma aba
             if (location.pathname === '/') {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }
           }}
-          className="flex items-center gap-3.5 group"
+          className="flex items-center gap-3 group"
         >
-          <img
-            src={logoImg}
-            alt="UFU MIA"
-            className="w-12 h-12 rounded-full object-cover shadow-xs group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300"
-          />
-          <div className="flex flex-col">
-            <span className="text-xl font-black text-gray-900 tracking-tight leading-none">
-              Ufu Mia
+          <div className="relative">
+            <img
+              src={logoImg}
+              alt="UFU MIA"
+              className="w-11 h-11 rounded-full object-cover shadow-md group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300"
+            />
+            {/* halo roxo suave ao hover */}
+            <div className="absolute inset-0 rounded-full bg-[#7B1FA2]/0 group-hover:bg-[#7B1FA2]/10 transition-colors duration-300" />
+          </div>
+          <div className="flex flex-col leading-none">
+            <span className="text-[1.15rem] font-black text-gray-900 tracking-tight">
+              UFU MIA
             </span>
-            <span className="hidden min-[360px]:block text-[10px] lg:text-[11px] font-bold text-[#7B1FA2] tracking-wider uppercase mt-1">
+            <span className="hidden min-[360px]:block text-[9px] font-bold text-[#7B1FA2] tracking-widest uppercase mt-0.5">
               Projeto de Extensão UFU
             </span>
           </div>
         </Link>
 
-        {/* Menu Desktop */}
-        <nav className="hidden lg:flex items-center gap-5 text-[13px] lg:text-[15px] font-semibold">
-          {[
-            { to: '/', label: 'Início' },
-            { to: '/animais', label: 'Animais' },
-            { to: '/sobre', label: 'Sobre Nós' },
-            { to: '/como-ajudar', label: 'Como Ajudar' },
-            { to: '/fale-conosco', label: 'Fale Conosco' },
-            { to: '/processo-seletivo', label: 'Processo Seletivo', pulse: true },
-            { to: '/faq', label: 'Dúvidas' },
-          ].map((item: { to: string; label: string; pulse?: boolean }) => (
+        {/* ── Nav Desktop ───────────────────────── */}
+        <nav className="hidden lg:flex items-center gap-1 text-[13px] font-semibold">
+          {NAV_LINKS.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className={`transition-colors py-1 relative flex items-center gap-1.5 ${
-                isActive(item.to) ? 'text-[#7B1FA2] font-bold' : 'text-gray-900 hover:text-[#7B1FA2]'
+              className={`relative px-3 py-2 rounded-full flex items-center gap-1.5 transition-all duration-200 ${
+                isActive(item.to)
+                  ? 'text-[#7B1FA2] bg-purple-50 font-bold'
+                  : 'text-gray-700 hover:text-[#7B1FA2] hover:bg-purple-50/70'
               }`}
             >
               {item.label}
-              {item.pulse && <span className="w-2 h-2 rounded-full bg-[#F2C744] animate-pulse" />}
-              {isActive(item.to) && (
-                <motion.div
-                  layoutId="navIndicator"
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#7B1FA2] rounded-full"
-                />
+              {item.pulse && (
+                <span className="w-1.5 h-1.5 rounded-full bg-[#F2C744] animate-pulse" />
               )}
             </Link>
           ))}
         </nav>
 
-        {/* Lado Direito: Instagram + Botão Doações */}
-        <div className="hidden sm:flex items-center gap-3">
+        {/* ── Direita: Instagram + Doe Agora ────── */}
+        <div className="hidden sm:flex items-center gap-2.5">
           <a
             href="https://instagram.com/ufu.mia"
             target="_blank"
             rel="noreferrer"
-            className="w-11 h-11 rounded-xl bg-white/70 hover:bg-white flex items-center justify-center transition-colors shadow-2xs"
+            className="w-10 h-10 rounded-xl bg-purple-50 hover:bg-purple-100 flex items-center justify-center transition-colors"
             title="Instagram @ufu.mia"
           >
             <InstagramIcon className="w-5 h-5" />
@@ -114,109 +117,81 @@ export default function Header() {
 
           <Link
             to="/doacoes"
-            className="bg-[#7B1FA2] hover:bg-[#6A0DAD] text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-xs hover:shadow-md btn-pulse"
+            className="bg-[#7B1FA2] hover:bg-[#6A0DAD] text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-md hover:shadow-lg btn-pulse transition-all"
           >
-            Doe agora
+            Doe agora 💜
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* ── Mobile: Botão Hamburguer ──────────── */}
         <div className="lg:hidden flex items-center gap-2">
           <Link
             to="/doacoes"
-            className="bg-[#7B1FA2] text-white px-4 py-2.5 min-h-11 inline-flex items-center rounded-full text-xs font-bold shadow-xs btn-pulse sm:hidden"
+            className="bg-[#7B1FA2] text-white px-3.5 py-2 min-h-10 inline-flex items-center rounded-full text-xs font-bold shadow-sm btn-pulse sm:hidden"
           >
-            Doe agora
+            Doe 💜
           </Link>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-3 -mr-1 text-gray-700 hover:text-[#7B1FA2] focus:outline-none"
+            className="w-10 h-10 flex items-center justify-center rounded-xl text-gray-700 hover:text-[#7B1FA2] hover:bg-purple-50 transition-colors"
             aria-label="Menu"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M6 18L18 6M6 6l12 12" />
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M4 6h16M4 12h16M4 18h16" />
               )}
             </svg>
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown com animação */}
+      {/* ── Mobile Menu Dropdown ───────────────── */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-[#D5ADEB] border-t border-[#B98AD6]/60 px-5 py-4 space-y-2 shadow-lg overflow-hidden"
+            transition={{ duration: 0.22, ease: 'easeOut' }}
+            className="lg:hidden bg-white border-t border-purple-100 px-5 py-5 shadow-lg overflow-hidden"
           >
-            <Link
-              to="/"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-sm font-bold text-gray-800 hover:text-[#7B1FA2]"
-            >
-              Início
-            </Link>
-            <Link
-              to="/animais"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-sm font-bold text-gray-800 hover:text-[#7B1FA2]"
-            >
-              Animais para Adoção
-            </Link>
-            <Link
-              to="/sobre"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-sm font-bold text-gray-800 hover:text-[#7B1FA2]"
-            >
-              Sobre Nós
-            </Link>
-            <Link
-              to="/como-ajudar"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-sm font-bold text-gray-800 hover:text-[#7B1FA2]"
-            >
-              Como Ajudar
-            </Link>
-            <Link
-              to="/fale-conosco"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-sm font-bold text-gray-800 hover:text-[#7B1FA2]"
-            >
-              Fale Conosco
-            </Link>
-            <Link
-              to="/processo-seletivo"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-sm font-bold text-[#7B1FA2]"
-            >
-              Processo Seletivo
-            </Link>
-            <Link
-              to="/faq"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-sm font-bold text-gray-800 hover:text-[#7B1FA2]"
-            >
-              Perguntas Frequentes
-            </Link>
-            <Link
-              to="/doacoes"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-sm font-bold text-[#7B1FA2]"
-            >
-              Doações e PIX
-            </Link>
-            <a
-              href="https://instagram.com/ufu.mia"
-              target="_blank"
-              rel="noreferrer"
-              className="block py-2 text-sm font-bold text-gray-800 hover:text-[#7B1FA2]"
-            >
-              Instagram @ufu.mia
-            </a>
+            <div className="grid grid-cols-2 gap-1.5">
+              {NAV_LINKS.map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`py-2.5 px-3 rounded-xl text-sm font-semibold flex items-center gap-1.5 transition-colors ${
+                    isActive(item.to)
+                      ? 'bg-purple-50 text-[#7B1FA2] font-bold'
+                      : 'text-gray-700 hover:bg-purple-50 hover:text-[#7B1FA2]'
+                  }`}
+                >
+                  {item.label}
+                  {item.pulse && <span className="w-1.5 h-1.5 rounded-full bg-[#F2C744] animate-pulse" />}
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-4 pt-4 border-t border-purple-100 flex items-center gap-3">
+              <Link
+                to="/doacoes"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex-1 text-center bg-[#7B1FA2] text-white px-4 py-3 rounded-full text-sm font-bold shadow-sm"
+              >
+                Doe agora 💜
+              </Link>
+              <a
+                href="https://instagram.com/ufu.mia"
+                target="_blank"
+                rel="noreferrer"
+                className="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center"
+              >
+                <InstagramIcon className="w-5 h-5" />
+              </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

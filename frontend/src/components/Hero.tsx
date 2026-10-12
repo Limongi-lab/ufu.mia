@@ -6,110 +6,148 @@ import { Quebras } from './RichText';
 
 const container: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.13, delayChildren: 0.05 } },
+  show: { transition: { staggerChildren: 0.14, delayChildren: 0.1 } },
 };
 
 const item: Variants = {
-  hidden: { opacity: 0, y: 26 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  hidden: { opacity: 0, y: 32 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
 };
 
 export default function Hero() {
   const { t } = useConteudo();
   return (
-    <section className="bg-gradient-to-br from-[#5B107D] via-[#7B1FA2] to-[#8C1BA8] text-white relative overflow-hidden">
-      <motion.div
-        animate={{ scale: [1, 1.18, 1], x: [0, -20, 0] }}
-        transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-0 right-0 w-[550px] h-[550px] bg-white/5 rounded-full blur-3xl pointer-events-none"
-      />
-      <motion.div
-        animate={{ scale: [1, 1.2, 1], y: [0, -25, 0] }}
-        transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -bottom-24 left-10 w-96 h-96 bg-[#F2C744]/15 rounded-full blur-3xl pointer-events-none"
-      />
+    <section className="relative overflow-hidden bg-white">
+      {/* ── Fundo decorativo: blobs roxos suaves ────────────────── */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-32 -right-32 w-[560px] h-[560px] rounded-full bg-[#EDD9F9] opacity-80 blur-3xl" />
+        <div className="absolute top-1/2 -left-40 w-96 h-96 rounded-full bg-[#C9B8F0]/40 blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 rounded-full bg-[#F2C744]/12 blur-2xl" />
+      </div>
 
-      {/* Patinhas flutuando ao fundo */}
-      {[
-        { pos: 'top-[10%] left-[4%]', size: 'text-4xl', dur: 6, delay: 0 },
-        { pos: 'top-[55%] left-[46%]', size: 'text-3xl', dur: 7.5, delay: 1.2 },
-        { pos: 'bottom-[8%] right-[6%]', size: 'text-5xl', dur: 8, delay: 0.6 },
-      ].map((p) => (
-        <motion.span
-          key={p.pos}
-          aria-hidden
-          animate={{ y: [0, -18, 0], rotate: [-12, 12, -12] }}
-          transition={{ duration: p.dur, repeat: Infinity, ease: 'easeInOut', delay: p.delay }}
-          className={`absolute ${p.pos} ${p.size} opacity-15 select-none pointer-events-none`}
-        >
-          🐾
-        </motion.span>
-      ))}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-0 sm:pt-20 lg:pt-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-end">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          
-          {/* Lado Esquerdo */}
+          {/* ── Lado Esquerdo: Texto ────────────────────────────── */}
           <motion.div
             variants={container}
             initial="hidden"
             animate="show"
-            className="lg:col-span-7 space-y-6 text-center lg:text-left"
+            className="pb-16 sm:pb-20 lg:pb-24 text-center lg:text-left space-y-7"
           >
-            
-            <motion.div variants={item} className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-xs border border-white/20 text-[#F2C744] font-black text-xs sm:text-sm tracking-widest uppercase px-4 py-1.5 rounded-full">{t('hero.selo')}</motion.div>
+            {/* Selo superior */}
+            <motion.div variants={item} className="selo-secao mx-auto lg:mx-0">
+              {t('hero.selo')}
+            </motion.div>
 
-            <motion.h1 variants={item} className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white">
+            {/* Título principal — enorme, editorial */}
+            <motion.h1
+              variants={item}
+              className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[1.0] text-gray-900"
+            >
               <Quebras texto={t('hero.titulo')} />
-</motion.h1>
+            </motion.h1>
 
-            <motion.p variants={item} className="text-base sm:text-lg lg:text-xl text-purple-100 font-normal max-w-xl mx-auto lg:mx-0 leading-relaxed">{t('hero.texto')}</motion.p>
+            {/* Subtítulo */}
+            <motion.p
+              variants={item}
+              className="text-base sm:text-lg text-gray-500 leading-relaxed max-w-lg mx-auto lg:mx-0 font-normal"
+            >
+              {t('hero.texto')}
+            </motion.p>
 
-            <motion.div variants={item} className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+            {/* Botões de ação */}
+            <motion.div
+              variants={item}
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1"
+            >
               <Link
                 to="/animais"
-                className="bg-white hover:bg-purple-50 text-[#6A0DAD] font-extrabold text-sm sm:text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 btn-shine"
-              >{t('hero.botao_adotar')}</Link>
+                className="bg-[#7B1FA2] hover:bg-[#6A0DAD] text-white font-bold text-sm sm:text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all btn-shine"
+              >
+                Adote um gatinho
+              </Link>
 
               <Link
                 to="/doacoes"
-                className="bg-white/10 hover:bg-white/20 text-white font-bold text-sm sm:text-base px-7 py-3.5 rounded-full border-2 border-white/60 transition-all transform hover:-translate-y-0.5 backdrop-blur-xs"
-              >{t('hero.botao_doar')}</Link>
+                className="bg-[#EDD9F9] hover:bg-[#DFC0F7] text-[#7B1FA2] font-bold text-sm sm:text-base px-7 py-4 rounded-full border border-[#C9B8F0] transition-all"
+              >
+                Fazer doação
+              </Link>
             </motion.div>
 
+            {/* Linha de stats rápida */}
+            <motion.div
+              variants={item}
+              className="flex items-center justify-center lg:justify-start gap-6 pt-2"
+            >
+              {[
+                { valor: '100+', label: 'Animais adotados' },
+                { valor: '🐾', label: '' },
+                { valor: 'UFU', label: 'Projeto oficial' },
+              ].map((s, i) => (
+                <div key={i} className="text-center lg:text-left">
+                  <div className="text-lg font-black text-[#7B1FA2]">{s.valor}</div>
+                  {s.label && <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">{s.label}</div>}
+                </div>
+              ))}
+            </motion.div>
           </motion.div>
 
-          {/* Lado Direito: Foto */}
+          {/* ── Lado Direito: Foto ──────────────────────────────── */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.15, ease: 'easeOut' }}
-            className="lg:col-span-5 flex justify-center items-center"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="relative flex items-end justify-center lg:justify-end"
           >
-            <motion.div
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
-              className="relative w-full max-w-md lg:max-w-none"
-            >
-              
-              <div className="absolute inset-0 bg-[#F2C744]/20 rounded-3xl transform rotate-2 scale-98 blur-xl pointer-events-none" />
+            {/* Card de foto com moldura editorial */}
+            <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-none">
 
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 bg-purple-900/30">
+              {/* Fundo decorativo deslocado */}
+              <div className="absolute inset-0 bg-[#DFC0F7] rounded-[2.5rem] translate-x-4 translate-y-4 -z-10" />
+
+              {/* Foto principal */}
+              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl bg-[#EDD9F9]">
                 <img
                   src={fotoHero}
                   alt="Gatinho recém resgatado pelo UFU MIA"
-                  className="w-full h-80 sm:h-96 lg:h-[440px] object-cover object-[50%_30%] transform hover:scale-105 transition-transform duration-700"
+                  className="w-full h-[420px] sm:h-[500px] lg:h-[560px] object-cover object-[50%_25%] transition-transform duration-700 hover:scale-105"
                 />
-                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-5 sm:p-6 text-white">
-                  <span className="text-xs uppercase tracking-wider text-[#F2C744] font-bold block mb-0.5">{t('hero.foto_selo')}</span>
-                  <span className="text-sm sm:text-base font-semibold">{t('hero.foto_legenda')}</span>
+
+                {/* Overlay degradê na base */}
+                <div className="absolute bottom-0 inset-x-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent" />
+
+                {/* Legenda */}
+                <div className="absolute bottom-5 left-5 right-5 text-white">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#F2C744] block mb-0.5">
+                    {t('hero.foto_selo')}
+                  </span>
+                  <span className="text-sm sm:text-base font-semibold leading-snug">
+                    {t('hero.foto_legenda')}
+                  </span>
                 </div>
               </div>
 
-            </motion.div>
+              {/* Badge flutuante: patinha */}
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute -top-4 -left-4 sm:-top-6 sm:-left-6 w-16 h-16 sm:w-20 sm:h-20 bg-[#7B1FA2] text-white rounded-2xl flex items-center justify-center text-2xl sm:text-3xl shadow-xl rotate-[-10deg]"
+              >
+                🐾
+              </motion.div>
+            </div>
           </motion.div>
 
         </div>
+      </div>
+
+      {/* ── Onda de transição ────────────────────────────────── */}
+      <div className="wave-divider mt-[-1px]">
+        <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full h-12 sm:h-16">
+          <path d="M0,0 C480,60 960,60 1440,0 L1440,60 L0,60 Z" fill="#EDD9F9" />
+        </svg>
       </div>
     </section>
   );

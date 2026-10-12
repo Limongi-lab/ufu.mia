@@ -6,6 +6,7 @@ import SecaoAdotados from '../components/SecaoAdotados';
 import SecaoProcessoSeletivo from '../components/SecaoProcessoSeletivo';
 import SecaoComoAjudar from '../components/SecaoComoAjudar';
 import SecaoContadores from '../components/SecaoContadores';
+import SecaoCarinho from '../components/SecaoCarinho';
 import SecaoFAQ from '../components/SecaoFAQ';
 import Footer from '../components/Footer';
 
@@ -18,9 +19,10 @@ export default function Home() {
         <SecaoAnimais />
         <SecaoSobre />
         <SecaoAdotados />
+        <SecaoContadores />
+        <SecaoCarinho />
         <SecaoProcessoSeletivo />
         <SecaoComoAjudar />
-        <SecaoContadores />
         <SecaoFAQ />
       </main>
       <Footer />

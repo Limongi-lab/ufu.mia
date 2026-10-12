@@ -13,7 +13,8 @@ TEXTOS = [
     ('hero.foto_legenda', 'Início – topo', 'Legenda da foto', 'Gatinho recém resgatado pelo projeto'),
     ('sobre.selo', 'Sobre o projeto', 'Selo pequeno acima do título', 'SOBRE O PROJETO'),
     ('sobre.titulo', 'Sobre o projeto', 'Título', 'O que nos move a cuidar dos gatinhos da UFU'),
-    ('sobre.texto', 'Sobre o projeto', 'Parágrafo de apresentação', 'O **UFU MIA** é um projeto de extensão da **Universidade Federal de Uberlândia (UFU)** que integra ensino, pesquisa e extensão para cuidar dos gatos abandonados no **Campus Santa Mônica**: oferecemos saúde, alimentação, castração e adoção responsável, e ainda contribuímos para a formação dos estudantes.'),
+    ('sobre.texto', 'Sobre o projeto', 'Parágrafo de apresentação', 'O UFU MIA é um projeto de extensão da Universidade Federal de Uberlândia (UFU) que integra ensino, pesquisa e extensão para cuidar dos gatos abandonados no Campus Santa Mônica: oferecemos saúde, alimentação, castração e adoção responsável, e ainda contribuímos para a formação dos estudantes.'),
+
     ('pagina_sobre.titulo', 'Títulos das páginas', 'Página Sobre – título', 'Sobre o UFU MIA'),
     ('pagina_sobre.texto', 'Títulos das páginas', 'Página Sobre – texto', 'Projeto de extensão da UFU que integra ensino, pesquisa e extensão para cuidar dos gatos do Campus Santa Mônica.'),
     ('pagina_faq.titulo', 'Títulos das páginas', 'Página Perguntas Frequentes – título', 'Perguntas Frequentes'),

@@ -18,7 +18,7 @@
   --color-preto: #18141D;
   --color-cinza-texto: #4B5563;
   /* página base: lilás extremamente suave e fosco */
-  --color-pagina: #E4C8F2;
+  --color-pagina: #EDD9F9;
 }
 
 @layer base {
@@ -27,7 +27,7 @@
   }
 
   body {
-    background-color: #E4C8F2;
+    background-color: #EDD9F9;
     color: #18141D;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -36,6 +36,7 @@
 
   h1, h2, h3, h4, .font-heading {
     font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: -0.02em;
   }
 
   :focus-visible {
@@ -44,34 +45,66 @@
     border-radius: 6px;
   }
 
-
   ::selection {
     background-color: #C9B8F0;
     color: #4A0E72;
   }
 }
 
-/* Glassmorphism header helper */
+/* ─── Header glass ─────────────────────────────────────────── */
 .glass-header {
-  background: rgba(228, 200, 242, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(237, 217, 249, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* ─── Seções: alternância de fundo ─────────────────────────── */
+/* Seção branca (cartão limpo) */
+.secao-branca {
+  background-color: #ffffff;
+}
+
+/* Seção lilás (fundo da página) */
+.secao-lilas {
+  background-color: #EDD9F9;
+}
+
+/* Seção lilás mais forte */
+.secao-lilas-forte {
+  background-color: #DFC0F7;
 }
 
 .bg-section-light {
-  background-color: rgba(255, 255, 255, 0.42);
+  background-color: rgba(255, 255, 255, 0.52);
 }
 
+/* ─── Selo de seção estilo editorial ────────────────────────── */
+/* Pequena pílula acima dos títulos de seção (ex: "— SOBRE NÓS") */
+.selo-secao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #7B1FA2;
+}
+/* ─── Divisor diagonal entre seções ────────────────────────── */
+.wave-divider {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
 
-
-
-/* Toque: sem atraso de clique, sem zoom por duplo toque e com destaque ao tocar */
+/* ─── Toque: comportamento mobile ───────────────────────────── */
 a, button, summary, label, [role="button"] {
   touch-action: manipulation;
   -webkit-tap-highlight-color: rgba(123, 31, 162, 0.2);
 }
 
-/* Botões e links arredondados: movimento com mola */
+/* ─── Botões arredondados: animação com mola ────────────────── */
 a[class*="rounded-full"],
 button[class*="rounded-full"],
 a[class*="rounded-xl"],
@@ -84,8 +117,6 @@ button[class*="rounded-xl"] {
     filter 0.15s ease;
 }
 
-/* Ao tocar/clicar: escurece de leve. NÃO encolhe o botão, porque encolher
-   fazia o dedo "sair" do botão e o toque se perdia. */
 a[class*="rounded-full"]:active,
 button[class*="rounded-full"]:not(:disabled):active,
 a[class*="rounded-xl"]:active,
@@ -93,7 +124,6 @@ button[class*="rounded-xl"]:not(:disabled):active {
   filter: brightness(0.88);
 }
 
-/* Só mouse: o botão sobe e cresce ao passar por cima */
 @media (hover: hover) and (pointer: fine) {
   a[class*="rounded-full"]:hover,
   button[class*="rounded-full"]:not(:disabled):hover,
@@ -111,7 +141,6 @@ button[class*="rounded-xl"]:not(:disabled):active {
   }
 }
 
-/* Celular/tablet: área de toque mínima de 44px */
 @media (pointer: coarse) {
   a[class*="rounded-full"],
   button[class*="rounded-full"],
@@ -122,7 +151,7 @@ button[class*="rounded-xl"]:not(:disabled):active {
   }
 }
 
-/* Brilho que passa de tempos em tempos nos botões de destaque (funciona sem mouse) */
+/* ─── Brilho passando nos botões de destaque ────────────────── */
 @keyframes brilho-passando {
   0%, 55% { transform: translateX(-130%) skewX(-20deg); }
   100%    { transform: translateX(260%) skewX(-20deg); }
@@ -138,7 +167,7 @@ button[class*="rounded-xl"]:not(:disabled):active {
   pointer-events: none;
 }
 
-/* Botão "Doe agora" do cabeçalho: anel suave pulsando para chamar atenção */
+/* ─── Pulso no botão de doação ──────────────────────────────── */
 @keyframes pulso-anel {
   0%   { box-shadow: 0 0 0 0 rgba(123, 31, 162, 0.5); }
   70%  { box-shadow: 0 0 0 12px rgba(123, 31, 162, 0); }
@@ -151,11 +180,19 @@ button[class*="rounded-xl"]:not(:disabled):active {
   animation: none;
 }
 
+/* ─── Flutuação suave para elementos decorativos ────────────── */
+@keyframes flutuar {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-14px); }
+}
+.float-anim {
+  animation: flutuar 5s ease-in-out infinite;
+}
 
-/* Só computador (tela larga + mouse): aumenta tudo que usa rem, ou seja, os textos */
+/* ─── Escala de fonte para desktop ──────────────────────────── */
 @media (min-width: 1024px) and (pointer: fine) {
   html { font-size: 112.5%; }
 }
 
-/* Segurança no celular: nenhum elemento decorativo pode criar rolagem horizontal */
+/* ─── Segurança: sem scroll horizontal ──────────────────────── */
 html, body { overflow-x: clip; }
