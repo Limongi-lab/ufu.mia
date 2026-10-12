@@ -5,6 +5,9 @@ from django.test import TestCase
 
 from .models import Animal, validar_imagem
 import secrets
+import tempfile
+from django.conf import settings
+from django.test import TestCase, override_settings
 
 # senha aleatória gerada a cada execução dos testes (nada fixo no código)
 SENHA_TESTE = secrets.token_urlsafe(16) + 'aA1!'
@@ -54,3 +57,37 @@ class UploadTests(TestCase):
         grande = SimpleUploadedFile('g.png', b'0' * (5 * 1024 * 1024 + 1), content_type='image/png')
         with self.assertRaises(ValidationError):
             validar_imagem(grande)
+
+class AdminCadastroAnimalTests(TestCase):
+    """Fluxo completo: salvar um animal pelo painel, com upload de foto."""
+
+    def setUp(self):
+        from django.contrib.auth import get_user_model
+        self.admin = get_user_model().objects.create_superuser(
+            'chefe', 'chefe@exemplo.com', secrets.token_urlsafe(16) + 'aA1!'
+        )
+        self.client.force_login(self.admin)
+        self.url = '/' + settings.ADMIN_URL + 'animais/animal/add/'
+
+    def _dados(self, **extra):
+        dados = {'nome': 'Mingau', 'especie': 'Gato', 'idade': '3 meses',
+                 'status': 'disponivel', 'descricao': 'Dócil', 'ativo': 'on', 'ordem': 0}
+        dados.update(extra)
+        return dados
+
+    def _png(self):
+        import io
+        from PIL import Image
+        buf = io.BytesIO()
+        Image.new('RGB', (20, 20), 'red').save(buf, 'PNG')
+        return SimpleUploadedFile('gato.png', buf.getvalue(), content_type='image/png')
+
+    def test_salva_animal_com_foto(self):
+        with override_settings(MEDIA_ROOT=tempfile.mkdtemp()):
+            resp = self.client.post(self.url, self._dados(foto=self._png()))
+        self.assertEqual(resp.status_code, 302)
+        self.assertTrue(Animal.objects.filter(nome='Mingau').exists())
+
+    def test_sem_foto_mostra_erro_de_formulario_e_nao_500(self):
+        resp = self.client.post(self.url, self._dados())
+        self.assertEqual(resp.status_code, 200)

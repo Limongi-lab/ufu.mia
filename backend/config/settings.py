@@ -264,6 +264,19 @@ if TESTING:
     # o cliente de testes não usa HTTPS
     SECURE_SSL_REDIRECT = False
 
+# --- Logs ------------------------------------------------------------------
+# Com DEBUG=False o Django NÃO imprime o traceback de um erro 500 no console.
+# Aqui o erro completo vai para a saída padrão, onde a Render coleta.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {'class': 'logging.StreamHandler'},
+    },
+    'loggers': {
+        'django.request': {'handlers': ['console'], 'level': 'ERROR', 'propagate': False},
+    },
+}
 
 # --- Painel admin ----------------------------------------------------------
 # Em produção, use um endereço difícil de adivinhar (ex.: painel-x7k2q/).
