@@ -264,16 +264,27 @@ export default function SecaoProcessoSeletivo() {
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {areasAtuacao.map((area) => (
-              <div
-                key={area.titulo}
-                className="bg-[#FAF7FD] rounded-2xl p-5 border border-purple-100/60 hover:border-purple-300 transition-colors"
-              >
-                <h4 className="text-base font-bold text-gray-900 mb-1.5">{area.titulo}</h4>
-                <p className="text-xs text-gray-600 leading-relaxed">{area.desc}</p>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {areasAtuacao.map((area, idx) => {
+              const cores = [
+                { bg: 'bg-[#7B1FA2]',   titulo: 'text-white',     desc: 'text-purple-200' },
+                { bg: 'bg-[#F2C744]',   titulo: 'text-[#1F0B2C]', desc: 'text-[#1F0B2C]/70' },
+                { bg: 'bg-[#EDD9F9]',   titulo: 'text-gray-900',  desc: 'text-gray-600' },
+                { bg: 'bg-[#1F0B2C]',   titulo: 'text-white',     desc: 'text-purple-300' },
+                { bg: 'bg-white border border-purple-100', titulo: 'text-gray-900', desc: 'text-gray-600' },
+                { bg: 'bg-[#DFC0F7]',   titulo: 'text-[#4A0E72]', desc: 'text-[#4A0E72]/80' },
+              ];
+              const c = cores[idx % cores.length];
+              return (
+                <div
+                  key={area.titulo}
+                  className={`${c.bg} rounded-2xl p-5 hover:scale-[1.02] transition-transform duration-200`}
+                >
+                  <h4 className={`text-base font-bold ${c.titulo} mb-1.5`}>{area.titulo}</h4>
+                  <p className={`text-xs ${c.desc} leading-relaxed`}>{area.desc}</p>
+                </div>
+              );
+            })}
           </div>
         </motion.div>
 

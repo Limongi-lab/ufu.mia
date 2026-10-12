@@ -11,84 +11,98 @@ export default function SecaoSobre() {
   const compromissos = listas.pontos_sobre;
 
   return (
-    <section id="sobre" className="py-16 sm:py-24 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
-          {/* Lado Esquerdo: Imagem com moldura estilizada e animação suave */}
+    <section id="sobre" className="secao-branca py-16 sm:py-24 relative overflow-hidden">
+      {/* Blob decorativo */}
+      <div className="pointer-events-none absolute top-0 right-0 w-96 h-96 bg-[#EDD9F9] rounded-full blur-3xl opacity-70" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+
+          {/* ── Lado Esquerdo: Foto ─────────────────────────────── */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-6 flex justify-center"
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="flex justify-center"
           >
             <div className="relative w-full max-w-lg">
-              
-              {/* Fundo colorido sólido da imagem */}
-              <div className="absolute inset-0 bg-[#7B1FA2] rounded-3xl transform -rotate-2 scale-98 opacity-90" />
+              {/* Bloco de cor deslocado — efeito editorial */}
+              <div className="absolute inset-0 bg-[#7B1FA2] rounded-[2.5rem] -translate-x-4 translate-y-4 opacity-100" />
 
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl">
                 <img
                   src={fotoSobre}
-                  alt="Gatinho recém resgatado pelo UFU MIA"
-                  className="w-full h-80 sm:h-96 lg:h-[460px] object-cover object-[50%_25%]"
+                  alt="Gatinho resgatado pelo UFU MIA"
+                  className="w-full h-[380px] sm:h-[460px] lg:h-[520px] object-cover object-[50%_25%]"
                 />
+                {/* Overlay roxo suave no rodapé */}
+                <div className="absolute bottom-0 inset-x-0 h-1/4 bg-gradient-to-t from-[#1F0B2C]/50 to-transparent" />
               </div>
 
+              {/* Selo flutuante */}
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute -bottom-5 -right-5 bg-[#F2C744] text-[#1F0B2C] font-black text-sm px-5 py-3 rounded-2xl shadow-xl rotate-3"
+              >
+                💜 Projeto UFU
+              </motion.div>
             </div>
           </motion.div>
 
-          {/* Lado Direito: Textos e Accordion */}
+          {/* ── Lado Direito: Texto + Accordion ────────────────── */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="lg:col-span-6 space-y-6"
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="space-y-7"
           >
-            
-            {/* Ícone de patinha em círculo */}
-            <div className="w-14 h-14 rounded-2xl bg-[#7B1FA2] text-white flex items-center justify-center text-2xl shadow-md">
-              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            </div>
+            <div className="selo-secao">{t('sobre.selo')}</div>
 
-            <div className="inline-block text-[#7B1FA2] font-black text-xs sm:text-sm tracking-widest uppercase">{t('sobre.selo')}</div>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.05]">
+              {t('sobre.titulo')}
+            </h2>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight leading-tight">{t('sobre.titulo')}</h2>
-
-            <p className="text-sm sm:text-base text-gray-600 leading-relaxed font-normal">
+            <p className="text-sm sm:text-base text-gray-500 leading-relaxed font-normal max-w-lg">
               <Quebras texto={t('sobre.texto')} />
             </p>
 
-            {/* Lista de Compromissos com (+) */}
-            <div className="pt-2 divide-y divide-purple-200 border-y border-purple-200">
+            {/* Accordion de compromissos */}
+            <div className="divide-y divide-gray-100 border-y border-gray-100 pt-1">
               {compromissos.map((item, index) => {
                 const isOpen = openIndex === index;
                 return (
-                  <div key={item.titulo} className="py-4">
+                  <div key={item.titulo}>
                     <button
                       onClick={() => setOpenIndex(isOpen ? null : index)}
-                      className="w-full text-left flex justify-between items-center gap-4 focus:outline-none group"
+                      className="w-full text-left flex justify-between items-center gap-4 py-4 focus:outline-none group"
                     >
-                      <span className="text-base sm:text-lg font-bold text-gray-900 group-hover:text-[#7B1FA2] transition-colors">
+                      <span className={`text-base font-bold transition-colors ${isOpen ? 'text-[#7B1FA2]' : 'text-gray-800 group-hover:text-[#7B1FA2]'}`}>
                         {item.titulo}
                       </span>
-                      <span className="text-2xl font-black text-[#7B1FA2] shrink-0 transition-transform duration-200">
-                        {isOpen ? '−' : '+'}
+                      <span className={`w-8 h-8 rounded-full flex items-center justify-center font-black text-sm shrink-0 transition-all duration-200 ${
+                        isOpen
+                          ? 'bg-[#7B1FA2] text-white rotate-45'
+                          : 'bg-purple-50 text-[#7B1FA2]'
+                      }`}>
+                        +
                       </span>
                     </button>
-
                     {isOpen && (
-                      <p className="mt-2.5 text-xs sm:text-sm text-gray-600 leading-relaxed font-medium">
+                      <motion.p
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        className="pb-4 text-sm text-gray-500 leading-relaxed font-medium"
+                      >
                         {item.descricao}
-                      </p>
+                      </motion.p>
                     )}
                   </div>
                 );
               })}
             </div>
-
           </motion.div>
 
         </div>

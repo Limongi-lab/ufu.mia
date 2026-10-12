@@ -6,6 +6,10 @@ O site tem duas partes:
 |---|---|---|
 | **backend** (`/backend`) | Django: API + painel da equipe | Render ou Railway |
 | **frontend** (`/frontend`) | React: o site que as pessoas visitam | Vercel ou Netlify |
+| **banco de dados** | onde ficam gatinhos, textos e contas | Neon (PostgreSQL) |
+| **fotos** | fotos dos gatinhos e da equipe | Cloudinary |
+
+> A Vercel hospeda só o **site** (frontend). O backend Django precisa de outro serviço, e os dois conversam pela internet.
 
 > **Regra de ouro:** nenhuma senha, chave ou usuário vai para o GitHub.
 > Tudo que é secreto fica em **variáveis de ambiente** no painel da hospedagem
@@ -21,7 +25,8 @@ O site tem duas partes:
    ```
    Guarde o resultado só no painel da hospedagem.
 2. **Crie uma conta gratuita no [Cloudinary](https://cloudinary.com).** É onde ficam as fotos dos gatinhos (o disco da hospedagem é apagado a cada deploy). No painel, copie o **API Environment variable**, que tem o formato `cloudinary://CHAVE:SEGREDO@NOME`. Ele será o `CLOUDINARY_URL`.
-3. **Crie um banco PostgreSQL** na própria hospedagem. Copie a **Internal/Database URL** (é o `DATABASE_URL`).
+3. **Crie um banco PostgreSQL gratuito no [Neon](https://neon.com).** Crie um projeto e copie a *connection string* (começa com `postgresql://`). Cole ela **inteira** no `DATABASE_URL`.
+   > ⚠️ **Não use o PostgreSQL gratuito da Render.** Segundo a documentação deles, ele expira 30 dias depois de criado (com 14 dias de tolerância), sem backup, e depois os dados são apagados. Para um site que a equipe vai editar, isso seria perder tudo.
 4. **Invente o endereço do painel**, algo que ninguém adivinhe, por exemplo `painel-x7k2q`. Será o `ADMIN_URL`.
 5. No GitHub, ative **Settings → Code security → Secret scanning** e **Push protection**.
 
@@ -56,6 +61,12 @@ Crie um *Web Service* apontando para este repositório com:
 
 O backend **se recusa a iniciar** se faltar `CLOUDINARY_URL` ou se `ADMIN_URL` for `admin/`. Isso é proposital: evita perder fotos e deixar o painel num endereço óbvio.
 
+## 2.1 Limites dos planos grátis (conferidos em outubro/2026; podem mudar)
+
+- **Render (backend grátis):** depois de **15 minutos sem visitas**, o serviço "dorme". A primeira visita depois disso demora **cerca de 30 a 60 segundos** para acordar. Nesse tempo o site mostra os textos padrão e a lista de gatinhos pode aparecer como "não foi possível carregar" (há o botão "Tentar de novo"). O plano pago mais barato (Starter, cerca de US$ 7/mês) elimina isso.
+- **Render:** o disco é apagado a cada deploy ou reinício. Por isso as fotos ficam no Cloudinary e os dados no Neon, nunca no servidor.
+- **Neon (banco grátis):** o plano gratuito é permanente, com 0,5 GB por projeto. O banco "adormece" depois de 5 minutos parado e a primeira consulta depois disso é um pouco mais lenta.
+
 ## 3. Criar a conta de administrador (SEM senha no código)
 
 > As contas que você criou no seu computador (`createsuperuser` local) **não existem** no site publicado: o banco de lá começa vazio. Por isso você cria a conta de administrador de novo, **uma vez**, no servidor.
@@ -70,6 +81,8 @@ python manage.py createsuperuser
 
 Ele pergunta usuário, e-mail e senha na hora. A senha é gravada criptografada no banco.
 
+> **Regras de senha (o painel recusa senhas fracas):** mínimo de **12 caracteres**, sem o nome do projeto (`ufumia...`), sem a palavra "senha" e sem sequências como `123456`. Use uma frase longa, por exemplo `cavalo-azul-tomate-janela-47`. Na Opção B abaixo (variáveis de ambiente) essa checagem **não** acontece, então escolha você mesmo uma senha forte.
+
 ### Opção B: plano grátis, sem terminal (por variáveis de ambiente)
 
 1. No painel da hospedagem, cadastre **temporariamente** estas variáveis (elas ficam só ali, nunca no GitHub):
@@ -78,7 +91,7 @@ Ele pergunta usuário, e-mail e senha na hora. A senha é gravada criptografada 
    |---|---|
    | `DJANGO_SUPERUSER_USERNAME` | o seu e-mail, ex.: `voce@gmail.com` |
    | `DJANGO_SUPERUSER_EMAIL` | o mesmo e-mail |
-   | `DJANGO_SUPERUSER_PASSWORD` | uma senha longa e única |
+   | `DJANGO_SUPERUSER_PASSWORD` | uma senha forte, com 12+ caracteres e única (nunca reaproveite uma senha usada em outro lugar) |
 
 2. No **Build command**, acrescente no final: ` && (python manage.py createsuperuser --noinput || true)`
 3. Faça o deploy. A conta é criada.

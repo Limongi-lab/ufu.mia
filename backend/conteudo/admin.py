@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.admin.models import LogEntry
 from django.utils.html import format_html
 from unfold.admin import ModelAdmin, TabularInline
 
@@ -75,3 +76,22 @@ class AreaContatoAdmin(_ListaAdmin):
     @admin.display(description='Pessoas')
     def pessoas(self, obj):
         return ', '.join(c.nome for c in obj.contatos.all()) or '—'
+
+
+@admin.register(LogEntry)
+class LogEntryAdmin(ModelAdmin):
+    """Histórico: quem mexeu em quê e quando (somente leitura)."""
+
+    list_display = ('action_time', 'user', 'content_type', 'object_repr', 'action_flag')
+    list_filter = ('action_flag', 'content_type')
+    search_fields = ('object_repr', 'user__email', 'user__username')
+    date_hierarchy = 'action_time'
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False

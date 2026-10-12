@@ -71,3 +71,53 @@ class LoginPorEmailTests(TestCase):
     def test_tela_de_login_pede_email(self):
         r = self.client.get('/admin/login/')
         self.assertContains(r, 'E-mail')
+
+
+class PainelSimplesTests(TestCase):
+    def setUp(self):
+        from django.contrib.auth.models import Group
+        from django.core.management import call_command
+        from io import StringIO
+        call_command('carregar_conteudo_inicial', stdout=StringIO())
+        self.membro = User.objects.create_user('membro', email='m@x.com', password=SENHA_TESTE, is_staff=True)
+        self.membro.groups.add(Group.objects.get(name='Equipe'))
+        self.chefe = User.objects.create_superuser('chefe', email='c@x.com', password=SENHA_TESTE)
+
+    def test_inicio_mostra_atalhos_em_portugues(self):
+        self.client.force_login(self.membro)
+        r = self.client.get('/admin/')
+        self.assertContains(r, 'Gatinhos para adoção')
+        self.assertContains(r, 'Textos do site')
+        self.assertContains(r, 'Salvar')
+
+    def test_equipe_nao_ve_menu_de_administracao(self):
+        self.client.force_login(self.membro)
+        r = self.client.get('/admin/')
+        self.assertNotContains(r, 'Contas da equipe')
+        self.assertNotContains(r, 'Grupos de permissão')
+
+    def test_superusuario_ve_administracao(self):
+        self.client.force_login(self.chefe)
+        r = self.client.get('/admin/')
+        self.assertContains(r, 'Contas da equipe')
+        self.assertContains(r, 'Quem mudou o quê')
+
+    def test_todas_as_rotas_do_menu_existem(self):
+        from django.conf import settings
+        from django.urls import reverse
+        for secao in settings.UNFOLD['SIDEBAR']['navigation']:
+            for item in secao['items']:
+                self.assertTrue(str(item['link']).startswith('/'), item['title'])
+
+
+class SenhaFracaTests(TestCase):
+    def test_recusa_senhas_fracas_e_previsiveis(self):
+        from django.contrib.auth.password_validation import validate_password
+        from django.core.exceptions import ValidationError
+        for ruim in ('ufumia-teste-aaa', 'Ufumia2026!!!!', 'curta1!', 'senha-super-forte-123', '12345678901234'):
+            with self.assertRaises(ValidationError, msg=ruim):
+                validate_password(ruim)
+
+    def test_aceita_frase_longa(self):
+        from django.contrib.auth.password_validation import validate_password
+        validate_password('cavalo-azul-tomate-janela-47')

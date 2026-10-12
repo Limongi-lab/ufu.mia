@@ -11,7 +11,7 @@ export const TEXTOS_PADRAO: Record<string, string> = {
   "hero.foto_legenda": "Gatinho recém resgatado pelo projeto",
   "sobre.selo": "SOBRE O PROJETO",
   "sobre.titulo": "O que nos move a cuidar dos gatinhos da UFU",
-  "sobre.texto": "O **UFU MIA** é um projeto de extensão da **Universidade Federal de Uberlândia (UFU)** que integra ensino, pesquisa e extensão para cuidar dos gatos abandonados no **Campus Santa Mônica**: oferecemos saúde, alimentação, castração e adoção responsável, e ainda contribuímos para a formação dos estudantes.",
+  "sobre.texto": "O UFU MIA é um projeto de extensão da Universidade Federal de Uberlândia (UFU) que integra ensino, pesquisa e extensão para cuidar dos gatos abandonados no Campus Santa Mônica: oferecemos saúde, alimentação, castração e adoção responsável, e ainda contribuímos para a formação dos estudantes.",
   "pagina_sobre.titulo": "Sobre o UFU MIA",
   "pagina_sobre.texto": "Projeto de extensão da UFU que integra ensino, pesquisa e extensão para cuidar dos gatos do Campus Santa Mônica.",
   "pagina_faq.titulo": "Perguntas Frequentes",

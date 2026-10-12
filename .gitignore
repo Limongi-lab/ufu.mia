@@ -233,3 +233,12 @@ Thumbs.db
 backend/staticfiles/
 backend/media/
 frontend/.env
+
+# Ambientes virtuais Python (raiz e backend)
+venv/
+backend/venv/
+.venv/
+
+# Arquivos internos / temporários
+PROGRESSO.md
+*.lnk
