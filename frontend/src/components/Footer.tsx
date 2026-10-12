@@ -127,9 +127,9 @@ export default function Footer() {
             {URL_ADMIN && (
               <a
                 href={URL_ADMIN}
-                aria-label="Área da equipe"
-                title="Área da equipe"
-                className="inline-flex p-1 opacity-25 hover:opacity-100 focus-visible:opacity-100 transition-opacity"
+                aria-label="Painel da equipe"
+                title="Painel da equipe"
+                className="inline-flex p-1 opacity-30 hover:opacity-90 transition-opacity"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5" aria-hidden="true">
                   <rect x="4" y="11" width="16" height="10" rx="2" />
