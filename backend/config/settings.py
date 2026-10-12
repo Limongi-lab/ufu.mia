@@ -6,8 +6,13 @@ Em desenvolvimento, crie um arquivo backend/.env (nunca commite esse arquivo).
 Veja backend/.env.example para referência.
 """
 
-import environ
+import sys
+from datetime import timedelta
 from pathlib import Path
+
+import environ
+from django.core.exceptions import ImproperlyConfigured
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +25,17 @@ env = environ.Env(
     CSRF_TRUSTED_ORIGINS=(list, []),
     ADMIN_URL=(str, 'admin/'),
     CLOUDINARY_URL=(str, ''),
+    PROXY_COUNT=(int, 1),
 )
+
+def _erro_config(mensagem):
+    """Mostra o motivo de forma clara (o Django às vezes esconde esta exceção) e para."""
+    sys.stderr.write(f'\n*** ERRO DE CONFIGURAÇÃO: {mensagem}\n\n')
+    raise ImproperlyConfigured(mensagem)
+
+
+# True quando rodando `python manage.py test`
+TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 
 # Lê o arquivo .env se existir (não falha se não existir)
 environ.Env.read_env(BASE_DIR / '.env', overwrite=False)
@@ -38,8 +53,8 @@ ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 # --- Aplicações instaladas ------------------------------------------------
 INSTALLED_APPS = [
-    # Admin customizado (deve vir antes de django.contrib.admin)
-    # 'unfold' será adicionado no Objetivo 2
+    # Painel visual do admin (deve vir antes de django.contrib.admin)
+    'unfold',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,6 +70,7 @@ INSTALLED_APPS = [
 
     # Local
     'animais',
+    'conteudo',
 ]
 
 
@@ -78,7 +94,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -104,24 +120,35 @@ DATABASES = {
 # --- Autenticação e senhas ------------------------------------------------
 AUTHENTICATION_BACKENDS = [
     'axes.backends.AxesStandaloneBackend',
-    'django.contrib.auth.backends.ModelBackend',
+    'config.auth.EmailOuUsuarioBackend',
 ]
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {'min_length': 12},
+    },
+    {'NAME': 'config.validators.SenhaDoProjetoValidator'},
     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 
 # --- django-axes (proteção anti força bruta) -------------------------------
-from datetime import timedelta  # noqa: E402
-
+# Bloqueia a COMBINAÇÃO usuário + IP. Assim, quem erra a senha de longe não
+# consegue trancar a conta da equipe para todo mundo.
 AXES_FAILURE_LIMIT = 5
 AXES_COOLOFF_TIME = timedelta(minutes=30)
-AXES_LOCKOUT_PARAMETERS = ['username', 'ip_address']
+AXES_LOCKOUT_PARAMETERS = [['username', 'ip_address']]
 AXES_RESET_ON_SUCCESS = True
+
+# Atrás do proxy da hospedagem (Render, Railway...), o IP real do visitante vem
+# no cabeçalho X-Forwarded-For. PROXY_COUNT = quantos proxies ficam na frente
+# do Django (1 na maioria das hospedagens). Em desenvolvimento não há proxy.
+if not DEBUG:
+    AXES_IPWARE_PROXY_COUNT = env('PROXY_COUNT')
+    AXES_IPWARE_META_PRECEDENCE_ORDER = ['HTTP_X_FORWARDED_FOR', 'REMOTE_ADDR']
 
 
 # --- Internacionalização --------------------------------------------------
@@ -136,7 +163,13 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STORAGES = {
     'staticfiles': {
-        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+        # Em produção: arquivos comprimidos e com hash (precisa de `collectstatic`
+        # no build). Em desenvolvimento e testes: armazenamento simples.
+        'BACKEND': (
+            'django.contrib.staticfiles.storage.StaticFilesStorage'
+            if (DEBUG or TESTING)
+            else 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+        ),
     },
 }
 
@@ -157,6 +190,13 @@ if _cloudinary_url:
         'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage',
     }
 else:
+    # Sem Cloudinary as fotos ficam no disco do servidor, que é APAGADO a cada
+    # novo deploy na maioria das hospedagens. Por isso é obrigatório em produção.
+    if not DEBUG and not TESTING:
+        _erro_config(
+            'Defina CLOUDINARY_URL: sem ele as fotos dos gatinhos seriam perdidas '
+            'a cada deploy.'
+        )
     STORAGES['default'] = {
         'BACKEND': 'django.core.files.storage.FileSystemStorage',
     }
@@ -167,15 +207,37 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # --- CORS ------------------------------------------------------------------
-CORS_ALLOWED_ORIGINS = env('CORS_ALLOWED_ORIGINS')
+# Em desenvolvimento, aceita qualquer origem local (Vite muda de porta a cada reinício).
+# Em produção, apenas as origens definidas em CORS_ALLOWED_ORIGINS são aceitas.
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
+else:
+    CORS_ALLOWED_ORIGINS = env('CORS_ALLOWED_ORIGINS')
+
 CSRF_TRUSTED_ORIGINS = env('CSRF_TRUSTED_ORIGINS')
 
 
 # --- Django REST Framework -------------------------------------------------
+# A API pública é SOMENTE LEITURA. Nenhuma escrita acontece por ela: tudo que
+# a equipe edita passa pelo painel admin (com login).
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
+    # Só sessão (sem Basic Auth, que seria um caminho alternativo de login)
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_THROTTLE_CLASSES': ['rest_framework.throttling.AnonRateThrottle'],
+    'DEFAULT_THROTTLE_RATES': {'anon': '300/min'},
+    'DEFAULT_RENDERER_CLASSES': (
+        ['rest_framework.renderers.JSONRenderer']
+        if not DEBUG
+        else [
+            'rest_framework.renderers.JSONRenderer',
+            'rest_framework.renderers.BrowsableAPIRenderer',
+        ]
+    ),
 }
 
 
@@ -196,7 +258,79 @@ if not DEBUG:
     CSRF_COOKIE_SAMESITE = 'Lax'
 
     X_FRAME_OPTIONS = 'DENY'
+    SECURE_REFERRER_POLICY = 'same-origin'
+
+if TESTING:
+    # o cliente de testes não usa HTTPS
+    SECURE_SSL_REDIRECT = False
 
 
-# --- URL customizada do admin ----------------------------------------------
-ADMIN_URL = env('ADMIN_URL')
+# --- Painel admin ----------------------------------------------------------
+# Em produção, use um endereço difícil de adivinhar (ex.: painel-x7k2q/).
+ADMIN_URL = env('ADMIN_URL').strip('/') + '/'
+if not DEBUG and not TESTING and ADMIN_URL == 'admin/':
+    _erro_config('Em produção, defina ADMIN_URL com um endereço não óbvio (não use "admin/").')
+
+# Sessão do painel: expira em 12 horas e ao fechar o navegador
+SESSION_COOKIE_AGE = 60 * 60 * 12
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+def _pode(*permissoes):
+    """Mostra o item do menu só para quem tem pelo menos uma das permissões."""
+    return lambda request: any(request.user.has_perm(p) for p in permissoes)
+
+
+def _item(titulo, icone, rota, permissao):
+    return {
+        'title': titulo,
+        'icon': icone,
+        'link': reverse_lazy(rota),
+        'permission': _pode(permissao),
+    }
+
+
+UNFOLD = {
+    'SITE_TITLE': 'UFU MIA',
+    'SITE_HEADER': 'UFU MIA · Painel da equipe',
+    'SITE_SYMBOL': 'pets',
+    'SITE_URL': 'https://ufumia.vercel.app',
+    'SHOW_HISTORY': True,
+    'SIDEBAR': {
+        'show_search': False,
+        'show_all_applications': False,
+        'navigation': [
+            {
+                'title': 'O que você quer mudar?',
+                'separator': False,
+                'items': [
+                    _item('Gatinhos para adoção', 'pets', 'admin:animais_animal_changelist', 'animais.view_animal'),
+                    _item('Histórias de adoção', 'favorite', 'admin:animais_historiaadocao_changelist', 'animais.view_historiaadocao'),
+                    _item('Textos do site', 'edit_note', 'admin:conteudo_textosite_changelist', 'conteudo.view_textosite'),
+                    _item('Perguntas frequentes', 'help', 'admin:conteudo_perguntafaq_changelist', 'conteudo.view_perguntafaq'),
+                    _item('Frentes de atuação', 'groups', 'admin:conteudo_frenteatuacao_changelist', 'conteudo.view_frenteatuacao'),
+                    _item('Formas de ajudar', 'volunteer_activism', 'admin:conteudo_formadeajudar_changelist', 'conteudo.view_formadeajudar'),
+                    _item('Pontos da seção Sobre', 'info', 'admin:conteudo_pontosobre_changelist', 'conteudo.view_pontosobre'),
+                    _item('Números de destaque', 'trending_up', 'admin:conteudo_estatistica_changelist', 'conteudo.view_estatistica'),
+                    _item('Contatos do Fale Conosco', 'call', 'admin:conteudo_areacontato_changelist', 'conteudo.view_areacontato'),
+                ],
+            },
+            {
+                'title': 'Administração',
+                'separator': True,
+                'items': [
+                    _item('Contas da equipe', 'person', 'admin:auth_user_changelist', 'auth.view_user'),
+                    _item('Grupos de permissão', 'lock', 'admin:auth_group_changelist', 'auth.view_group'),
+                    _item('Quem mudou o quê', 'history', 'admin:admin_logentry_changelist', 'admin.view_logentry'),
+                    _item('Tentativas de login', 'shield', 'admin:axes_accessattempt_changelist', 'axes.view_accessattempt'),
+                ],
+            },
+        ],
+    },
+    'COLORS': {
+        'primary': {
+            '50': '#f8f0fc', '100': '#f0dcf8', '200': '#e2bcf0', '300': '#cd92e3',
+            '400': '#b565d3', '500': '#9a3dbd', '600': '#7b1fa2', '700': '#681a88',
+            '800': '#561670', '900': '#46135a', '950': '#2c0a3a',
+        },
+    },
+}

@@ -1,0 +1,21 @@
+name: Varredura de segredos (gitleaks)
+
+# Roda a cada push e pull request. Se alguém commitar uma chave, senha ou
+# token por engano, o GitHub marca a verificação como falha.
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # histórico completo
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

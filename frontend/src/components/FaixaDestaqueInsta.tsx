@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useConteudo } from '../context/ConteudoContext';
 
 export default function FaixaDestaqueInsta() {
+  const { t } = useConteudo();
   return (
     <section className="bg-gradient-to-r from-[#5B107D] via-[#7B1FA2] to-[#8C1BA8] text-white py-10 sm:py-12 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
@@ -17,12 +19,8 @@ export default function FaixaDestaqueInsta() {
             <div className="inline-block bg-[#F2C744] text-[#1F1A24] font-black text-[11px] lg:text-[12px] uppercase tracking-wider px-3 py-0.5 rounded-full mb-1">
               @ufu.mia
             </div>
-            <h3 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-white">
-              Nos siga no Instagram!
-            </h3>
-            <p className="text-xs sm:text-sm text-purple-100 leading-relaxed">
-              E fique por dentro de todas as novidades: resgates emocionantes, histórias de adoção, dicas de cuidados com felinos, eventos, rifas e muito mais!
-            </p>
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-white">{t('insta.titulo')}</h3>
+            <p className="text-xs sm:text-sm text-purple-100 leading-relaxed">{t('insta.texto')}</p>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { MotionConfig, motion } from 'framer-motion';
 import BarraProgresso from './components/BarraProgresso';
+import ConteudoProvider from './context/ConteudoProvider';
 import ScrollToTop from './components/ScrollToTop';
 import FundoGatinhos from './components/FundoGatinhos';
 import Home from './pages/Home';
@@ -39,12 +40,14 @@ function RotasAnimadas() {
 function App() {
   return (
     <MotionConfig reducedMotion="never">
+      <ConteudoProvider>
       <BrowserRouter>
         <FundoGatinhos />
         <BarraProgresso />
         <ScrollToTop />
         <RotasAnimadas />
       </BrowserRouter>
+      </ConteudoProvider>
     </MotionConfig>
   );
 }
