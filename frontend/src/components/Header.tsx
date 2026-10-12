@@ -89,6 +89,9 @@ export default function Header() {
             <Link
               key={item.to}
               to={item.to}
+              onClick={() => {
+                if (location.pathname === item.to) window.location.reload();
+              }}
               className={`relative px-3 py-2 rounded-full flex items-center gap-1.5 transition-all duration-200 ${
                 isActive(item.to)
                   ? 'text-[#7B1FA2] bg-purple-50 font-bold'
@@ -162,7 +165,10 @@ export default function Header() {
                 <Link
                   key={item.to}
                   to={item.to}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    if (location.pathname === item.to) window.location.reload();
+                  }}
                   className={`py-2.5 px-3 rounded-xl text-sm font-semibold flex items-center gap-1.5 transition-colors ${
                     isActive(item.to)
                       ? 'bg-purple-50 text-[#7B1FA2] font-bold'

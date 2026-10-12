@@ -207,7 +207,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # --- CORS ------------------------------------------------------------------
-CORS_ALLOWED_ORIGINS = env('CORS_ALLOWED_ORIGINS')
+# Em desenvolvimento, aceita qualquer origem local (Vite muda de porta a cada reinício).
+# Em produção, apenas as origens definidas em CORS_ALLOWED_ORIGINS são aceitas.
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
+else:
+    CORS_ALLOWED_ORIGINS = env('CORS_ALLOWED_ORIGINS')
+
 CSRF_TRUSTED_ORIGINS = env('CSRF_TRUSTED_ORIGINS')
 
 
