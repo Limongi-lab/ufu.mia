@@ -87,7 +87,7 @@ export default function SecaoAnimais() {
   return (
     <section id="animais" className="py-16 sm:py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Cabeçalho */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
@@ -117,11 +117,10 @@ export default function SecaoAnimais() {
               <button
                 key={tab.key}
                 onClick={() => setFilterStatus(tab.key)}
-                className={`px-4 py-2 rounded-full transition-all text-xs sm:text-sm ${
-                  filterStatus === tab.key
+                className={`px-4 py-2 rounded-full transition-all text-xs sm:text-sm ${filterStatus === tab.key
                     ? 'bg-[#7B1FA2] text-white font-bold shadow-md'
                     : 'bg-white/60 text-[#4A0E72] hover:bg-white/90'
-                }`}
+                  }`}
               >
                 {tab.label}
               </button>
@@ -131,16 +130,21 @@ export default function SecaoAnimais() {
 
         {/* Loading Skeleton */}
         {loading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((n) => (
-              <div key={n} className="rounded-3xl p-4 bg-[#FAF7FD] border border-purple-100 animate-pulse">
-                <div className="aspect-square bg-purple-200/50 rounded-2xl mb-4" />
-                <div className="h-6 bg-purple-200/50 rounded w-1/2 mb-2" />
-                <div className="h-4 bg-purple-200/40 rounded w-1/3 mb-4" />
-                <div className="h-10 bg-purple-200/40 rounded-xl" />
-              </div>
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3].map((n) => (
+                <div key={n} className="rounded-3xl p-4 bg-[#FAF7FD] border border-purple-100 animate-pulse">
+                  <div className="aspect-square bg-purple-200/50 rounded-2xl mb-4" />
+                  <div className="h-6 bg-purple-200/50 rounded w-1/2 mb-2" />
+                  <div className="h-4 bg-purple-200/40 rounded w-1/3 mb-4" />
+                  <div className="h-10 bg-purple-200/40 rounded-xl" />
+                </div>
+              ))}
+            </div>
+            <p className="text-center text-xs text-gray-600 mt-6">
+              Chamando os gatinhos... na primeira visita pode levar até 1 minuto 🐱
+            </p>
+          </>
         )}
 
         {/* Erro */}
@@ -242,7 +246,7 @@ export default function SecaoAnimais() {
 
         {/* Empty state */}
         {!loading && !error && filteredAnimais.length === 0 && (
-            <div className="bg-white/70 rounded-3xl p-12 text-center max-w-md mx-auto border border-purple-100">
+          <div className="bg-white/70 rounded-3xl p-12 text-center max-w-md mx-auto border border-purple-100">
             <h3 className="text-lg font-bold text-gray-900 mb-1">Nenhum gatinho encontrado nesta categoria</h3>
             <p className="text-xs text-gray-500 mb-5">
               Tente selecionar outro filtro ou confira todos os animais cadastrados.
@@ -353,7 +357,7 @@ export default function SecaoAnimais() {
                 </button>
 
                 <div className="w-16 h-16 rounded-full bg-[#F5F0FC] border border-purple-200 flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-7 h-7 text-[#7B1FA2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                  <svg className="w-7 h-7 text-[#7B1FA2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>
                 </div>
 
                 <h3 className="text-2xl font-black text-gray-900 mb-2">
@@ -375,7 +379,13 @@ export default function SecaoAnimais() {
                   </a>
 
                   <a
-                    href={`mailto:ufumiaufu@gmail.com?subject=${encodeURIComponent(`Interesse em Adoção: ${adoptionModalAnimal.nome}`)}&body=${encodeURIComponent(`Olá equipe UFU MIA, gostaria de me candidatar para adotar o(a) ${adoptionModalAnimal.nome}!`)}`}
+                    href={
+                      /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+                        ? `mailto:ufumiaufu@gmail.com?subject=${encodeURIComponent(`Interesse em Adoção: ${adoptionModalAnimal.nome}`)}&body=${encodeURIComponent(`Olá equipe UFU MIA, gostaria de me candidatar para adotar o(a) ${adoptionModalAnimal.nome}!`)}`
+                        : `https://mail.google.com/mail/?view=cm&fs=1&to=ufumiaufu@gmail.com&su=${encodeURIComponent(`Interesse em Adoção: ${adoptionModalAnimal.nome}`)}&body=${encodeURIComponent(`Olá equipe UFU MIA, gostaria de me candidatar para adotar o(a) ${adoptionModalAnimal.nome}!`)}`
+                    }
+                    target="_blank"
+                    rel="noreferrer"
                     className="w-full bg-[#F5F0FC] hover:bg-purple-100 text-[#7B1FA2] font-bold py-3 px-4 rounded-xl text-xs sm:text-sm transition-colors flex items-center justify-center gap-2 border border-purple-200"
                   >
                     <span>Enviar E-mail (ufumiaufu@gmail.com)</span>

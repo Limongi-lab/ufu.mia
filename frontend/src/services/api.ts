@@ -13,19 +13,27 @@ export interface Animal {
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
 
 export async function getAnimais(): Promise<Animal[]> {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 3500);
+  const tentativas = 3;
+  let ultimoErro: unknown;
 
-  try {
-    const response = await fetch(`${API_URL}/animais/`, {
-      signal: controller.signal,
-    });
-    if (!response.ok) {
-      throw new Error(`Erro ${response.status} ao buscar os animais`);
+  for (let i = 0; i < tentativas; i++) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 40000);
+    try {
+      const response = await fetch(`${API_URL}/animais/`, {
+        signal: controller.signal,
+      });
+      if (!response.ok) {
+        throw new Error(`Erro ${response.status} ao buscar os animais`);
+      }
+      const data = await response.json();
+      return Array.isArray(data) ? data : [];
+    } catch (e) {
+      ultimoErro = e;
+      await new Promise((r) => setTimeout(r, 2000));
+    } finally {
+      clearTimeout(timeoutId);
     }
-    const data = await response.json();
-    return Array.isArray(data) ? data : [];
-  } finally {
-    clearTimeout(timeoutId);
   }
+  throw ultimoErro;
 }

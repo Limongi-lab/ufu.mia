@@ -35,7 +35,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
 /** Busca todo o conteúdo editável. Falha em silêncio: o site usa os textos padrão. */
 export async function getConteudo(): Promise<ConteudoSite | null> {
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 4000);
+  const timeoutId = setTimeout(() => controller.abort(), 45000);
   try {
     const response = await fetch(`${API_URL}/conteudo/`, { signal: controller.signal });
     if (!response.ok) return null;
