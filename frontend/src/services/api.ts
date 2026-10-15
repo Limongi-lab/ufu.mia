@@ -4,6 +4,7 @@ export interface Animal {
   especie: string;
   idade: string;
   foto: string;
+  fotos?: { id: number; imagem: string }[];
   status: string;
   status_display: string;
   descricao: string;

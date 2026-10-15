@@ -9,6 +9,7 @@ export default function SecaoAnimais() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedAnimal, setSelectedAnimal] = useState<Animal | null>(null);
+  const [fotoIdx, setFotoIdx] = useState(0);
   const [adoptionModalAnimal, setAdoptionModalAnimal] = useState<Animal | null>(null);
   const [filterStatus, setFilterStatus] = useState<string>('todos');
 
@@ -29,7 +30,9 @@ export default function SecaoAnimais() {
     buscar();
   }, [buscar]);
 
-  // Esc fecha os modais e a página não rola por trás deles
+  useEffect(() => {
+    setFotoIdx(0);
+  }, [selectedAnimal]);
   const algumModalAberto = selectedAnimal !== null || adoptionModalAnimal !== null;
   useEffect(() => {
     if (!algumModalAberto) return;
@@ -118,8 +121,8 @@ export default function SecaoAnimais() {
                 key={tab.key}
                 onClick={() => setFilterStatus(tab.key)}
                 className={`px-4 py-2 rounded-full transition-all text-xs sm:text-sm ${filterStatus === tab.key
-                    ? 'bg-[#7B1FA2] text-white font-bold shadow-md'
-                    : 'bg-white/60 text-[#4A0E72] hover:bg-white/90'
+                  ? 'bg-[#7B1FA2] text-white font-bold shadow-md'
+                  : 'bg-white/60 text-[#4A0E72] hover:bg-white/90'
                   }`}
               >
                 {tab.label}
@@ -285,13 +288,65 @@ export default function SecaoAnimais() {
                   ✕
                 </button>
 
-                <div className="h-64 bg-purple-50 relative">
-                  <img
-                    src={selectedAnimal.foto}
-                    alt={selectedAnimal.nome}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                {(() => {
+                  const galeria = [
+                    selectedAnimal.foto,
+                    ...(selectedAnimal.fotos ?? []).map((f) => f.imagem),
+                  ];
+                  const atual = galeria[Math.min(fotoIdx, galeria.length - 1)];
+                  return (
+                    <div className="bg-purple-50">
+                      <div className="h-64 relative">
+                        <img
+                          src={atual}
+                          alt={`${selectedAnimal.nome} — foto ${fotoIdx + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                        {galeria.length > 1 && (
+                          <>
+                            <button
+                              type="button"
+                              aria-label="Foto anterior"
+                              onClick={() =>
+                                setFotoIdx((i) => (i - 1 + galeria.length) % galeria.length)
+                              }
+                              className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-[#7B1FA2] text-xl font-black shadow"
+                            >
+                              ‹
+                            </button>
+                            <button
+                              type="button"
+                              aria-label="Próxima foto"
+                              onClick={() => setFotoIdx((i) => (i + 1) % galeria.length)}
+                              className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-[#7B1FA2] text-xl font-black shadow"
+                            >
+                              ›
+                            </button>
+                            <span className="absolute bottom-2 right-3 text-[11px] font-bold bg-black/50 text-white rounded-full px-2 py-0.5">
+                              {fotoIdx + 1}/{galeria.length}
+                            </span>
+                          </>
+                        )}
+                      </div>
+                      {galeria.length > 1 && (
+                        <div className="flex gap-2 p-3 overflow-x-auto">
+                          {galeria.map((src, i) => (
+                            <button
+                              key={i}
+                              type="button"
+                              aria-label={`Ver foto ${i + 1}`}
+                              onClick={() => setFotoIdx(i)}
+                              className={`shrink-0 w-14 h-14 rounded-lg overflow-hidden border-2 ${i === fotoIdx ? 'border-[#7B1FA2]' : 'border-transparent opacity-70'
+                                }`}
+                            >
+                              <img src={src} alt="" className="w-full h-full object-cover" />
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
 
                 <div className="p-6 sm:p-8 space-y-4">
                   <div className="flex justify-between items-center">
