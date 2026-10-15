@@ -3,6 +3,7 @@ import SecaoAnimais from '../components/SecaoAnimais';
 import SecaoComoAjudar from '../components/SecaoComoAjudar';
 import Footer from '../components/Footer';
 import { useConteudo } from '../context/ConteudoContext';
+import SecaoMemorial from '../components/SecaoMemorial';
 
 export default function Animais() {
   const { t } = useConteudo();
@@ -19,6 +20,7 @@ export default function Animais() {
         </div>
 
         <SecaoAnimais />
+        <SecaoMemorial />
         <SecaoComoAjudar />
       </main>
       <Footer />

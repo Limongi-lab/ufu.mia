@@ -189,7 +189,7 @@ export default function SecaoAnimais() {
                       <img
                         src={animal.foto}
                         alt={animal.nome}
-                        className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-contain rounded-2xl group-hover:scale-105 transition-transform duration-500"
                         onError={(e) => {
                           e.currentTarget.onerror = null;
                           e.currentTarget.src = logoReserva;
@@ -296,11 +296,17 @@ export default function SecaoAnimais() {
                   const atual = galeria[Math.min(fotoIdx, galeria.length - 1)];
                   return (
                     <div className="bg-purple-50">
-                      <div className="h-64 relative">
+                      <div className="h-72 relative overflow-hidden">
+                        <img
+                          src={atual}
+                          alt=""
+                          aria-hidden="true"
+                          className="absolute inset-0 w-full h-full object-cover blur-2xl scale-125 opacity-60"
+                        />
                         <img
                           src={atual}
                           alt={`${selectedAnimal.nome} — foto ${fotoIdx + 1}`}
-                          className="w-full h-full object-cover"
+                          className="relative w-full h-full object-contain"
                         />
                         {galeria.length > 1 && (
                           <>

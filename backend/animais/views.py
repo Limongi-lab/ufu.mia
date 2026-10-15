@@ -1,8 +1,11 @@
 from rest_framework import viewsets
 
-from .models import Animal, HistoriaAdocao
-from .serializers import AnimalSerializer, HistoriaAdocaoSerializer
-
+from .models import Animal, GatoMemorial, HistoriaAdocao
+from .serializers import (
+    AnimalSerializer,
+    GatoMemorialSerializer,
+    HistoriaAdocaoSerializer,
+)
 
 class AnimalViewSet(viewsets.ReadOnlyModelViewSet):
     """
@@ -21,3 +24,12 @@ class HistoriaAdocaoViewSet(viewsets.ReadOnlyModelViewSet):
 
     queryset = HistoriaAdocao.objects.select_related("animal").all()
     serializer_class = HistoriaAdocaoSerializer
+
+class GatoMemorialViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Endpoint somente leitura do memorial dos gatinhos que se foram.
+    Exibe apenas os marcados como ativos.
+    """
+
+    queryset = GatoMemorial.objects.filter(ativo=True)
+    serializer_class = GatoMemorialSerializer

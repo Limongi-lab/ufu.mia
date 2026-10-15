@@ -7,6 +7,11 @@ from django.db import models
 
 def validar_imagem(arquivo):
     """Valida que o upload é uma imagem com tamanho máximo de 5 MB."""
+    # Arquivo que já está salvo (ex.: no Cloudinary) chega aqui de novo quando se
+    # edita outro campo do cadastro, e o nome dele vem sem extensão. Ele já foi
+    # validado no upload, então só validamos arquivos novos.
+    if getattr(arquivo, '_committed', False):
+        return
     max_tamanho = 5 * 1024 * 1024  # 5 MB
     if arquivo.size > max_tamanho:
         raise ValidationError(
@@ -29,6 +34,11 @@ def upload_animais(instance, filename):
     nome_seguro = f'{uuid.uuid4().hex}{ext}'
     return f'animais/{nome_seguro}'
 
+def upload_memorial(instance, filename):
+    """Gera um nome seguro e único para o arquivo de upload."""
+    ext = os.path.splitext(filename)[1].lower()
+    nome_seguro = f'{uuid.uuid4().hex}{ext}'
+    return f'memorial/{nome_seguro}'
 
 def upload_historias(instance, filename):
     """Gera um nome seguro e único para o arquivo de upload."""
@@ -141,3 +151,48 @@ class HistoriaAdocao(models.Model):
 
     def __str__(self):
         return f"História de {self.animal.nome} — {self.data_adocao}"
+
+class GatoMemorial(models.Model):
+    nome = models.CharField(
+        max_length=100,
+        help_text='Nome do gatinho (ex: "Pipoca").',
+    )
+    foto = models.ImageField(
+        upload_to=upload_memorial,
+        validators=[validar_imagem],
+        help_text='Foto do gatinho (máx. 5 MB, formatos: JPG, PNG, GIF, WebP).',
+    )
+    periodo = models.CharField(
+        max_length=50,
+        blank=True,
+        help_text='Período de vida ou ano (ex: "2019 – 2025"). Opcional.',
+    )
+    descricao = models.TextField(
+        help_text='Texto de homenagem: como ele era, como foi a passagem pelo projeto.',
+    )
+    texto_ex_donos = models.TextField(
+        blank=True,
+        help_text='Palavras de quem cuidou ou adotou o gatinho. Opcional.',
+    )
+    autor_texto = models.CharField(
+        max_length=100,
+        blank=True,
+        help_text='Quem escreveu o texto acima (ex: "Maria, ex-tutora"). Opcional.',
+    )
+    ativo = models.BooleanField(
+        default=True,
+        help_text='Desmarque para esconder do site sem apagar.',
+    )
+    ordem = models.PositiveIntegerField(
+        default=0,
+        help_text='Ordem de exibição no site. Menor número aparece primeiro.',
+    )
+    criado_em = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Gatinho em memória"
+        verbose_name_plural = "Memorial"
+        ordering = ["ordem", "-criado_em"]
+
+    def __str__(self):
+        return self.nome

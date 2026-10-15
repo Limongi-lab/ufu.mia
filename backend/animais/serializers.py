@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Animal, FotoAnimal, HistoriaAdocao
+from .models import Animal, FotoAnimal, GatoMemorial, HistoriaAdocao
 
 
 class FotoAnimalSerializer(serializers.ModelSerializer):
@@ -43,4 +43,17 @@ class HistoriaAdocaoSerializer(serializers.ModelSerializer):
             "foto_atual",
             "texto",
             "data_adocao",
+        ]
+
+class GatoMemorialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GatoMemorial
+        fields = [
+            "id",
+            "nome",
+            "foto",
+            "periodo",
+            "descricao",
+            "texto_ex_donos",
+            "autor_texto",
         ]

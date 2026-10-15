@@ -318,6 +318,7 @@ UNFOLD = {
                 'items': [
                     _item('Gatinhos para adoção', 'pets', 'admin:animais_animal_changelist', 'animais.view_animal'),
                     _item('Histórias de adoção', 'favorite', 'admin:animais_historiaadocao_changelist', 'animais.view_historiaadocao'),
+                    _item('Memorial', 'local_florist', 'admin:animais_gatomemorial_changelist', 'animais.view_gatomemorial'),
                     _item('Textos do site', 'edit_note', 'admin:conteudo_textosite_changelist', 'conteudo.view_textosite'),
                     _item('Perguntas frequentes', 'help', 'admin:conteudo_perguntafaq_changelist', 'conteudo.view_perguntafaq'),
                     _item('Frentes de atuação', 'groups', 'admin:conteudo_frenteatuacao_changelist', 'conteudo.view_frenteatuacao'),
