@@ -1,9 +1,16 @@
 from rest_framework import serializers
 
-from .models import Animal, HistoriaAdocao
+from .models import Animal, FotoAnimal, HistoriaAdocao
+
+
+class FotoAnimalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FotoAnimal
+        fields = ["id", "imagem"]
 
 
 class AnimalSerializer(serializers.ModelSerializer):
+    fotos = FotoAnimalSerializer(many=True, read_only=True)
     status_display = serializers.CharField(
         source="get_status_display", read_only=True
     )
@@ -16,6 +23,7 @@ class AnimalSerializer(serializers.ModelSerializer):
             "especie",
             "idade",
             "foto",
+            "fotos",
             "status",
             "status_display",
             "descricao",

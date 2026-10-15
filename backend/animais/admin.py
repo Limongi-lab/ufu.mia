@@ -1,12 +1,19 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from unfold.admin import ModelAdmin
+from unfold.admin import ModelAdmin, TabularInline
 
-from .models import Animal, HistoriaAdocao
+from .models import Animal, FotoAnimal, HistoriaAdocao
+
+class FotoAnimalInline(TabularInline):
+    model = FotoAnimal
+    extra = 2
+    max_num = 8
+    fields = ("imagem", "ordem")
 
 
 @admin.register(Animal)
 class AnimalAdmin(ModelAdmin):
+    inlines = [FotoAnimalInline]
     list_display = (
         "nome",
         "especie",

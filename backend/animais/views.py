@@ -10,7 +10,7 @@ class AnimalViewSet(viewsets.ReadOnlyModelViewSet):
     Exibe apenas animais marcados como ativos.
     """
 
-    queryset = Animal.objects.filter(ativo=True)
+    queryset = Animal.objects.filter(ativo=True).prefetch_related("fotos")
     serializer_class = AnimalSerializer
 
 

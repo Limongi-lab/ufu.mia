@@ -89,6 +89,31 @@ class Animal(models.Model):
     def __str__(self):
         return f"{self.nome} ({self.especie})"
 
+class FotoAnimal(models.Model):
+    animal = models.ForeignKey(
+        Animal,
+        on_delete=models.CASCADE,
+        related_name="fotos",
+        help_text='Animal ao qual esta foto extra pertence.',
+    )
+    imagem = models.ImageField(
+        upload_to=upload_animais,
+        validators=[validar_imagem],
+        help_text='Foto extra (máx. 5 MB, formatos: JPG, PNG, GIF, WebP).',
+    )
+    ordem = models.PositiveIntegerField(
+        default=0,
+        help_text='Ordem na galeria. Menor número aparece primeiro.',
+    )
+
+    class Meta:
+        verbose_name = "Foto extra"
+        verbose_name_plural = "Fotos extras"
+        ordering = ["ordem", "id"]
+
+    def __str__(self):
+        return f"Foto de {self.animal.nome}"
+
 
 class HistoriaAdocao(models.Model):
     animal = models.ForeignKey(
